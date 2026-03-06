@@ -46,3 +46,4 @@ results/figures/*.png
 .idea/
 *.swp
 .claude/
+data/pilot/reddit_mental_health/raw_2019/
