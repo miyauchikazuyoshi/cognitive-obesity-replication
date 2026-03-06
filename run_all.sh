@@ -182,6 +182,17 @@ else
     $PYTHON analysis/block_c/03_macro_processing_capacity.py 2>&1 | tee results/macro_processing.log
 fi
 
+# ---- Optional: Pilot studies ----
+# Uncomment to include pilot analyses in the pipeline.
+# These require additional data (Understanding Society, Reddit MH Dataset).
+# Run 00_synthetic_data.py first to test pipelines with synthetic data.
+
+# echo ""
+# echo "[Pilot] SNS Engagement decomposition..."
+# $PYTHON analysis/pilot/sns_engagement/00_synthetic_data.py 2>&1 | tee results/pilot_synthetic.log
+# $PYTHON analysis/pilot/sns_engagement/01_writer_vs_rom.py 2>&1 | tee results/pilot_writer_vs_rom.log
+# $PYTHON analysis/pilot/sns_engagement/02_reddit_engagement_spectrum.py 2>&1 | tee results/pilot_reddit_engagement.log
+
 # ---- Done ----
 echo ""
 echo "=============================================="

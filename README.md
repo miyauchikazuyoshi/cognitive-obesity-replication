@@ -54,13 +54,24 @@ cognitive-obesity-replication/
 │   │   ├── proxy_validation.py      ← Ad proxy construct validation
 │   │   └── r_cce_ife_estimators.R   ← CCE (Pesaran), IFE (Bai) [R]
 │   │
-│   └── block_c/               ← Individual-level validation
-│       ├── 01_nhanes_phq9_exercise.py       ← Section 2.3.2 (baseline)
-│       ├── 01_nhanes_weighted.py            ← Appendix A.1 (survey weights)
-│       ├── 02_atus_wellbeing_analysis.py    ← Section 2.3.3 (baseline)
-│       ├── 02b_atus_ratio_test.py           ← Additive vs. ratio model test
-│       ├── 02_atus_with_covariates.py       ← Appendix A.2 (covariates + weights)
-│       └── 03_macro_processing_capacity.py  ← Section 2.3.1
+│   ├── block_c/               ← Individual-level validation
+│   │   ├── 01_nhanes_phq9_exercise.py       ← Section 2.3.2 (baseline)
+│   │   ├── 01_nhanes_weighted.py            ← Appendix A.1 (survey weights)
+│   │   ├── 02_atus_wellbeing_analysis.py    ← Section 2.3.3 (baseline)
+│   │   ├── 02b_atus_ratio_test.py           ← Additive vs. ratio model test
+│   │   ├── 02_atus_with_covariates.py       ← Appendix A.2 (covariates + weights)
+│   │   └── 03_macro_processing_capacity.py  ← Section 2.3.1
+│   │
+│   └── pilot/                 ← Pilot studies (extensions)
+│       └── sns_engagement/    ← SNS toxicity decomposition
+│           ├── 00_synthetic_data.py           ← Pipeline test data generator
+│           ├── 01_writer_vs_rom.py            ← Writer vs ROM (passive consumer)
+│           └── 02_reddit_engagement_spectrum.py ← Reddit posting frequency × MH
+│
+├── docs/
+│   ├── paper/                 ← EN/JA preprints + LaTeX source
+│   └── experiment_design/     ← Future experiment designs
+│       └── sns_decomposition_design.md  ← Evaluated vs non-evaluated + push×ads 2×2
 │
 └── results/
     └── paper_figure_table_map.md  ← Paper claim → script correspondence
@@ -119,6 +130,19 @@ Documented in the paper (Section 8.4) and Appendix A.3:
 5. **Ecological fallacy** constrains all macro-level findings
 6. **No natural experiment** directly tied to advertising ecosystems
 7. **Ad proxy construct validity** limited (indirect measure)
+
+## Pilot Studies
+
+Extending the Cognitive Obesity framework to decompose SNS toxicity:
+
+| Study | Data | Script | Status |
+|-------|------|--------|--------|
+| Writer vs ROM | Understanding Society Wave 11 | `analysis/pilot/sns_engagement/01_writer_vs_rom.py` | Pipeline ready |
+| Reddit engagement spectrum | Reddit MH Dataset (Zenodo) | `analysis/pilot/sns_engagement/02_reddit_engagement_spectrum.py` | Pipeline ready |
+| Evaluated vs non-evaluated SNS | *Design only* | — | [`docs/experiment_design/`](docs/experiment_design/sns_decomposition_design.md) |
+| Push notification × advertising | *Design only* | — | [`docs/experiment_design/`](docs/experiment_design/sns_decomposition_design.md) |
+
+Run `python3 analysis/pilot/sns_engagement/00_synthetic_data.py` to generate test data, then run the analysis scripts.
 
 ## Planned Additions
 
