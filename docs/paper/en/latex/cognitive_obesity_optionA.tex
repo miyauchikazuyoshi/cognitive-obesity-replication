@@ -92,7 +92,7 @@ In the 2020s, mental health statistics in developed countries present a curious 
 
 \subsection{The Paradox}
 
-Two camps have formed around this paradox. The regulatory camp (Haidt, 2024; Twenge, 2017; Hansen, 2019) advocates limiting exposure to smartphones and social media. They argue that the rise in youth mental illness directly parallels the diffusion of smartphones and social media platforms, and the massive popular reception of this argument---as seen in the global bestseller status of Hansen's \textit{Sk\"armhj\"arnan} (2019; published in Japan as \textit{sumaho-n\=o})---attests to its intuitive appeal. The digital resilience camp responds that the measured effect sizes are trivially small---comparable to the well-being impact of wearing glasses or eating potatoes (Orben \& Przybylski, 2019)---that longitudinal evidence shows no lasting harm (Coyne et al., 2020), and that media literacy education is the appropriate intervention. A large-scale Facebook deactivation RCT found modest well-being improvements but simultaneously reduced political knowledge and news awareness (Allcott et al., 2020), illustrating the complexity that neither simple restriction nor simple education can resolve.
+Two camps have formed around this paradox. The regulatory camp (Haidt, 2024; Twenge, 2017; Hansen, 2019) advocates limiting exposure to smartphones and social media. They argue that the rise in youth mental illness directly parallels the diffusion of smartphones and social media platforms, and the massive popular reception of this argument---as seen in the global bestseller status of Hansen's \textit{Sk\"armhj\"arnan} (2019; published in Japan as \textit{sumaho-n\=o})---attests to its intuitive appeal. The digital resilience camp responds that the measured effect sizes are trivially small---comparable to the well-being impact of wearing glasses or eating potatoes (Orben \& Przybylski, 2019)---that longitudinal evidence shows no lasting harm (Heffer et al., 2019; Coyne et al., 2020), and that media literacy education is the appropriate intervention. Meanwhile, the general psychopathology factor (``$p$-factor''; Caspi et al., 2014) literature suggests that internalizing and externalizing symptoms share a common liability dimension---a perspective our framework extends by proposing processing capacity overload as one mechanism generating this shared variance. A large-scale Facebook deactivation RCT found modest well-being improvements but simultaneously reduced political knowledge and news awareness (Allcott et al., 2020), illustrating the complexity that neither simple restriction nor simple education can resolve.
 
 Yet approximately a decade of debate shows no sign of convergence. Why?
 
@@ -299,7 +299,9 @@ From the theoretical framework above, the following empirically testable predict
 
 We constructed a panel dataset of 177 countries $\times$ 1990--2023 (34 years) by merging publicly available sources: World Bank WDI (internet penetration, GDP per capita, education), IHME GBD (depression prevalence), WHO GHO (suicide rate), and UNODC (homicide rate). The advertising exposure proxy was computed as $\text{AdProxy} = \text{Internet}(\%) \times \text{GDP/capita} / 1000$. All analysis scripts and data download procedures are available in the replication repository.
 
-Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator, and Bai Interactive Fixed Effects. Results are presented in the Appendix.
+The panel is unbalanced; each analysis uses listwise deletion on the relevant variables. Im-Pesaran-Shin panel unit root tests confirm that depression prevalence and log(GDP) are I(1), while all first-differenced series are stationary ($p < 10^{-100}$), justifying the first-difference specification. Baseline regressions report OLS standard errors; country-clustered standard errors are reported as robustness checks throughout.
+
+Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator, and Bai Interactive Fixed Effects. Results are presented in the Appendix. We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
 
 
 \subsection{Main Findings}\label{sec:main-findings}
@@ -392,7 +394,7 @@ Limitation: time-series validation (proxy \emph{changes} vs ad spend changes, 20
 \end{figure}
 
 \paragraph{First-Difference Identification: Proxy is Not GDP.}\label{sec:first-diff}
-In the model $\Delta y_{it} = \beta_1 \cdot \Delta\log(\text{proxy})_{it} + \beta_2 \cdot \Delta\log(\text{GDP})_{it} + \text{Year FE} + \varepsilon_{it}$, the full sample yields proxy $t = 0.46$ (n.s.) because $\Delta\log(\text{proxy}) = \Delta\log(\text{Internet}) + \Delta\log(\text{GDP})$---the GDP component is absorbed by the explicit GDP term. Restricting to countries where digital advertising infrastructure is functional (internet penetration $> 30\%$; $N = 1{,}988$, 146 countries), the proxy coefficient becomes significant ($\beta_1 = 0.049$, $t = 3.16$, $p < 0.01$) while GDP also remains significant ($t = -4.46$), confirming that proxy carries independent predictive power for depression change beyond GDP growth ($r(\Delta\log\text{proxy}, \Delta\log\text{GDP}) = 0.32$, VIF $= 1.12$).
+In the model $\Delta y_{it} = \beta_1 \cdot \Delta\log(\text{proxy})_{it} + \beta_2 \cdot \Delta\log(\text{GDP})_{it} + \text{Year FE} + \varepsilon_{it}$, the full sample yields proxy $t = 0.46$ (n.s.) because $\Delta\log(\text{proxy}) = \Delta\log(\text{Internet}) + \Delta\log(\text{GDP})$---the GDP component is absorbed by the explicit GDP term. Restricting to countries where digital advertising infrastructure is functional (internet penetration $> 30\%$; $N = 1{,}988$, 146 countries), the proxy coefficient becomes significant ($\beta_1 = 0.049$, $t = 3.16$, $p < 0.01$) while GDP also remains significant ($t = -4.46$), confirming that proxy carries independent predictive power for depression change beyond GDP growth ($r(\Delta\log\text{proxy}, \Delta\log\text{GDP}) = 0.32$, VIF $= 1.12$). Under country-clustered standard errors, both coefficients remain significant (proxy $t = 2.24$, $p = 0.025$; GDP $t = -3.27$, $p = 0.001$).
 
 \begin{figure}[htbp]
 \centering
@@ -457,8 +459,11 @@ The analysis in this paper followed a partially exploratory process. The initial
   \item \textbf{Ecological fallacy}: Country-level associations do not demonstrate individual-level causation.
   \item \textbf{Diagnostic bias}: Depression prevalence is confounded with diagnostic infrastructure. Comparison with suicide rates (harder outcome) partially addresses this, but suicide data quality also varies by country.
   \item \textbf{Proxy limitations}: The ad proxy is a product of two macro variables; unmeasured confounders cannot be excluded. More fundamentally, the proxy cannot capture the \emph{qualitative} evolution of the advertising ecosystem---advances in algorithmic targeting, the transition from banner ads to autoplay short-form video, and cross-country differences in privacy regulation (GDPR, COPPA, etc.) all alter the mapping from ad expenditure to actual cognitive load. The strong cross-sectional but weak time-series validity ($\rho = 0.80$ vs $0.16$) likely reflects this structural gap. Closing it requires attention-weighted exposure data (impressions $\times$ dwell time) that remain proprietary to major platforms.
-  \item \textbf{Missing variables}: Direct measures of screen time, physical activity, and media consumption at the country level are unavailable for most countries and years.
+  \item \textbf{Missing variables}: Direct measures of screen time, physical activity, and media consumption at the country level are unavailable for most countries and years. Controls for age structure, alcohol consumption, unemployment, and mental-health service access---all potential confounders---are not included in the baseline specifications.
   \item \textbf{Temporal resolution}: Annual data cannot capture within-year dynamics of digital media adoption.
+  \item \textbf{Dynamic panel bias}: Lagged-dependent-variable models with country fixed effects are susceptible to Nickell bias; difference/system GMM (Arellano \& Bond, 1991) with appropriate diagnostics (AR(2), Hansen/Sargan tests) should be applied in future work.
+  \item \textbf{Causal identification}: No plausibly exogenous instruments (e.g., submarine cable arrival, terrain-based broadband cost) are employed. Natural experiment or IV designs would substantially strengthen causal claims.
+  \item \textbf{Threshold validation}: The dose-response reversal point and Hansen PTR threshold have not been cross-validated on held-out countries or time periods; out-of-sample validation is needed to rule out overfitting.
   \item \textbf{Alternative estimators}: Driscoll-Kraay SE, CCE/IFE, and first-difference IV results are presented in the Appendix; core findings are robust, but some specifications show attenuation.
 \end{enumerate}
 
@@ -537,7 +542,7 @@ D: Quadratic log-ratio & 30,726 & +106 & 0.0058 \\
 \end{tabular}
 \end{table}
 
-The additive model achieved the best AIC across all specifications ($\Delta\text{AIC} \geq 36$), directly supporting the additive structure of the theoretical equation. Independent component effects: passive leisure ($\beta = -0.0009$, $t = -11.08^{***}$), physical exercise ($\beta = +0.0016$, $t = 5.37^{***}$). While the ratio proxy is a useful approximation at the country-year level, individual-level data confirm that $\alpha_1 I$ and $\alpha_2 C$ operate as independent additive channels.
+The additive model achieved the best AIC across all specifications ($\Delta\text{AIC} \geq 36$), directly supporting the additive structure of the theoretical equation and demonstrating that raw ratios---which can amplify measurement error and denominator instability---are inferior to component-wise additive specifications at the individual level. Independent component effects: passive leisure ($\beta = -0.0009$, $t = -11.08^{***}$), physical exercise ($\beta = +0.0016$, $t = 5.37^{***}$). While the ratio proxy is a useful approximation at the country-year level, individual-level data confirm that $\alpha_1 I$ and $\alpha_2 C$ operate as independent additive channels.
 
 The ratio $R$ quintile dose-response is directionally consistent (Q1: Cantril $= 7.19$ $\to$ Q5: $6.93$, $d = 0.12$, $p < 10^{-7}$; Fair/Poor health: Q1 $= 13.8\%$ $\to$ Q5 $= 25.2\%$). The ratio is a valid approximation of the theory, but the additive model is statistically superior (Figure~\ref{fig:ratio-test}).
 
@@ -766,6 +771,10 @@ This paper is a working paper and welcomes all forms of feedback: methodological
   \item Nolen-Hoeksema, S. (1991). Responses to depression and their effects on the duration of depressive episodes. \textit{Journal of Abnormal Psychology}, 100(4), 569--582.
   \item Ryan, R.~M., \& Deci, E.~L. (2000). Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. \textit{American Psychologist}, 55(1), 68--78.
   \item Varela, F.~J., Thompson, E., \& Rosch, E. (1991). \textit{The Embodied Mind: Cognitive Science and Human Experience}. MIT Press.
+  \item Caspi, A., et al. (2014). The $p$ factor: One general psychopathology factor in the structure of psychiatric disorders? \textit{Clinical Psychological Science}, 2(2), 119--137.
+  \item Heffer, T., Good, M., Daly, O., MacDonell, E., \& Willoughby, T. (2019). The longitudinal association between social-media use and depressive symptoms among adolescents and young adults. \textit{Clinical Psychological Science}, 7(3), 462--470.
+  \item Nickell, S. (1981). Biases in dynamic models with fixed effects. \textit{Econometrica}, 49(6), 1417--1426.
+  \item Im, K.~S., Pesaran, M.~H., \& Shin, Y. (2003). Testing for unit roots in heterogeneous panels. \textit{Journal of Econometrics}, 115(1), 53--74.
 \end{enumerate}
 
 
