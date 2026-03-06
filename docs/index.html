@@ -300,7 +300,7 @@
   <div class="meta">
     <span><strong>Author:</strong> Kazuyoshi Miyauchi</span>
     <span><strong>Year:</strong> 2026</span>
-    <span><strong>Status:</strong> v9 · Major Revision</span>
+    <span><strong>Status:</strong> Preprint · PsyArXiv</span>
     <span><strong>Data:</strong> 177 countries × 1990–2023</span>
   </div>
   <div class="links" style="margin-top:1.5rem">
@@ -373,10 +373,10 @@
       <div class="block-label">Block C · Individual</div>
       <h3>Additive model wins decisively</h3>
       <p>
-        Exercise and active cognitive leisure predict wellbeing
-        as independent channels; interaction is null.
-        <span class="stat">ATUS ΔAIC=73.6</span>
-        <span class="stat">interaction p=0.95</span>
+        L = &alpha;&#8321;&middot;I &minus; &alpha;&#8322;&middot;C validated:
+        additive model beats ratio R = I/C model.
+        <span class="stat">ΔAIC = 86</span>
+        <span class="stat">N = 21,736</span>
       </p>
     </div>
     <div class="finding-card">
@@ -447,6 +447,10 @@
 │   └── <span class="file-py">build_ad_validation.py</span> Proxy validation dataset (N=10 template)
 │
 ├── <span class="dir">analysis/</span>
+│   ├── <span class="dir">block_a/</span>                   First approximation (Section 2.1)
+│   │   ├── <span class="file-py">00_descriptive_stats.py</span>
+│   │   ├── <span class="file-py">01_correlation_analysis.py</span>
+│   │   └── <span class="file-py">02_fixed_effects_comparison.py</span>
 │   ├── <span class="dir">block_b/</span>                   Macro panel (177 countries)
 │   │   ├── <span class="file-py">hansen_ptr.py</span>      Threshold regression
 │   │   ├── <span class="file-py">lag_analysis.py</span>    Granger causality
@@ -458,6 +462,7 @@
 │       ├── <span class="file-py">01_nhanes_phq9_exercise.py</span>
 │       ├── <span class="file-py">01_nhanes_weighted.py</span>
 │       ├── <span class="file-py">02_atus_wellbeing_analysis.py</span>
+│       ├── <span class="file-py">02b_atus_ratio_test.py</span>   Additive vs. ratio model
 │       ├── <span class="file-py">02_atus_with_covariates.py</span>
 │       └── <span class="file-py">03_macro_processing_capacity.py</span>
 │
@@ -492,6 +497,10 @@
   </p>
   <div class="status-grid">
     <div class="status-item">
+      <span class="check">✓</span>
+      <span>English preprint → PsyArXiv submission</span>
+    </div>
+    <div class="status-item">
       <span class="pending">→</span>
       <span>WARC/eMarketer ad-spend data for proxy validation (N>10)</span>
     </div>
@@ -502,10 +511,6 @@
     <div class="status-item">
       <span class="pending">→</span>
       <span>Pre-registered ESM study (notifications × affect × activity)</span>
-    </div>
-    <div class="status-item">
-      <span class="pending">→</span>
-      <span>English translation → PsyArXiv / arXiv preprint</span>
     </div>
   </div>
 </section>
