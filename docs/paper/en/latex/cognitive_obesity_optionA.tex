@@ -306,6 +306,24 @@ Alternative estimators to address cross-sectional dependence, trend confounding,
 
 \subsubsection{Phase Transition in Correlation Structure by Development Stage}\label{sec:phase-transition}
 
+The global Pearson correlation between depression prevalence and homicide rate across all country-years is weak ($r = -0.059$, $p < 0.001$). However, income-stratified analysis reveals a striking pattern (\cref{fig:dep-hom-global}). Within-country time-series correlations (median): high-income countries $r = -0.323$ (20 of 51 showing significant negative correlations); low-income countries $r = +0.007$ (effectively zero). For example, Japan shows depression prevalence rising from 2.32\% (1990) to 3.06\% (2023) while homicide fell from 0.55 to 0.23 per 100k, yielding $r = -0.865$ ($p < 10^{-10}$), the 2nd strongest divergence among 135 countries.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_depression_homicide_global.png}
+\caption{Depression prevalence vs homicide rate: global analysis (1990--2023). A: Global time-series trends. B: Cross-sectional scatter (post-2019, log scale). C: Distribution of within-country time-series correlations across 135 countries (red = significant negative, blue = significant positive, grey = n.s.). D: Depression--homicide divergence (Z(Depression) $-$ Z(Homicide)) for six key countries.}
+\label{fig:dep-hom-global}
+\end{figure}
+
+Suicide and homicide show positive correlations (within-country median $r = +0.293$; global time-series $r = +0.638$, $p < 0.001$), contradicting Achenbach's internalization/externalization model and suggesting both arise from a common substrate of chronic processing capacity overload (\cref{fig:int-ext-symmetry}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{fig_internalization_externalization.png}
+\caption{Internalization--externalization symmetry analysis (1990--2023). Top row: within-country Pearson $r$ distributions. Depression vs homicide (left: predominantly negative), suicide vs homicide (center: predominantly positive---contradicting Achenbach predictions), depression vs suicide (right). Bottom row: global Z-score time series. Red = significant negative, blue = significant positive, grey = n.s.}
+\label{fig:int-ext-symmetry}
+\end{figure}
+
 Piecewise regression with country fixed effects reveals a clean phase transition. Below the first-approximation ratio threshold ($R^* = 2.75$), the within-country slope $\beta \approx -0.002$ (effectively zero, $p = 0.35$); above, $\beta = 0.034$ ($t = 14.0$, $p < 10^{-40}$). The 95\% confidence interval for the reversal point is [2.4, 3.1]. Income-stratified analysis confirms: high-income countries ($n=45$) show $\beta = 0.042$, $t = 14.0$, within-$R^2 = 0.252$; low-income countries ($n=28$) show $\beta = -0.001$, $t = -0.27$, within-$R^2 = 0.000$.
 
 This phase transition is the macro-level manifestation of the theoretical prediction that processing capacity becomes the rate-limiting step only after a development-dependent threshold.
@@ -667,6 +685,9 @@ If this framework is correct, current policy debate is structurally incomplete. 
 Core policy insight: SNS age restrictions and physical education hours should be treated as a \textbf{single policy package}, not alternatives. Reducing Term~1 without increasing Term~2 (or vice versa) is insufficient.
 
 Advertising format regulation constitutes a third policy axis. The loop closure threshold of this framework suggests that non-skippable autoplay ads are more harmful than user-selected content, supporting policy design targeting ``non-selective cognitive input density'' rather than mere screen time.
+
+\paragraph{Natural experiment: Japan's Work Style Reform.}
+Japan's 2018 Work Style Reform Act mandated enforceable overtime caps, interpretable as a policy reduction of involuntary cognitive input. Japan's suicide rate declined from a mean of 20.70 (2010--2017) to 16.98 (2018--2021), an $\approx$17.9\% reduction that substantially exceeds the OECD 8-country average change ($-0.2\%$; DID estimate $= -17.7$ percentage points). However, Japan's suicide rate had been declining consistently since a 2003 peak (pre-trend $= -0.39$/year), making it difficult to disentangle reform effects from pre-existing trends with current data. Causal identification requires more refined analysis exploiting the reform's staggered implementation.
 
 
 \subsection{The Observation Problem}
