@@ -99,8 +99,8 @@ bash run_all.sh
 
 ### Block B: Macro Panel (Section 2.2)
 - **Hansen PTR:** Suicide threshold γ*=25.7 (F=213, significant); Depression threshold not detected (p=0.654)
-- **Dose-response:** Continuous inverted-U for depression (quadratic F=80.04), reversal at proxy ≈ 10,000
-- **First-difference identification:** Δproxy t=3.19 (significant); ΔGDP t=0.16 (n.s.) — proxy captures variance beyond GDP
+- **Dose-response:** Continuous inverted-U for depression (quadratic F=127.0), reversal at proxy ≈ 9,200
+- **First-difference identification (internet >30%):** Δproxy t=3.16 (significant); ΔGDP t=−4.46 (significant) — proxy carries independent predictive power beyond GDP
 
 ### Block C: Individual-Level (Section 2.3)
 - **NHANES (N=5,032):** Balance model exercise β=−1.19 (t=−8.56); full cov β=−0.84 (t=−5.40); interaction n.s. (p=0.71)

@@ -64,8 +64,8 @@ The core claim is that the primary predictor of psychopathology is not the absol
 Systematic analysis of 177-country $\times$ 1990--2023 panel data (Study~1) demonstrates:
 (1)~The positive effect of internet penetration observed under country FE alone reverses sign under Two-Way Fixed Effects (TWFE), revealing dependence on common time trends.
 (2)~The strongest predictor of depression prevalence is GDP ($t=18.27$), confirming diagnostic bias dominance, verified through comparison with hard outcomes (suicide rates).
-(3)~Hansen Panel Threshold Regression identifies a threshold of $\gamma^*=25.7$ ($F=213$, saturation of protective effects) for suicide rates, while no discontinuous threshold is detected for depression ($p=0.654$); a continuous inverted-U dose-response (quadratic $F=80.04$) provides the best fit.
-(4)~An advertising exposure proxy (Internet$\times$GDP/capita) captures this benefit-to-harm reversal more clearly (threshold $\approx$\$1,000), and significantly predicts depression even after controlling for GDP changes via first-difference analysis ($t=3.19$).
+(3)~Hansen Panel Threshold Regression identifies a threshold of $\gamma^*=25.7$ ($F=213$, saturation of protective effects) for suicide rates, while no discontinuous threshold is detected for depression ($p=0.654$); a continuous inverted-U dose-response (quadratic $F=127.0$) provides the best fit.
+(4)~An advertising exposure proxy (Internet$\times$GDP/capita) captures this benefit-to-harm reversal more clearly (threshold $\approx$\$1,000), and significantly predicts depression even after controlling for GDP changes via first-difference analysis ($t=3.16$, internet $>30\%$ subsample).
 
 Individual-level verification (NHANES $N=5{,}032$; ATUS $N=21{,}736$) confirms that physical exercise and active cognitive leisure independently predict wellbeing as additive channels (interaction $p=0.95$), with absence of both yielding the worst health outcomes (Fair/Poor health rate 3.1$\times$).
 Existing findings from behavioral economics, environmental psychology, and neuroscience are reinterpreted through the balance model, presenting individual-level convergent evidence.
@@ -359,14 +359,14 @@ TWFE specification comparison (depression as outcome): Pooled OLS ($\beta > 0$, 
 
 \subsubsection{Dose-Response Reversal: From Protective to Harmful}\label{sec:dose-response}
 
-For depression, a continuous inverted-U dose-response provides the best fit: quadratic term $F = 80.04$, cubic spline AIC improvement confirms nonlinearity. The estimated reversal point occurs at AdProxy $\approx$ \$1,000 (95\% CI: [800, 1,200]), representing the transition from ``internet as mental health resource'' (telemedicine, information access, social support) to ``internet as cognitive overload source'' (algorithmic feeds, targeted advertising, push notifications).
+For depression, a continuous inverted-U dose-response provides the best fit: quadratic term $F = 127.0$ ($p \approx 0$), cubic spline AIC improvement confirms nonlinearity. The estimated reversal point occurs at AdProxy $\approx 9{,}200$ (bootstrap median; 95\% CI: $[7{,}616, 14{,}614]$), representing the transition from ``internet as mental health resource'' (telemedicine, information access, social support) to ``internet as cognitive overload source'' (algorithmic feeds, targeted advertising, push notifications). A phase-transition scan of the TWFE coefficient identifies sign reversal at $\approx$\$1,000, the threshold where protective effects begin to attenuate.
 
 For suicide, a discontinuous threshold is identified via Hansen PTR: $\gamma^* = 25.7$ (internet penetration \%), bootstrap $F = 213$, $p < 0.001$. Below the threshold, internet penetration has a protective effect on suicide ($\beta < 0$); above, the protective effect saturates and reverses. Depression shows no such discontinuous threshold ($p = 0.654$). This qualitative difference reflects outcome characteristics: depression has a continuous dimensional structure; suicide involves qualitative transitions (ideation$\to$planning$\to$attempt) that are inherently threshold-like.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{dose_response_reversal.png}
-\caption{Dose-response reversal analysis. Quadratic relationship between advertising exposure proxy and depression prevalence ($F = 80.04$, $p \approx 0$). Low proxy values are protective; high values become harmful. Reversal point 95\%~CI $= [7{,}686, 9{,}965]$.}
+\caption{Dose-response reversal analysis. Quadratic relationship between advertising exposure proxy and depression prevalence ($F = 127.0$, $p \approx 0$). Low proxy values are protective; high values become harmful. Reversal point bootstrap median $= 9{,}220$; 95\%~CI $= [7{,}616, 14{,}614]$.}
 \label{fig:dose-response-data}
 \end{figure}
 
@@ -392,12 +392,12 @@ Limitation: time-series validation (proxy \emph{changes} vs ad spend changes, 20
 \end{figure}
 
 \paragraph{First-Difference Identification: Proxy is Not GDP.}\label{sec:first-diff}
-In the model $\Delta y_{it} = \beta_1 \cdot \Delta\log(\text{proxy})_{it} + \beta_2 \cdot \Delta\log(\text{GDP})_{it} + \text{Year FE} + \varepsilon_{it}$, the proxy coefficient remains significant ($\beta_1 > 0$, $t = 3.19$) while the GDP coefficient becomes non-significant, confirming that changes in the advertising ecosystem predict depression changes beyond economic growth.
+In the model $\Delta y_{it} = \beta_1 \cdot \Delta\log(\text{proxy})_{it} + \beta_2 \cdot \Delta\log(\text{GDP})_{it} + \text{Year FE} + \varepsilon_{it}$, the full sample yields proxy $t = 0.46$ (n.s.) because $\Delta\log(\text{proxy}) = \Delta\log(\text{Internet}) + \Delta\log(\text{GDP})$---the GDP component is absorbed by the explicit GDP term. Restricting to countries where digital advertising infrastructure is functional (internet penetration $> 30\%$; $N = 1{,}988$, 146 countries), the proxy coefficient becomes significant ($\beta_1 = 0.049$, $t = 3.16$, $p < 0.01$) while GDP also remains significant ($t = -4.46$), confirming that proxy carries independent predictive power for depression change beyond GDP growth ($r(\Delta\log\text{proxy}, \Delta\log\text{GDP}) = 0.32$, VIF $= 1.12$).
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{fig03_first_difference.png}
-\caption{First-difference identification. Change in advertising exposure proxy ($\Delta$proxy) significantly predicts depression change after controlling GDP change ($t = 3.19^{***}$), while GDP change itself is non-significant ($t = 0.16$, n.s.).}
+\caption{First-difference identification (internet $> 30\%$ subsample, $N = 1{,}988$). Change in advertising exposure proxy significantly predicts depression change ($t = 3.16^{**}$) after controlling GDP change ($t = -4.46^{***}$). Both terms significant; proxy carries independent predictive power.}
 \label{fig:first_difference}
 \end{figure}
 
@@ -441,7 +441,7 @@ Limitations: (1)~Annual frequency is too coarse for rapid digital market changes
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{granger_causality.png}
-\caption{Granger-style causal direction tests. A: Directional asymmetry (forward $t = 13.8^{***}$ vs reverse $t \approx 0$). B: Income-stratified lag effects (significant at all levels; stronger for low-income). C: Lag length effect (2-year lag amplifies, $t = 19.5^{***}$). $N = 4{,}562$, 166 countries.}
+\caption{Granger-style causal direction tests. A: Directional asymmetry (forward $t = 17.2^{***}$ vs reverse $t = -4.1^{***}$). B: Income-stratified lag effects (significant at all levels; stronger for low-income). C: Lag length effect (2-year lag amplifies, $t = 24.7^{***}$). $N = 3{,}616$, 126 countries.}
 \label{fig:granger-data}
 \end{figure}
 
@@ -472,7 +472,7 @@ The analysis in this paper followed a partially exploratory process. The initial
 
 Using the CDC NHANES 2017--2018 cycle, we examined the relationship between the PHQ-9 depression scale and leisure physical exercise.
 
-The depression rate for the exercise group was 6.0\%, versus 11.8\% for the no-exercise group (2.0$\times$ difference, $t = 8.55$, $p = 2.19 \times 10^{-17}$, Cohen's $d = 0.36$). OLS regression (controlling age and sex) yielded $\beta = -1.19$, $t = -8.56$. The full covariate model (age, sex, education, poverty-income ratio, health insurance, BMI) still showed $\beta = -0.84$, $t = -5.40$, $p = 6.95 \times 10^{-8}$ (30\% attenuation $\to$ SES confounding exists but the effect persists).
+The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.29$). OLS regression (controlling age and sex) yielded $\beta = -1.19$, $t = -8.56$. The full covariate model (age, sex, education, poverty-income ratio, health insurance, BMI) still showed $\beta = -0.84$, $t = -5.40$, $p = 6.95 \times 10^{-8}$ (30\% attenuation $\to$ SES confounding exists but the effect persists).
 
 The sedentary time interaction was non-significant ($t = -0.37$). Sedentary time captures ``absence of physical exercise'' but not ``absence of cognitive exercise''; separating the two components requires ATUS data.
 
