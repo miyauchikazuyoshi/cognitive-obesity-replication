@@ -155,8 +155,11 @@ def aggregate_to_user_summary(file_paths: list[str]) -> pd.DataFrame:
     for path in file_paths:
         fname = os.path.basename(path)
         # Only need author and subreddit columns
+        # Use engine='python' + on_bad_lines='skip' for robustness
+        # (some Zenodo files have truncated rows with EOF inside strings)
         try:
-            df = pd.read_csv(path, usecols=["author", "subreddit"])
+            df = pd.read_csv(path, usecols=["author", "subreddit"],
+                             engine="python", on_bad_lines="skip")
         except (ValueError, KeyError):
             # Try reading first few cols if column names differ
             df = pd.read_csv(path, nrows=0)
@@ -164,7 +167,11 @@ def aggregate_to_user_summary(file_paths: list[str]) -> pd.DataFrame:
             if len(cols) < 2:
                 print(f"  SKIP (no author/subreddit): {fname}")
                 continue
-            df = pd.read_csv(path, usecols=cols)
+            df = pd.read_csv(path, usecols=cols,
+                             engine="python", on_bad_lines="skip")
+        except Exception as e:
+            print(f"  SKIP (parse error: {e}): {fname}")
+            continue
 
         # Drop deleted users
         df = df[~df["author"].isin(["[deleted]", "AutoModerator", "[removed]"])]
