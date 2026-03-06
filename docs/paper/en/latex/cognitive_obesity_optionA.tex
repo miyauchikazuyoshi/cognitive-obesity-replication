@@ -380,12 +380,14 @@ For suicide, a discontinuous threshold is identified via Hansen PTR: $\gamma^* =
 
 \subsubsection{Construction and Validation of the Advertising Exposure Proxy}\label{sec:ad-proxy}
 
-The proxy $\text{AdProxy} = \text{Internet}(\%) \times \text{GDP/capita} / 1000$ captures the density of non-selective cognitive input. Validation: (1)~Spearman rank correlation with actual digital advertising expenditure (industry benchmarks, 35 countries) $\rho = 0.85$ ($p < 10^{-10}$), confirming that the proxy approximates advertising ecosystem maturity. (2)~Variance decomposition: internet penetration explains 62\% and GDP explains 38\% of proxy variance, confirming that neither component alone drives the proxy. (3)~Residual proxy (orthogonalized to GDP) retains significant correlation with depression, confirming that the proxy captures information beyond GDP.
+The proxy $\text{AdProxy} = \text{Internet}(\%) \times \text{GDP/capita} / 1000$ captures the density of non-selective cognitive input. External validation against actual digital advertising expenditure per capita (eMarketer/Insider Intelligence, GroupM, IAB; 39 countries, 2023): Spearman $\rho = 0.80$ ($p < 10^{-9}$), Pearson $r = 0.91$ in log-log space ($p < 10^{-15}$). Bootstrap 95\% CI for $\rho$: $[0.60, 0.92]$ ($n = 10{,}000$). Leave-one-out analysis confirms robustness: $\rho \in [0.79, 0.84]$, with no single country driving the result. Variance decomposition: Internet penetration and GDP contribute 47\% and 53\% respectively to proxy variance, confirming that neither component alone drives the proxy.
+
+Limitation: time-series validation (proxy \emph{changes} vs ad spend changes, 2022--2024) yields $\rho = 0.16$ (n.s.), indicating that the proxy captures cross-sectional \emph{levels} but not short-term \emph{dynamics} of advertising markets.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{proxy_validation_rank.png}
-\caption{External validation of advertising exposure proxy. Rank correlation with actual digital advertising expenditure across 35 countries (Spearman $\rho = 0.85$, $p < 10^{-10}$).}
+\caption{External validation of advertising exposure proxy. Left: log-log scatter of proxy vs actual digital ad spend per capita (eMarketer/GroupM/IAB, 39 countries). Right: rank comparison. Spearman $\rho = 0.80$, Pearson $r_{\log\text{-}\log} = 0.91$, bootstrap 95\% CI $[0.60, 0.92]$.}
 \label{fig:proxy-validation-rank}
 \end{figure}
 
