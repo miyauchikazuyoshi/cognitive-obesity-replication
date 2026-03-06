@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cognitive Obesity — Miyauchi 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f6;
+    --fg: #1a1a1a;
+    --accent: #c23616;
+    --accent2: #0652DD;
+    --muted: #6b6b6b;
+    --border: #e0ddd7;
+    --card: #fff;
+    --code-bg: #f4f2ed;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- Header ---- */
+  header {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+  }
+  header .label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  header h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  header .subtitle {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  header .meta {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 2rem;
+  }
+  header .meta strong { color: var(--fg); font-weight: 500; }
+
+  /* ---- Divider ---- */
+  .divider {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .divider hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ---- Section ---- */
+  section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  section h2 {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+  section p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    max-width: 640px;
+  }
+
+  /* ---- Equation ---- */
+  .equation {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .equation .formula {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+  }
+  .equation .terms {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .equation .term {
+    text-align: center;
+    max-width: 240px;
+  }
+  .equation .term-label {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  .equation .term-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .term-1 .term-label { color: var(--accent); }
+  .term-2 .term-label { color: var(--accent2); }
+
+  /* ---- Key findings ---- */
+  .findings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .finding-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+  .finding-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .finding-card .block-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .finding-card h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .finding-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .finding-card .stat {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--fg);
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+  }
+
+  /* ---- Repo ---- */
+  .repo-section {
+    background: var(--fg);
+    color: var(--bg);
+    padding: 3rem 2rem;
+    margin-top: 1rem;
+  }
+  .repo-section .inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .repo-section h2 {
+    color: var(--bg);
+    font-family: var(--serif);
+    margin-bottom: 1rem;
+  }
+  .repo-section p { color: #aaa; max-width: 640px; }
+  .repo-tree {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: #ccc;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  .repo-tree .dir { color: #64b5f6; }
+  .repo-tree .file-py { color: #81c784; }
+  .repo-tree .file-r { color: #ffb74d; }
+  .repo-tree .file-md { color: #ce93d8; }
+
+  /* ---- Status ---- */
+  .status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  @media (max-width: 600px) {
+    .status-grid { grid-template-columns: 1fr; }
+  }
+  .status-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .status-item .check { color: #4caf50; font-weight: bold; flex-shrink: 0; }
+  .status-item .pending { color: #ff9800; flex-shrink: 0; }
+  .status-item .label { color: var(--muted); }
+
+  /* ---- Links ---- */
+  .links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .link-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .link-primary:hover { background: #a82010; }
+  .link-secondary {
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .link-secondary:hover { border-color: var(--fg); }
+  .link-dark {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .link-dark:hover { background: rgba(255,255,255,0.2); }
+
+  /* ---- Footer ---- */
+  footer {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="label">Exploratory Research · Preprint in Preparation</span>
+  <h1>Cognitive Obesity</h1>
+  <p class="subtitle">
+    Cognitive-Experiential Imbalance as a Unifying Framework
+    for Depression, Violence, and Information Overload
+  </p>
+  <div class="meta">
+    <span><strong>Author:</strong> Kazuyoshi Miyauchi</span>
+    <span><strong>Year:</strong> 2026</span>
+    <span><strong>Status:</strong> v9 · Major Revision</span>
+    <span><strong>Data:</strong> 177 countries × 1990–2023</span>
+  </div>
+  <div class="links" style="margin-top:1.5rem">
+    <a href="#findings" class="link-primary">Key Findings ↓</a>
+    <a href="#repo" class="link-secondary">Replication Repository</a>
+    <a href="paper/en/cognitive_obesity_preprint.pdf" class="link-secondary">Preprint (PDF)</a>
+  </div>
+</header>
+
+<div class="divider"><hr></div>
+
+<section>
+  <h2>The Core Idea</h2>
+  <p>
+    The mental health impact of digital technology depends not on how <em>much</em>
+    time you spend on screens, but on the <strong>balance</strong> between involuntary
+    cognitive input and experiential processing — classified by the degree of
+    sensorimotor loop closure with the environment.
+  </p>
+
+  <div class="equation">
+    <div class="formula">L = α₁ · I &minus; α₂ · C</div>
+    <div class="terms">
+      <div class="term term-1">
+        <div class="term-label">TERM 1 — α₁·I</div>
+        <div class="term-desc">
+          <strong>Cognitive Input</strong><br>
+          Low loop closure: scrolling, push notifications,
+          algorithmic feeds, targeted ads
+        </div>
+      </div>
+      <div class="term term-2">
+        <div class="term-label">TERM 2 — α₂·C</div>
+        <div class="term-desc">
+          <strong>Experiential Processing</strong><br>
+          High loop closure: exercise, creative work,
+          face-to-face interaction, embodied play
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<section id="findings">
+  <h2>Key Findings</h2>
+  <div class="findings">
+    <div class="finding-card">
+      <div class="block-label">Block B · Macro</div>
+      <h3>Ad proxy survives first-difference</h3>
+      <p>
+        Internet×GDP/capita retains predictive power for depression
+        after controlling for GDP change.
+        <span class="stat">Δproxy t=3.19</span>
+        <span class="stat">ΔGDP t=0.16 n.s.</span>
+      </p>
+    </div>
+    <div class="finding-card">
+      <div class="block-label">Block B · Macro</div>
+      <h3>Suicide shows threshold, depression doesn't</h3>
+      <p>
+        Hansen PTR detects a significant protective saturation point
+        for suicide but not for depression.
+        <span class="stat">Suicide γ*=25.7, F=213</span>
+        <span class="stat">Depression p=0.654</span>
+      </p>
+    </div>
+    <div class="finding-card">
+      <div class="block-label">Block C · Individual</div>
+      <h3>Additive model wins decisively</h3>
+      <p>
+        Exercise and active cognitive leisure predict wellbeing
+        as independent channels; interaction is null.
+        <span class="stat">ATUS ΔAIC=73.6</span>
+        <span class="stat">interaction p=0.95</span>
+      </p>
+    </div>
+    <div class="finding-card">
+      <div class="block-label">Block C · Individual</div>
+      <h3>No processing = worst outcomes</h3>
+      <p>
+        High passive input with no exercise or active leisure
+        produces 2× the Fair/Poor health rate.
+        <span class="stat">25.2% vs 12.5%</span>
+        <span class="stat">p=8.57×10⁻¹⁶</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<section>
+  <h2>Limitations (Honest Assessment)</h2>
+  <p>This is exploratory research. The following limitations constrain all findings:</p>
+  <div class="status-grid">
+    <div class="status-item">
+      <span class="pending">△</span>
+      <span>All individual data cross-sectional — causal direction unidentified</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">△</span>
+      <span>Ecological fallacy constrains all macro findings</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">△</span>
+      <span>Ad proxy construct validity limited (indirect measure)</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">△</span>
+      <span>Depression reversal point in upper ~10th percentile only</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">△</span>
+      <span>No natural experiment tied to advertising ecosystems</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">△</span>
+      <span>US-only individual data — cross-cultural generalizability unknown</span>
+    </div>
+  </div>
+</section>
+
+<div id="repo" class="repo-section">
+  <div class="inner">
+    <h2>Replication Repository</h2>
+    <p>
+      Full analysis pipeline from data download to alternative estimators.
+      Python + R. All public data.
+    </p>
+
+    <div class="repo-tree">
+<span class="dir">cognitive-obesity-replication/</span>
+├── <span class="file-md">README.md</span>
+├── <span class="file-md">LICENSE</span> (MIT)
+├── run_all.sh
+│
+├── <span class="dir">data/</span>
+│   ├── <span class="file-py">download_nhanes.py</span>     NHANES 2017-2018
+│   ├── <span class="file-py">download_atus.py</span>       ATUS Wellbeing 2010-2013
+│   ├── <span class="file-py">download_macro.py</span>      World Bank + IHME
+│   ├── <span class="file-py">build_macro_panel.py</span>   WDI/IHME/WHO → panel_merged.csv
+│   └── <span class="file-py">build_ad_validation.py</span> Proxy validation dataset (N=10 template)
+│
+├── <span class="dir">analysis/</span>
+│   ├── <span class="dir">block_b/</span>                   Macro panel (177 countries)
+│   │   ├── <span class="file-py">hansen_ptr.py</span>      Threshold regression
+│   │   ├── <span class="file-py">lag_analysis.py</span>    Granger causality
+│   │   ├── <span class="file-py">stationarity.py</span>    Unit root tests
+│   │   ├── <span class="file-py">robust_tests.py</span>    Robustness checks
+│   │   ├── <span class="file-py">alternative_estimators.py</span>  DK-SE, trends, FD-IV
+│   │   └── <span class="file-r">r_cce_ife_estimators.R</span>     CCE, IFE (Pesaran/Bai)
+│   └── <span class="dir">block_c/</span>                   Individual-level
+│       ├── <span class="file-py">01_nhanes_phq9_exercise.py</span>
+│       ├── <span class="file-py">01_nhanes_weighted.py</span>
+│       ├── <span class="file-py">02_atus_wellbeing_analysis.py</span>
+│       ├── <span class="file-py">02_atus_with_covariates.py</span>
+│       └── <span class="file-py">03_macro_processing_capacity.py</span>
+│
+└── <span class="dir">results/</span>
+    └── <span class="file-md">paper_figure_table_map.md</span>  Claim → Script mapping
+    </div>
+
+    <div class="status-grid" style="margin:1.5rem 0">
+      <div class="status-item"><span class="check">✓</span> <span>Driscoll-Kraay SE</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>Country-specific trends</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>First-difference IV</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>Pesaran CCE estimator</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>Bai IFE (Interactive FE)</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>Survey weight variants</span></div>
+      <div class="status-item"><span class="pending">○</span> <span class="label">System GMM (planned)</span></div>
+      <div class="status-item"><span class="pending">○</span> <span class="label">Event-study design (needs data)</span></div>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/miyauchikazuyoshi/cognitive-obesity-replication" class="link-dark">
+        GitHub Repository →
+      </a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <h2>Next Steps</h2>
+  <p>
+    The desk-based analysis has reached its ceiling. The remaining requirements
+    for publication-quality evidence are field-dependent:
+  </p>
+  <div class="status-grid">
+    <div class="status-item">
+      <span class="pending">→</span>
+      <span>WARC/eMarketer ad-spend data for proxy validation (N>10)</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">→</span>
+      <span>Event-study around GDPR / Apple ATT / platform shocks</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">→</span>
+      <span>Pre-registered ESM study (notifications × affect × activity)</span>
+    </div>
+    <div class="status-item">
+      <span class="pending">→</span>
+      <span>English translation → PsyArXiv / arXiv preprint</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>
+    Kazuyoshi Miyauchi · 2026 ·
+    <a href="https://miyauchikazuyoshi.github.io/InsightSpike-AI/">InsightSpike-AI</a>
+  </p>
+</footer>
+
+</body>
+</html>

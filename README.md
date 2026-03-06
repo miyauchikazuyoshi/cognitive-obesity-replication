@@ -1,0 +1,147 @@
+# Cognitive Obesity: Replication Materials
+
+**Paper:** "Cognitive Obesity: Cognitive-Experiential Imbalance as a Unifying Framework for Depression, Violence, and Information Overload"
+
+**Status:** Exploratory study. Preprint in preparation.
+
+## Overview
+
+This repository provides all analysis scripts needed to reproduce the quantitative findings in the paper. The core model is an additive balance equation:
+
+**L = α₁·I − α₂·C**
+
+- **Term 1 (α₁·I):** Cognitive Input — information processing with low sensorimotor loop closure
+- **Term 2 (α₂·C):** Experiential Processing — bodily/sensory processing with high sensorimotor loop closure
+
+## Repository Structure
+
+```
+cognitive-obesity-replication/
+├── README.md                  ← This file
+├── LICENSE                    ← MIT
+├── requirements.txt           ← Python dependencies
+├── run_all.sh                 ← Full pipeline (bash run_all.sh)
+│
+├── data/
+│   ├── README_data.md         ← Data sources & download instructions
+│   ├── download_nhanes.py     ← NHANES 2017-2018 (automated)
+│   ├── download_atus.py       ← ATUS Wellbeing 2010-2013 (may require manual)
+│   ├── download_macro.py      ← World Bank + manual IHME/WHO
+│   ├── download_who_gho.py    ← WHO GHO API (inactivity, suicide)
+│   └── download_owid.py       ← OWID (schooling years, homicide)
+│
+├── analysis/
+│   ├── block_a/               ← First approximation (Section 2.1)
+│   │   ├── 00_descriptive_stats.py       ← Panel overview & summary statistics
+│   │   ├── 01_correlation_analysis.py    ← Country-level time-series correlations
+│   │   └── 02_fixed_effects_comparison.py ← FE model specification comparison (Table 5)
+│   │
+│   ├── block_b/               ← Macro panel (177 countries × 1990-2023)
+│   │   ├── hansen_ptr.py      ← Section 2.2.6: Threshold regression
+│   │   ├── lag_analysis.py    ← Section 2.2.1: Granger causality
+│   │   ├── stationarity.py    ← Section 2.2.8: Unit root tests
+│   │   ├── robust_tests.py    ← Section 2.2.8: Robustness checks
+│   │   ├── alternative_estimators.py ← DK-SE, country trends, FD-IV
+│   │   ├── proxy_validation.py      ← Ad proxy construct validation
+│   │   └── r_cce_ife_estimators.R   ← CCE (Pesaran), IFE (Bai) [R]
+│   │
+│   └── block_c/               ← Individual-level validation
+│       ├── 01_nhanes_phq9_exercise.py       ← Section 2.3.2 (baseline)
+│       ├── 01_nhanes_weighted.py            ← Appendix A.1 (survey weights)
+│       ├── 02_atus_wellbeing_analysis.py    ← Section 2.3.3 (baseline)
+│       ├── 02_atus_with_covariates.py       ← Appendix A.2 (covariates + weights)
+│       └── 03_macro_processing_capacity.py  ← Section 2.3.1
+│
+└── results/
+    └── paper_figure_table_map.md  ← Paper claim → script correspondence
+```
+
+## Quick Start
+
+```bash
+# 1. Install dependencies
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+
+# 2. Download data
+# NHANES/WDI: automated. ATUS may require manual download (see data/README_data.md).
+python3 data/download_nhanes.py
+python3 data/download_atus.py
+python3 data/download_macro.py
+python3 data/download_who_gho.py
+python3 data/download_owid.py
+python3 data/check_data.py  # shows any missing manual items (IHME/ATUS)
+
+# 3. Run individual-level analyses (no manual data needed)
+python3 analysis/block_c/01_nhanes_phq9_exercise.py
+python3 analysis/block_c/02_atus_wellbeing_analysis.py
+
+# 4. (Optional) Macro panel analyses require manual IHME/WHO downloads
+# See data/README_data.md, then build the panel:
+python3 data/build_macro_panel.py
+
+# Or run the full pipeline
+bash run_all.sh
+```
+
+## Key Results
+
+### Block B: Macro Panel (Section 2.2)
+- **Hansen PTR:** Suicide threshold γ*=25.7 (F=213, significant); Depression threshold not detected (p=0.654)
+- **Dose-response:** Continuous inverted-U for depression (quadratic F=80.04), reversal at proxy ≈ 10,000
+- **First-difference identification:** Δproxy t=3.19 (significant); ΔGDP t=0.16 (n.s.) — proxy captures variance beyond GDP
+
+### Block C: Individual-Level (Section 2.3)
+- **NHANES (N=5,032):** Balance model exercise β=−1.19 (t=−8.56); full cov β=−0.84 (t=−5.40); interaction n.s. (p=0.71)
+- **ATUS (N=21,736):** Additive model decisively preferred (ΔAIC=73.6; interaction p=0.95)
+- **Balance test:** High-input/no-processing group shows 2× the Fair/Poor health rate
+
+## Known Limitations
+
+Documented in the paper (Section 8.4) and Appendix A.3:
+
+1. **Cross-sectional individual data** — causal direction unidentified
+2. **Survey weights not applied** in baseline analyses (weighted versions provided)
+3. **ATUS covariates not included** in baseline (covariate version provided)
+4. **US-only individual data** — cross-cultural generalizability unknown
+5. **Ecological fallacy** constrains all macro-level findings
+6. **No natural experiment** directly tied to advertising ecosystems
+7. **Ad proxy construct validity** limited (indirect measure)
+
+## Planned Additions
+
+- [x] Driscoll-Kraay standard errors for cross-sectional dependence
+- [x] Country-specific linear trends in fixed effects
+- [x] First-difference IV (Arellano-Bond logic) for Nickell bias
+- [x] Pesaran CCE (Common Correlated Effects) estimator [R]
+- [x] Bai IFE (Interactive Fixed Effects) via phtt [R]
+- [ ] Full system GMM (Blundell-Bond) with instrument diagnostics
+- [ ] Alternative ad proxy validation with WARC/GroupM data
+- [ ] ELSA longitudinal validation (UK panel)
+- [ ] Suicide quality-weighted subset analysis (WHO quality scores)
+- [ ] Event-study around quasi-exogenous shocks (GDPR, ATT, cable landings)
+
+## Citation
+
+```
+Miyauchi, K. (2026). Cognitive Obesity: Cognitive-Experiential Imbalance as a
+Unifying Framework for Depression, Violence, and Information Overload.
+[Preprint in preparation]
+```
+
+## License
+
+Code: MIT License. Data: See individual source licenses in `data/README_data.md`.
+
+## Dependencies
+
+**Python:**
+```
+python3 -m pip install -r requirements.txt  # pandas, numpy, scipy, statsmodels, matplotlib, wbgapi
+```
+
+**R** (for CCE/IFE estimators):
+```r
+install.packages(c("plm", "phtt", "lmtest", "sandwich"))
+```

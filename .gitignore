@@ -1,0 +1,48 @@
+# Data files (not redistributed; see data/README_data.md)
+data/nhanes/
+data/atus/
+data/macro/*.csv
+data/macro/IHME-*/
+!data/macro/ad_spend_validation.csv
+
+# Draft paper versions (keep only final LaTeX output)
+docs/paper/ja_pre/paper_versions/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Results (regenerable via run_all.sh)
+results/*.log
+results/*.json
+results/figures/*.png
+
+# IDE / tools
+.vscode/
+.idea/
+*.swp
+.claude/

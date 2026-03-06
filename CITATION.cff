@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the preprint (preferred-citation) and/or this software."
+title: "Cognitive Obesity: Replication Materials"
+authors:
+  - family-names: "Miyauchi"
+    given-names: "Kazuyoshi"
+license: "MIT"
+repository-code: "https://github.com/miyauchikazuyoshi/cognitive-obesity-replication"
+preferred-citation:
+  type: article
+  title: "Cognitive Obesity: Cognitive-Experiential Imbalance as a Unifying Framework for Depression, Violence, and Information Overload"
+  authors:
+    - family-names: "Miyauchi"
+      given-names: "Kazuyoshi"
+  year: 2026
+  status: preprint
