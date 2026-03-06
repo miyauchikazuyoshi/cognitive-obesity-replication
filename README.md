@@ -2,7 +2,16 @@
 
 **Paper:** "Cognitive Obesity: Cognitive-Experiential Imbalance as a Unifying Framework for Depression, Violence, and Information Overload"
 
-**Status:** Exploratory study. Preprint in preparation.
+**Project Page:** https://miyauchikazuyoshi.github.io/cognitive-obesity-replication/
+
+|  | Link |
+|--|------|
+| Preprint (EN) | [PDF](docs/paper/en/cognitive_obesity_preprint.pdf) |
+| Preprint (JA) | [PDF](docs/paper/ja_pre/latex/cognitive_obesity_optionA.pdf) |
+| LaTeX source (EN) | [docs/paper/en/latex/](docs/paper/en/latex/) |
+| LaTeX source (JA) | [docs/paper/ja_pre/latex/](docs/paper/ja_pre/latex/) |
+
+**Status:** Preprint — PsyArXiv submission in progress.
 
 ## Overview
 
@@ -49,6 +58,7 @@ cognitive-obesity-replication/
 │       ├── 01_nhanes_phq9_exercise.py       ← Section 2.3.2 (baseline)
 │       ├── 01_nhanes_weighted.py            ← Appendix A.1 (survey weights)
 │       ├── 02_atus_wellbeing_analysis.py    ← Section 2.3.3 (baseline)
+│       ├── 02b_atus_ratio_test.py           ← Additive vs. ratio model test
 │       ├── 02_atus_with_covariates.py       ← Appendix A.2 (covariates + weights)
 │       └── 03_macro_processing_capacity.py  ← Section 2.3.1
 │
@@ -95,6 +105,7 @@ bash run_all.sh
 ### Block C: Individual-Level (Section 2.3)
 - **NHANES (N=5,032):** Balance model exercise β=−1.19 (t=−8.56); full cov β=−0.84 (t=−5.40); interaction n.s. (p=0.71)
 - **ATUS (N=21,736):** Additive model decisively preferred (ΔAIC=73.6; interaction p=0.95)
+- **Ratio test:** Additive L=α₁·I−α₂·C beats ratio R=I/C model (ΔAIC=86); validates theoretical framework
 - **Balance test:** High-input/no-processing group shows 2× the Fair/Poor health rate
 
 ## Known Limitations
@@ -127,8 +138,10 @@ Documented in the paper (Section 8.4) and Appendix A.3:
 ```
 Miyauchi, K. (2026). Cognitive Obesity: Cognitive-Experiential Imbalance as a
 Unifying Framework for Depression, Violence, and Information Overload.
-[Preprint in preparation]
+PsyArXiv. https://doi.org/[DOI pending]
 ```
+
+See also: [CITATION.cff](CITATION.cff)
 
 ## License
 
