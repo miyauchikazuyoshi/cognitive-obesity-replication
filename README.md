@@ -106,7 +106,7 @@ bash run_all.sh
 - **NHANES (N=5,032):** Balance model exercise β=−1.19 (t=−8.56); full cov β=−0.84 (t=−5.40); interaction n.s. (p=0.71)
 - **ATUS (N=21,736):** Additive model decisively preferred (ΔAIC=73.6; interaction p=0.95)
 - **Ratio test:** Additive L=α₁·I−α₂·C beats ratio R=I/C model (ΔAIC=86); validates theoretical framework
-- **Balance test:** High-input/no-processing group shows 2× the Fair/Poor health rate
+- **Balance test:** Highest passive-to-active ratio quintile shows 1.8× the Fair/Poor health rate (Q5=25.2% vs Q1=13.8%)
 
 ## Known Limitations
 
