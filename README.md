@@ -7,7 +7,7 @@
 |  | Link |
 |--|------|
 | Preprint (EN) | [PDF](docs/paper/en/cognitive_obesity_preprint.pdf) |
-| Preprint (JA) | [PDF](docs/paper/ja_pre/latex/cognitive_obesity_optionA.pdf) |
+| Preprint (JA) | [PDF](docs/paper/ja_pre/cognitive_obesity_preprint.pdf) |
 | LaTeX source (EN) | [docs/paper/en/latex/](docs/paper/en/latex/) |
 | LaTeX source (JA) | [docs/paper/ja_pre/latex/](docs/paper/ja_pre/latex/) |
 
