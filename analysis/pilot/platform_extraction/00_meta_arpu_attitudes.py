@@ -49,11 +49,16 @@ def build_meta_financial_data():
     data = {
         "year": [2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
         # Worldwide ARPU (USD, annual) — from 10-K filings
+        # Note: These are Facebook-only ARPU values reported in 10-K filings.
+        #   From 2024, Meta switched to "Family of Apps" ARPP (Average Revenue Per Person),
+        #   which is higher due to Instagram/WhatsApp/Messenger inclusion.
+        #   Third-party sources (Statista, FourWeekMBA) may report Family ARPP, not FB ARPU.
         "meta_arpu_world": [5.32, 6.64, 9.45, 11.96, 15.98, 20.21, 24.96, 29.25, 32.03, 40.96, 36.49, 40.02, 48.85],
         # US & Canada ARPU (USD, annual)
         "meta_arpu_us": [20.04, 26.76, 38.63, 49.05, 62.23, 84.41, 111.97, 130.14, 143.47, 175.44, 164.92, 178.36, 218.52],
         # DAU worldwide (millions, Q4 of each year)
-        "meta_dau_m": [618, 757, 890, 1038, 1227, 1401, 1523, 1657, 1845, 1929, 1984, 2110, 2200],
+        # Verified against SEC 10-K filings and earnings reports
+        "meta_dau_m": [618, 757, 890, 1038, 1227, 1401, 1523, 1657, 1840, 1929, 2000, 2110, 2110],
         # Ad impressions YoY growth (%)
         "ad_impressions_growth_pct": [None, None, None, None, None, None, 34, 33, 33, 10, 18, 28, 11],
         # Ad price YoY growth (%)

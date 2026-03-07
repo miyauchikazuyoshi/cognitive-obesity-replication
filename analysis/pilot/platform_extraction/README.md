@@ -11,8 +11,8 @@ user welfare?
 
 | Script | Description | Data Required |
 |--------|-------------|---------------|
-| `00_meta_arpu_attitudes.py` | Time-series analysis: Meta ARPU vs Pew/Reuters user attitudes | Compiled from SEC filings + Pew (built-in) |
-| `01_gss_wellbeing_divergence.py` | GSS happiness × internet use divergence (1972–2024) | GSS data (free download) |
+| `00_meta_arpu_attitudes.py` | Study 1: Meta ARPU vs Pew/Reuters user attitudes divergence | Compiled from SEC filings + Pew (built-in) |
+| `01_msi_natural_experiment.py` | Study 2: Facebook MSI algorithm change (Jan 2018) natural experiment | Published aggregate data (built-in) |
 
 ## Running
 
@@ -20,8 +20,8 @@ user welfare?
 # Study 1: ARPU × Attitudes (data is built-in)
 python3 analysis/pilot/platform_extraction/00_meta_arpu_attitudes.py
 
-# Study 4: GSS analysis (requires download)
-python3 analysis/pilot/platform_extraction/01_gss_wellbeing_divergence.py
+# Study 2: MSI Natural Experiment (data is built-in)
+python3 analysis/pilot/platform_extraction/01_msi_natural_experiment.py
 ```
 
 ## Connection to Cognitive Obesity
