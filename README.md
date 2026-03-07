@@ -141,6 +141,9 @@ Extending the Cognitive Obesity framework to decompose SNS toxicity:
 | Reddit engagement spectrum | Reddit MH Dataset (Zenodo) | `analysis/pilot/sns_engagement/02_reddit_engagement_spectrum.py` | Pipeline ready |
 | Evaluated vs non-evaluated SNS | *Design only* | — | [`docs/experiment_design/`](docs/experiment_design/sns_decomposition_design.md) |
 | Push notification × advertising | *Design only* | — | [`docs/experiment_design/`](docs/experiment_design/sns_decomposition_design.md) |
+| **Platform extraction phase** | Meta 10-K, Pew, Reuters | `analysis/pilot/platform_extraction/00_meta_arpu_attitudes.py` | **Results available** |
+| ARPU × Attitudes divergence | SEC filings + surveys | (above) | DI slope=+0.60/yr, p=.0001 |
+| GSS wellbeing divergence | GSS 1972–2024 | `analysis/pilot/platform_extraction/01_gss_wellbeing_divergence.py` | Pipeline ready |
 
 Run `python3 analysis/pilot/sns_engagement/00_synthetic_data.py` to generate test data, then run the analysis scripts.
 

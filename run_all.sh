@@ -193,6 +193,11 @@ fi
 # $PYTHON analysis/pilot/sns_engagement/01_writer_vs_rom.py 2>&1 | tee results/pilot_writer_vs_rom.log
 # $PYTHON analysis/pilot/sns_engagement/02_reddit_engagement_spectrum.py 2>&1 | tee results/pilot_reddit_engagement.log
 
+# echo ""
+# echo "[Pilot] Platform extraction phase..."
+# $PYTHON analysis/pilot/platform_extraction/00_meta_arpu_attitudes.py 2>&1 | tee results/pilot_platform_extraction.log
+# $PYTHON analysis/pilot/platform_extraction/01_gss_wellbeing_divergence.py 2>&1 | tee results/pilot_gss_wellbeing.log
+
 # ---- Done ----
 echo ""
 echo "=============================================="

@@ -1,0 +1,25 @@
+{
+  "study": "Platform Investment-to-Extraction Phase",
+  "meta_arpu": {
+    "us_2012": 20.04,
+    "us_2024": 218.52,
+    "growth_ratio": 10.904191616766468,
+    "log_linear_growth_rate_pct_per_year": 19.53404441342183,
+    "arpu_vs_dau_growth_ratio": 1.8917565846621267
+  },
+  "pew_attitudes": {
+    "bad_2018": 55.0,
+    "bad_2024": 68.0,
+    "trend_pp_per_year": 1.95
+  },
+  "divergence_index": {
+    "trend_slope_per_year": 0.5975997933827677,
+    "trend_r_squared": 0.8821885775469566,
+    "trend_p_value": 5.535737460718545e-05
+  },
+  "arpu_attitude_correlation": {
+    "pearson_r": 0.8989949637804855,
+    "p_value": 0.10100503621951451,
+    "n_observations": 4
+  }
+}
