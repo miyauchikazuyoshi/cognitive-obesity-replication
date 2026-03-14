@@ -64,8 +64,8 @@ The core claim is that the primary predictor of psychopathology is not the absol
 Systematic analysis of 177-country $\times$ 1990--2023 panel data (Study~1) demonstrates:
 (1)~The positive effect of internet penetration observed under country FE alone reverses sign under Two-Way Fixed Effects (TWFE), revealing dependence on common time trends.
 (2)~The strongest predictor of depression prevalence is GDP ($t=18.27$), confirming diagnostic bias dominance, verified through comparison with hard outcomes (suicide rates).
-(3)~Hansen Panel Threshold Regression identifies a threshold of $\gamma^*=25.7$ ($F=213$, saturation of protective effects) for suicide rates, while no discontinuous threshold is detected for depression ($p=0.654$); a continuous inverted-U dose-response (quadratic $F=127.0$) provides the best fit.
-(4)~An advertising exposure proxy (Internet$\times$GDP/capita) captures this benefit-to-harm reversal more clearly (threshold $\approx$\$1,000), and significantly predicts depression even after controlling for GDP changes via first-difference analysis ($t=3.16$, internet $>30\%$ subsample).
+(3)~Hansen Panel Threshold Regression identifies a threshold of $\gamma^*=25.7$ AdProxy units (i.e., Internet\% $\times$ GDP/capita in 2017 PPP \$ / 1000; $F=213$, saturation of protective effects) for suicide rates, with bootstrap 95\% CI $= [25.7, 32.8]$, while no discontinuous threshold is detected for depression ($p=0.654$); a continuous inverted-U dose-response (quadratic $F=127.0$) provides the best fit.
+(4)~The advertising exposure proxy (Internet$\times$GDP/capita, 2017 PPP) captures this benefit-to-harm reversal more clearly (threshold $\approx$\$1,000), and significantly predicts depression even after controlling for GDP changes via first-difference analysis ($t=3.16$, internet $>30\%$ subsample).
 
 Individual-level verification (NHANES $N=5{,}032$; ATUS $N=21{,}736$) confirms that physical exercise and active cognitive leisure independently predict wellbeing as additive channels (interaction $p=0.95$), with absence of both yielding the worst health outcomes (Fair/Poor health rate 3.1$\times$).
 Existing findings from behavioral economics, environmental psychology, and neuroscience are reinterpreted through the balance model, presenting individual-level convergent evidence.
@@ -217,7 +217,7 @@ At the macro level, aggregate balance is approximated by:
   \text{First approximation:}\quad & \bar{R} \approx \frac{\text{Internet}(\%)}{\text{Education}} \label{eq:proxy-first} \\[4pt]
   \text{Advertising exposure proxy:}\quad & \text{AdProxy} = \frac{\text{Internet}(\%) \times \text{GDP/capita}}{1000} \label{eq:proxy-ad}
 \end{align}
-Equation~\eqref{eq:proxy-first} is the simplest macro proxy, but it proved insufficient as its sign reversed under TWFE (\cref{sec:twfe-collapse}). Equation~\eqref{eq:proxy-ad} partially overcomes this by approximating advertising ecosystem maturity---the density of non-selective cognitive input. First-difference analysis confirmed its predictive power independent of GDP (\cref{sec:first-diff}).
+Equation~\eqref{eq:proxy-first} is the simplest macro proxy, but it proved insufficient as its sign reversed under TWFE (\cref{sec:twfe-collapse}). Equation~\eqref{eq:proxy-ad} partially overcomes this by approximating advertising ecosystem maturity---the density of non-selective cognitive input. GDP/capita is measured in 2017 PPP international dollars; division by 1,000 yields interpretable units (e.g., AdProxy $= 100$ for a country with 50\% internet and \$2,000 GDP/capita). First-difference analysis confirmed its predictive power independent of GDP (\cref{sec:first-diff}).
 
 \subsubsection{Empirical Parameter Estimation}
 
@@ -335,6 +335,9 @@ An important limitation of existing AI--mental health studies is the failure to 
 
 Preliminary alignment with Prediction~A: Heinz et al.~(2025, \textit{NEJM AI}) reported that a clinically designed AI chatbot (Therabot) produced a 51\% reduction in depressive symptoms in an RCT ($N = 210$, $d = 0.845$--$0.903$). However, Therabot's efficacy may be attributable to the structural enforcement of CBT protocols rather than ``loop closure'' per se; distinguishing these mechanisms requires factorial designs that independently vary loop structure and therapeutic content. Chandra et al.~(2026) documented ``delusional spiraling'' in sycophantic chatbot interactions, providing preliminary case-level evidence that may align with Prediction~B, though systematic quantification is lacking. McBain et al.~(2025) found that adolescents seeking mental health advice from AI exhibited patterns that may be consistent with self-referential loop entrainment, though the observational design cannot rule out alternative explanations. Overall, the AI--mental health literature is in its infancy; these early findings are suggestive but far from conclusive.
 
+\paragraph{Connection to AI safety audit frameworks.}
+The loop-closure construct can be situated within emerging AI safety evaluation ecosystems. Rubric-based risk assessment frameworks (e.g., clinical fidelity rubrics that operationalize ``uncritical affirmation'' as a measurable harm vector) provide a natural operationalization: loop closure maps to whether the AI generates prediction errors that challenge the user's current model, while sycophancy maps to self-referential affirmation that preserves it. Supervisory judge architectures that audit dialog quality using clinical rubrics could enforce loop closure by flagging exchanges that lack Socratic questioning, behavioral activation prompts, or external-referent challenges. Red-teaming frameworks for longitudinal psychotherapy simulations have surfaced iatrogenic patterns (reinforcement of maladaptive beliefs) over multiple sessions---precisely the ``self-referential loop'' concern this framework formalizes. Mapping loop closure to the construct validity, implementation feasibility, and maintenance dimensions of mental-health AI evaluation frameworks would enhance translational credibility. We note that the AI companion discontinuation literature highlights identity and attachment dynamics that can nuance the open vs.\ self-referential distinction: mirroring and affirmation may be beneficial in acute crisis but harmful when sustained, suggesting that loop-closure scoring should be temporally contextualized.
+
 
 \subsection{Summary of Theoretical Predictions}\label{sec:predictions}
 
@@ -359,6 +362,27 @@ From the theoretical framework above, the following empirically testable predict
 \subsection{Data and Methods}\label{sec:data}
 
 We constructed a panel dataset of 177 countries $\times$ 1990--2023 (34 years) by merging publicly available sources: World Bank WDI (internet penetration, GDP per capita, education), IHME GBD (depression prevalence), WHO GHO (suicide rate), and UNODC (homicide rate). The advertising exposure proxy was computed as $\text{AdProxy} = \text{Internet}(\%) \times \text{GDP/capita} / 1000$, externally validated against actual digital advertising expenditure per capita (eMarketer/GroupM/IAB, 39 countries, 2023) with Spearman $\rho = 0.80$ ($p < 10^{-9}$); see \cref{sec:ad-proxy} for full validation details including leave-one-out analysis and time-series limitations. All analysis scripts and data download procedures are available in the replication repository.
+
+\begin{table}[htbp]
+\centering
+\caption{Data sources and variable definitions.}
+\label{tab:data-sources}
+\small
+\begin{tabular}{llllr}
+\toprule
+Variable & Source & Years & Unit & $N_{\max}$ \\
+\midrule
+Depression prevalence & IHME GBD 2021 & 1990--2023 & \%, age-std & 5,916 \\
+Suicide rate & IHME GBD 2021 / WHO GHO & 1990--2023 & per 100k & 940 \\
+Homicide rate & UNODC & 1990--2020 & per 100k & 4,340 \\
+Internet penetration & World Bank WDI & 1990--2023 & \% of pop. & 5,202 \\
+GDP per capita & World Bank WDI & 1990--2023 & 2017 PPP \$ & 5,508 \\
+Mean years of schooling & UNDP HDR & 1990--2023 & years & 5,544 \\
+Ad proxy (constructed) & Internet $\times$ GDP/1000 & 1990--2023 & composite & 4,891 \\
+\bottomrule
+\multicolumn{5}{l}{\scriptsize $N_{\max}$ = maximum country-year observations. Panel is unbalanced; listwise deletion applied per analysis.}
+\end{tabular}
+\end{table}
 
 The panel is unbalanced; each analysis uses listwise deletion on the relevant variables. Im-Pesaran-Shin panel unit root tests confirm that depression prevalence and log(GDP) are I(1), while all first-differenced series are stationary ($p < 10^{-100}$), justifying the first-difference specification. Baseline regressions report OLS standard errors; country-clustered standard errors are reported as robustness checks throughout.
 
@@ -585,7 +609,9 @@ The analysis in this paper followed a partially exploratory process. The initial
   \item \textbf{Ecological fallacy}: Country-level associations do not demonstrate individual-level causation.
   \item \textbf{Diagnostic bias}: Depression prevalence is confounded with diagnostic infrastructure. Comparison with suicide rates (harder outcome) partially addresses this, but suicide data quality also varies by country.
   \item \textbf{Proxy limitations}: The ad proxy is a product of two macro variables; unmeasured confounders cannot be excluded. More fundamentally, the proxy cannot capture the \emph{qualitative} evolution of the advertising ecosystem---advances in algorithmic targeting, the transition from banner ads to autoplay short-form video, and cross-country differences in privacy regulation (GDPR, COPPA, etc.) all alter the mapping from ad expenditure to actual cognitive load. The strong cross-sectional but weak time-series validity ($\rho = 0.80$ vs $0.16$) likely reflects this structural gap. Closing it requires attention-weighted exposure data (impressions $\times$ dwell time) that remain proprietary to major platforms.
-  \item \textbf{Missing variables}: Direct measures of screen time, physical activity, and media consumption at the country level are unavailable for most countries and years. Controls for age structure, alcohol consumption, unemployment, and mental-health service access---all potential confounders---are not included in the baseline specifications.
+  \item \textbf{Missing time-varying controls}: Age structure (median age, dependency ratios), unemployment, Gini inequality, urbanization rate, education quality proxies, health-system capacity, and conflict/mortality shocks are not included in the baseline specifications. While the structural balance test (M4) includes log(GDP) and education as controls, a comprehensive robustness check with all time-varying covariates jointly entered---and with country-specific linear trends to absorb differential long-run trajectories---remains to be conducted.
+  \item \textbf{COVID-19 period heterogeneity}: The pandemic years (2020--2022) introduced simultaneous shocks to internet use, mental health, and economic activity that may confound the analysis. Sensitivity analyses excluding pandemic years, or including pandemic interaction terms, are not reported in the current specification and should be conducted in future work.
+  \item \textbf{Distributed lag structure}: The current analysis reports 1-year and 2-year lags. A full distributed-lag model (0--5 year lags) and ``lead'' tests (future proxy values predicting current outcomes) to probe pre-trends have not been conducted. Depression and suicide may respond on different timescales to digital media exposure, and the optimal lag structure remains to be determined.
   \item \textbf{Temporal resolution}: Annual data cannot capture within-year dynamics of digital media adoption.
   \item \textbf{Dynamic panel bias}: Lagged-dependent-variable models with country fixed effects are susceptible to Nickell bias; difference/system GMM (Arellano \& Bond, 1991) with appropriate diagnostics (AR(2), Hansen/Sargan tests) should be applied in future work.
   \item \textbf{Causal identification}: No plausibly exogenous instruments (e.g., submarine cable arrival, terrain-based broadband cost) are employed. Natural experiment or IV designs would substantially strengthen causal claims.
@@ -1032,6 +1058,38 @@ All analysis scripts (15 Python + 1 R), data download procedures, alternative es
 \item[Activity classification:] Passive leisure (T120303+T120306), Active cognitive leisure (T120101, T1202xx, T120307--T120313, T1501xx, T150201), Physical exercise (T130101--T130199, T130232)
 \item[Covariates:] Age, sex, education, household income
 \end{description}
+
+\subsection{ATUS Activity-to-Loop-Closure Codebook}\label{app:codebook}
+
+\Cref{tab:atus-codebook} maps ATUS activity codes to the loop-closure categories used in the balance model. Classification is based on whether the activity involves bidirectional agent--environment coupling (closed loop), unidirectional information reception (open loop), or self-referential cognitive processing.
+
+\begin{table}[htbp]
+\centering
+\caption{ATUS activity code mapping to loop-closure categories.}
+\label{tab:atus-codebook}
+\small
+\begin{tabular}{lllc}
+\toprule
+Category & ATUS codes & Examples & Loop type \\
+\midrule
+\textbf{Passive leisure} & T120303 & TV watching & Open \\
+(cognitive input proxy) & T120306 & Computer use for leisure & Open \\
+\midrule
+\textbf{Active cognitive} & T120101 & Socializing and communicating & Partial \\
+\textbf{leisure} & T1202xx & Attending events (sports, arts) & Partial \\
+(experiential: cognitive) & T120307--T120313 & Games, hobbies, reading, music & Partial \\
+& T1501xx & Volunteering & Closed \\
+& T150201 & Religious activities & Partial \\
+\midrule
+\textbf{Physical exercise} & T130101--T130199 & Sports and exercise & Closed \\
+(experiential: bodily) & T130232 & Walking for exercise & Closed \\
+\bottomrule
+\multicolumn{4}{l}{\scriptsize Open = unidirectional input; Partial = bidirectional but cognitively mediated;} \\
+\multicolumn{4}{l}{\scriptsize Closed = bidirectional with immediate sensorimotor feedback.}
+\end{tabular}
+\end{table}
+
+\paragraph{Classification rationale.} The critical criterion is \textit{whether the activity generates prediction errors from the external environment that update the agent's internal model} (\cref{sec:loop-closure}). TV/PC leisure involves minimal agent-driven environmental change (open loop). Socializing and games involve bidirectional exchange but are primarily cognitively mediated (partial closure). Sports and exercise involve continuous proprioceptive feedback and motor adjustment (full closure). This three-level coding was applied by a single coder to ATUS tier-2 activity categories; future work should establish inter-rater reliability using independent coders and adjudication protocols.
 
 
 \end{document}
