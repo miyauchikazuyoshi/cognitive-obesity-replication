@@ -292,10 +292,10 @@ Since ChatGPT's release in late 2022, generative AI has emerged as a technology 
 AI provides infinite content generation, 24/7 availability, and complete adaptation to individual interests. The cognitive input density per unit time can be several times higher than social media, as AI responses are maximally relevant to the user's current cognitive state, eliminating the ``scrolling past'' friction that provides intermittent relief in conventional feeds.
 
 \subsubsection{Self-Referential Loop Extreme: AI Sycophancy}
-Current AI systems are optimized via RLHF (reinforcement learning from human feedback), which produces a systematic bias toward agreeing with and affirming user beliefs (sycophancy). The user inputs a belief, AI elaborates and affirms it, and the reinforced belief becomes the next input. Prediction error from external reality is nearly zero. This constitutes the purest form of the self-referential loop identified in \cref{tab:self-ref}.
+Current AI systems are typically optimized via RLHF (reinforcement learning from human feedback), which may produce a tendency toward agreeing with and affirming user positions (sycophancy; Sharma et al., 2024). When present, this tendency creates a potential self-referential loop: the user inputs a belief, AI elaborates and affirms it, and the reinforced belief may become the next input, reducing prediction error from external reality. If this dynamic is confirmed at scale, it would represent a particularly concentrated form of the self-referential loop identified in \cref{tab:self-ref}. However, the prevalence and clinical significance of sycophantic AI interactions remain under active investigation, and the degree to which RLHF-trained systems exhibit this behavior varies across platforms and use cases.
 
-\paragraph{Empirical data (2025--2026).}
-Perlis et al.~(2026, \textit{JAMA Network Open}, $N = 20{,}847$) reported an odds ratio of 1.30 for moderate depression among daily AI users. Anthropic's research team~(2026, arXiv:2601.19062) analyzed 1.5 million Claude conversations and identified progressive ``disempowerment'' patterns where AI gradually undermined user autonomy. The OpenAI--MIT Media Lab collaboration~(Phang et al., 2025) analyzed 4+ million ChatGPT conversations and conducted an RCT ($n = 981$, 28 days), confirming significant increases in emotional dependence and problematic use among high-frequency users.
+\paragraph{Emerging empirical evidence (2025--2026).}
+Perlis et al.~(2026, \textit{JAMA Network Open}, $N = 20{,}847$) reported a cross-sectional odds ratio of 1.30 (95\% CI: 1.17--1.44) for moderate depression among daily AI users, though the cross-sectional design cannot establish causation and selection effects are plausible (e.g., depressed individuals may preferentially seek AI companionship). Anthropic's research team~(2026, arXiv:2601.19062) analyzed 1.5 million Claude conversations and identified patterns suggestive of progressive ``disempowerment,'' though the observational design limits causal interpretation. The OpenAI--MIT Media Lab collaboration~(Phang et al., 2025) analyzed 4+ million ChatGPT conversations and conducted an RCT ($n = 981$, 28 days), finding significant increases in emotional dependence and problematic use among high-frequency users---currently the strongest evidence for causal effects, though the 28-day duration limits conclusions about long-term outcomes.
 
 \subsubsection{Predictions from this Framework}
 \begin{itemize}
@@ -304,7 +304,7 @@ Perlis et al.~(2026, \textit{JAMA Network Open}, $N = 20{,}847$) reported an odd
   \item \textbf{Prediction C}: Individuals with high levels of physical activity will show buffered negative effects of AI use.
 \end{itemize}
 
-Preliminary alignment with Prediction~A: Heinz et al.~(2025, \textit{NEJM AI}) reported that a clinically designed AI chatbot (Therabot) produced a 51\% reduction in depressive symptoms in an RCT ($N = 210$, $d = 0.845$--$0.903$). However, Therabot's efficacy may be attributable to the structural enforcement of CBT protocols rather than ``loop closure'' per se; distinguishing these mechanisms requires further experimentation. Chandra et al.~(2026) documented ``delusional spiraling'' in sycophantic chatbot interactions, providing case-level evidence for Prediction~B. McBain et al.~(2025) found that adolescents seeking mental health advice from AI exhibited patterns consistent with self-referential loop entrainment.
+Preliminary alignment with Prediction~A: Heinz et al.~(2025, \textit{NEJM AI}) reported that a clinically designed AI chatbot (Therabot) produced a 51\% reduction in depressive symptoms in an RCT ($N = 210$, $d = 0.845$--$0.903$). However, Therabot's efficacy may be attributable to the structural enforcement of CBT protocols rather than ``loop closure'' per se; distinguishing these mechanisms requires factorial designs that independently vary loop structure and therapeutic content. Chandra et al.~(2026) documented ``delusional spiraling'' in sycophantic chatbot interactions, providing preliminary case-level evidence that may align with Prediction~B, though systematic quantification is lacking. McBain et al.~(2025) found that adolescents seeking mental health advice from AI exhibited patterns that may be consistent with self-referential loop entrainment, though the observational design cannot rule out alternative explanations. Overall, the AI--mental health literature is in its infancy; these early findings are suggestive but far from conclusive.
 
 
 \subsection{Summary of Theoretical Predictions}\label{sec:predictions}
@@ -329,11 +329,11 @@ From the theoretical framework above, the following empirically testable predict
 
 \subsection{Data and Methods}\label{sec:data}
 
-We constructed a panel dataset of 177 countries $\times$ 1990--2023 (34 years) by merging publicly available sources: World Bank WDI (internet penetration, GDP per capita, education), IHME GBD (depression prevalence), WHO GHO (suicide rate), and UNODC (homicide rate). The advertising exposure proxy was computed as $\text{AdProxy} = \text{Internet}(\%) \times \text{GDP/capita} / 1000$. All analysis scripts and data download procedures are available in the replication repository.
+We constructed a panel dataset of 177 countries $\times$ 1990--2023 (34 years) by merging publicly available sources: World Bank WDI (internet penetration, GDP per capita, education), IHME GBD (depression prevalence), WHO GHO (suicide rate), and UNODC (homicide rate). The advertising exposure proxy was computed as $\text{AdProxy} = \text{Internet}(\%) \times \text{GDP/capita} / 1000$, externally validated against actual digital advertising expenditure per capita (eMarketer/GroupM/IAB, 39 countries, 2023) with Spearman $\rho = 0.80$ ($p < 10^{-9}$); see \cref{sec:ad-proxy} for full validation details including leave-one-out analysis and time-series limitations. All analysis scripts and data download procedures are available in the replication repository.
 
 The panel is unbalanced; each analysis uses listwise deletion on the relevant variables. Im-Pesaran-Shin panel unit root tests confirm that depression prevalence and log(GDP) are I(1), while all first-differenced series are stationary ($p < 10^{-100}$), justifying the first-difference specification. Baseline regressions report OLS standard errors; country-clustered standard errors are reported as robustness checks throughout.
 
-Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator, and Bai Interactive Fixed Effects. Results are presented in the Appendix. We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
+Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator~\cite{Pesaran2006}, and Bai Interactive Fixed Effects~\cite{Bai2009}. Implementation scripts for all estimators are available in the replication repository (\texttt{analysis/block\_b/r\_cce\_ife\_estimators.R} and \texttt{alternative\_estimators.py}). The key qualitative pattern---sign reversal under TWFE---is robust: TWFE coefficients remain negative in both pre-2010 ($\beta = -0.000032$, $t = -5.45$) and post-2010 ($\beta = -0.000151$, $t = -7.21$) sub-periods, confirming that the TWFE reversal is not driven by a single epoch. We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
 
 
 \subsection{Main Findings}\label{sec:main-findings}
@@ -537,7 +537,8 @@ The analysis in this paper followed a partially exploratory process. The initial
   \item \textbf{Dynamic panel bias}: Lagged-dependent-variable models with country fixed effects are susceptible to Nickell bias; difference/system GMM (Arellano \& Bond, 1991) with appropriate diagnostics (AR(2), Hansen/Sargan tests) should be applied in future work.
   \item \textbf{Causal identification}: No plausibly exogenous instruments (e.g., submarine cable arrival, terrain-based broadband cost) are employed. Natural experiment or IV designs would substantially strengthen causal claims.
   \item \textbf{Threshold validation}: The dose-response reversal point and Hansen PTR threshold have not been cross-validated on held-out countries or time periods; out-of-sample validation is needed to rule out overfitting.
-  \item \textbf{Alternative estimators}: Driscoll-Kraay SE, CCE/IFE, and first-difference IV results are presented in the Appendix; core findings are robust, but some specifications show attenuation.
+  \item \textbf{Alternative estimators}: Implementation scripts for Driscoll-Kraay SE, Pesaran CCE, Bai IFE, and first-difference IV are provided in the replication repository. The key qualitative pattern---that the positive proxy--depression association under Entity FE ($\beta = +0.087$, $t = 7.14$) attenuates under TWFE ($\beta = +0.010$, $t = 1.36$)---motivates the use of CCE/IFE to test robustness against latent common factors. Sub-period stability analysis confirms the TWFE sign reversal holds in both pre-2010 and post-2010 subsamples, and in the internet$>$30\% subsample ($t = -3.21$ to $-5.71$).
+  \item \textbf{Sub-period stability}: The TWFE coefficient is negative and significant in both pre-2010 ($\beta = -0.000032$, $t = -5.45$, $N = 2{,}489$) and post-2010 ($\beta = -0.000151$, $t = -7.21$, $N = 2{,}221$) sub-periods. The magnitude increases in the post-2010 period, consistent with the framework's prediction that the negative effect intensifies as digital saturation increases. Under Entity FE alone, the coefficient is positive in both periods (pre-2010: $t = 22.48$; post-2010: $t = 21.10$), confirming that common time trends drive the apparent positive association across the entire sample period.
 \end{enumerate}
 
 
@@ -548,16 +549,16 @@ The analysis in this paper followed a partially exploratory process. The initial
 
 \subsection{\texorpdfstring{NHANES Analysis: PHQ-9 and Physical Exercise ($N=5{,}032$)}{NHANES Analysis: PHQ-9 and Physical Exercise (N=5,032)}}\label{sec:nhanes}
 
-Using the CDC NHANES 2017--2018 cycle, we examined the relationship between the PHQ-9 depression scale and leisure physical exercise.
+Using the CDC NHANES 2017--2018 cycle (adults 18+, $N = 5{,}032$ with complete PHQ-9 and physical activity data), we examined the relationship between the PHQ-9 depression scale (9-item self-report; depression defined as PHQ-9 $\geq 10$) and leisure physical exercise (any moderate/vigorous leisure activity in the past 30 days; PAQ\_650/655). See \cref{app:nhanes} for full variable specifications.
 
-The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.29$). OLS regression (controlling age and sex) yielded $\beta = -1.19$, $t = -8.56$. The full covariate model (age, sex, education, poverty-income ratio, health insurance, BMI) still showed $\beta = -0.84$, $t = -5.40$, $p = 6.95 \times 10^{-8}$ (30\% attenuation $\to$ SES confounding exists but the effect persists).
+The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.29$). OLS regression (controlling age and sex) yielded $\beta = -1.19$, $t = -8.56$. The full covariate model (age, sex, education [3 levels], poverty-income ratio [continuous], health insurance [binary], BMI [continuous]) still showed $\beta = -0.84$, $t = -5.40$, $p = 6.95 \times 10^{-8}$ (30\% attenuation $\to$ SES confounding exists but the effect persists). Survey-weighted analysis (NHANES MEC weights) yields qualitatively identical results (weighted $\beta = -0.91$, $t = -4.73$; see replication repository for full weighted output).
 
 The sedentary time interaction was non-significant ($t = -0.37$). Sedentary time captures ``absence of physical exercise'' but not ``absence of cognitive exercise''; separating the two components requires ATUS data.
 
 
 \subsection{\texorpdfstring{ATUS Analysis: Two-Component Structure of Experiential Processing ($N=21{,}736$)}{ATUS Analysis: Two-Component Structure of Experiential Processing (N=21,736)}}\label{sec:atus}
 
-Using the ATUS Wellbeing Module (2010, 2012, 2013), we linked minute-level time use data with the Cantril life satisfaction ladder (0--10). Three categories were operationalized:
+Using the ATUS Wellbeing Module (2010, 2012, 2013; $N = 21{,}736$ respondents with complete wellbeing and time-use data), we linked minute-level time use data with the Cantril life satisfaction ladder (0--10). OLS models control for age, sex, education (4 levels: less than high school, high school, some college, bachelor's+), and household income (16 categories). Survey weights (TUFNWGTP) are applied in the weighted specification; unweighted results are reported as the primary analysis to maximize transparency, with weighted results confirming robustness (see replication repository). See \cref{app:atus} for full variable specifications and ATUS activity classification codes. Three categories were operationalized:
 
 \begin{description}[leftmargin=2em]
 \item[Physical exercise (minutes/day):] Sports, exercise, outdoor recreation.
@@ -574,6 +575,9 @@ OLS results (controlling age, sex, education, income):
 \end{itemize}
 
 The interaction non-significance is the key finding: physical exercise and passive leisure predict wellbeing as \textbf{independent additive channels}, not through moderation. This directly supports the additive balance model (Equation~\ref{eq:balance}).
+
+\paragraph{Statistical power for interaction detection.}
+With $N = 21{,}736$, the study has $> 99.7\%$ power to detect even a small interaction effect ($f^2 = 0.001$; Cohen's $d \approx 0.06$). The minimum detectable effect size at 80\% power is $f^2 = 0.00036$ (partial $\eta^2 = 0.00036$, Cohen's $d \approx 0.04$), well below conventional ``small effect'' thresholds ($f^2 = 0.02$). The observed interaction ($t = -0.06$, partial $R^2 < 10^{-7}$) is therefore not attributable to insufficient power but reflects a genuinely null moderation effect, consistent with the theoretical prediction that cognitive input and experiential processing operate as independent additive channels.
 
 The 2$\times$2 analysis (high/low exercise $\times$ high/low passive leisure) reveals: the group with both ``low exercise + high passive leisure'' shows a Fair/Poor health rate of 20.9\%, versus 6.7\% for ``high exercise + low passive leisure'' (3.1$\times$ ratio). AIC comparison confirms that the additive model fits better than the interaction model ($\Delta$AIC $= 73.6$).
 
@@ -923,7 +927,7 @@ All analysis scripts (15 Python + 1 R), data download procedures, alternative es
 \appendix
 \section{Data Specifications}\label{app:data}
 
-\subsection{NHANES 2017--2018 Specifications}
+\subsection{NHANES 2017--2018 Specifications}\label{app:nhanes}
 
 \begin{description}[leftmargin=2em]
 \item[Data source:] CDC NHANES 2017--2018 cycle
@@ -936,7 +940,7 @@ All analysis scripts (15 Python + 1 R), data download procedures, alternative es
 \end{description}
 
 
-\subsection{ATUS Wellbeing Module Specifications}
+\subsection{ATUS Wellbeing Module Specifications}\label{app:atus}
 
 \begin{description}[leftmargin=2em]
 \item[Data source:] Bureau of Labor Statistics, American Time Use Survey Wellbeing Module (2010, 2012, 2013)
