@@ -313,6 +313,33 @@ At the neural level, Watkins \& Teasdale~(2004) showed that self-focused process
 
 \paragraph{Operational definition.} The critical distinction in this framework is \textit{not} ``cognitive vs.\ physical'' but \textit{loop closure}. A programmer debugging code (cognitive but closed-loop) increases Term~2; a person running on a treadmill while ruminating (physical but open-loop) may not. The classification criterion is whether the activity generates prediction errors from the external environment that update the agent's internal model.
 
+\begin{table}[htbp]
+\centering
+\caption{Operational definitions of the three core constructs. Classification is determined by loop structure, not by surface features (``screen'' vs.\ ``non-screen'' or ``cognitive'' vs.\ ``physical''). Boundary cases (marked $\dagger$) depend on moment-to-moment engagement mode and require ESM assessment for definitive classification.}
+\label{tab:operational-defs}
+\small
+\begin{tabular}{p{2.2cm}p{3.2cm}p{3.5cm}p{3.5cm}}
+\toprule
+\textbf{Construct} & \textbf{Necessary condition} & \textbf{Examples} & \textbf{Non-examples} \\
+\midrule
+\textbf{Cognitive input} (Term~1: $\alpha_1 \cdot I$) &
+  External symbolic information received without action--feedback cycle; low loop closure &
+  Algorithmic feed scrolling; autoplay video; push notifications; news consumption; passive lecture &
+  Interactive tutoring$^\dagger$; Socratic dialogue; problem-solving with external feedback \\
+\addlinespace
+\textbf{Experiential processing} (Term~2: $\alpha_2 \cdot C$) &
+  Action $\to$ environment response $\to$ model update cycle; high loop closure &
+  Sports; musical instrument practice; cooking; programming/debugging; competitive gaming; hands-on crafts &
+  Treadmill running while ruminating$^\dagger$; watching exercise videos; reading about cooking \\
+\addlinespace
+\textbf{Self-referential loop} (pathological extreme of Term~1) &
+  Output feeds back to self without external disconfirmation; prediction error approaches zero &
+  Rumination; echo chambers; approval-seeking SNS loops; sycophantic AI dialogue &
+  Journaling with prompts$^\dagger$; structured self-reflection (CBT); Socratic AI questioning \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \paragraph{Connection to active inference and predictive processing.}
 The loop-closure construct can be formalized within the active inference framework (Friston, 2010; Parr, Pezzulo, \& Friston, 2022). Under active inference, adaptive behavior minimizes variational free energy---equivalently, prediction error---through two complementary channels: \textit{perceptual inference} (updating internal models to match sensory data) and \textit{active inference} (acting on the environment to make sensory data match predictions). Closed-loop activities correspond to the active inference channel: the agent generates motor commands, receives proprioceptive and exteroceptive prediction errors, and updates both action and model. Open-loop activities (passive consumption) reduce prediction error primarily through perceptual inference alone, without the action-perception cycle that grounds internal models in external reality. In this formalization, $L$ can be reinterpreted as a precision-weighted prediction error imbalance: Term~1 ($\alpha_1 \cdot I$) accumulates \textit{exteroceptive} prediction errors from information exposure that cannot be resolved through action, while Term~2 ($\alpha_2 \cdot C$) indexes the rate at which \textit{proprioceptive} prediction errors are generated and resolved through sensorimotor engagement. Self-referential loops represent a degenerate case where prediction error is minimized by eliminating external input entirely---the agent's model converges on itself without environmental correction, analogous to ``dark room'' pathology in the free-energy literature (Friston, Thornton, \& Clark, 2012). This connection suggests that computational phenotyping approaches---measuring prediction error dynamics via EEG mismatch negativity, pupillary responses, or Bayesian model-updating tasks---could provide neural-level validation of the loop-closure construct.
 
