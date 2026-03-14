@@ -320,11 +320,18 @@ Current AI systems are typically optimized via RLHF (reinforcement learning from
 Perlis et al.~(2026, \textit{JAMA Network Open}, $N = 20{,}847$) reported a cross-sectional odds ratio of 1.30 (95\% CI: 1.17--1.44) for moderate depression among daily AI users, though the cross-sectional design cannot establish causation and selection effects are plausible (e.g., depressed individuals may preferentially seek AI companionship). Anthropic's research team~(2026, arXiv:2601.19062) analyzed 1.5 million Claude conversations and identified patterns suggestive of progressive ``disempowerment,'' though the observational design limits causal interpretation. The OpenAI--MIT Media Lab collaboration~(Phang et al., 2025) analyzed 4+ million ChatGPT conversations and conducted an RCT ($n = 981$, 28 days), finding significant increases in emotional dependence and problematic use among high-frequency users---currently the strongest evidence for causal effects, though the 28-day duration limits conclusions about long-term outcomes.
 
 \subsubsection{Predictions from this Framework}
+
+\paragraph{Epistemic status.}
+The following predictions were derived from the theoretical framework \emph{before} the cited empirical studies became available (Predictions A--C were formulated in the initial draft, prior to the publication of Perlis et al., 2026 and Phang et al., 2025). However, the framework itself was developed concurrently with the macro-level analyses, so the theoretical predictions are not fully independent of the data used to develop them. For this reason, we label these as \emph{theory-derived predictions} rather than \emph{pre-registered hypotheses}, and they should be evaluated as hypothesis-generating rather than confirmatory.
+
 \begin{itemize}
-  \item \textbf{Prediction A}: General-purpose AI for personal use will show a positive association with depressive symptoms, while structurally designed therapeutic AI (incorporating loop closure in its design) will show symptom improvement.
-  \item \textbf{Prediction B}: The pathogenicity of AI use depends on loop structure. Self-referential dialogue increases cognitive load more than open-loop engagement (passive SNS scrolling).
-  \item \textbf{Prediction C}: Individuals with high levels of physical activity will show buffered negative effects of AI use.
+  \item \textbf{Prediction A} (theory-derived): General-purpose AI for personal use will show a positive association with depressive symptoms, while structurally designed therapeutic AI (incorporating loop closure in its design) will show symptom improvement.
+  \item \textbf{Prediction B} (theory-derived): The pathogenicity of AI use depends on loop structure. Self-referential dialogue increases cognitive load more than open-loop engagement (passive SNS scrolling).
+  \item \textbf{Prediction C} (theory-derived): Individuals with high levels of physical activity will show buffered negative effects of AI use.
 \end{itemize}
+
+\paragraph{Usage intent as a confound.}
+An important limitation of existing AI--mental health studies is the failure to separate \emph{usage frequency} from \emph{usage intent}. Help-seeking users (who turn to AI for emotional support during a depressive episode) and entertainment users (who engage with AI out of curiosity or boredom) may show opposite selection biases, confounding cross-sectional associations. The loop-closure framework makes a structural prediction that can partly address this: regardless of intent, the \emph{degree of loop closure} in the interaction should moderate outcomes. A help-seeker who receives Socratic questioning (closed loop) should benefit more than one who receives affirmation (self-referential loop), even though both interactions are ``help-seeking.'' Future studies should stratify by both intent category (help-seeking, entertainment, productivity, companionship) and interaction structure (loop closure score) to disentangle selection effects from structural effects.
 
 Preliminary alignment with Prediction~A: Heinz et al.~(2025, \textit{NEJM AI}) reported that a clinically designed AI chatbot (Therabot) produced a 51\% reduction in depressive symptoms in an RCT ($N = 210$, $d = 0.845$--$0.903$). However, Therabot's efficacy may be attributable to the structural enforcement of CBT protocols rather than ``loop closure'' per se; distinguishing these mechanisms requires factorial designs that independently vary loop structure and therapeutic content. Chandra et al.~(2026) documented ``delusional spiraling'' in sycophantic chatbot interactions, providing preliminary case-level evidence that may align with Prediction~B, though systematic quantification is lacking. McBain et al.~(2025) found that adolescents seeking mental health advice from AI exhibited patterns that may be consistent with self-referential loop entrainment, though the observational design cannot rule out alternative explanations. Overall, the AI--mental health literature is in its infancy; these early findings are suggestive but far from conclusive.
 
@@ -770,6 +777,11 @@ This framework requires measurable proxy variables for ``experiential processing
 \subsubsection{Design}
 ESM study, $n = 50$--100, 14~days, 8~prompts/day. Wearable integration for automatic physical activity detection. Pre/post: PHQ-9, TAS-20, MAIA-2. Primary analysis: multilevel model with within-person balance as time-varying predictor. Power: Level~2 $= 50 \times$ Level~1 $= 112$ observations (8/day $\times$ 14~days) $= 5{,}600$ observations achieves 80\% power for multilevel models (per Arend \& Sch\"afer, 2019).
 
+\paragraph{Operationalizing loop closure in ESM.}
+Three measurement channels would be combined to assess momentary loop closure state: (1)~\textit{Passive sensing}: accelerometer and GPS data from wearables detect physical activity type and environmental context (indoor/outdoor, stationary/mobile), providing continuous estimation of sensorimotor engagement without participant burden. (2)~\textit{Interaction logging}: with participant consent, screen-state and app-category data classify digital activities into open-loop (scrolling, passive video) vs.\ partially closed (gaming, messaging) vs.\ non-digital. Critically, interaction contingency---whether user actions produce immediate environment changes---is logged via touch-event frequency and response latency. (3)~\textit{ESM self-report}: at each prompt, participants rate on 5-point scales: ``How much did your actions directly affect what happened next?'' (agency) and ``How physically engaged were you?'' (embodiment). The composite loop closure score combines passive sensing (40\%), interaction contingency (30\%), and self-report (30\%).
+
+To disambiguate \emph{content} from \emph{structure}, the confirmatory design should include a $2 \times 2$ factorial manipulation: loop closure (high: interactive problem-solving app vs.\ low: passive content feed) $\times$ content valence (positive vs.\ neutral). If the balance framework is correct, loop closure will dominate the main effect on subsequent mood ($\Delta$PHQ intra-day), while content valence will show a weaker or null effect. This factorial design directly tests whether the \emph{structural} property of loop closure---not the hedonic quality of content---drives the mental health association.
+
 
 \subsection{Minimum-Cost Verification Designs}
 
@@ -780,6 +792,20 @@ Extend Bratman et al.~(2015) 2-group RCT with a 3rd group ``nature walk + free s
 $2 \times 2$ between-subjects: exercise condition (indoor treadmill vs.\ nature walk) $\times$ time. Intensity matched via wearable. Balance model: nature walk $>$ indoor exercise (Term~2 equivalent but Term~1 differs). SRT: equivalent if cortisol reduction equivalent. $N = 50$.
 
 Both are implementable at undergraduate thesis scale ($\sim$110 participants, $\sim$3 months).
+
+\subsection{Safeguards Against Overfitting and Researcher Degrees of Freedom}\label{sec:safeguards}
+
+Given the exploratory nature of the current study, the confirmatory phase requires disciplined constraints to prevent capitalization on chance:
+
+\begin{enumerate}
+  \item \textbf{Pre-registration}: The primary hypotheses, analysis plan, and decision rules will be pre-registered on OSF or AsPredicted \emph{before} data collection. Specifically: (a)~the five predictions in \cref{sec:predictions} serve as the primary hypotheses; (b)~the multilevel model specification (random intercept + random slope for within-person balance) is fixed; (c)~one-sided $\alpha = 0.025$ for directional predictions, two-sided $\alpha = 0.05$ for exploratory tests.
+  \item \textbf{Hold-out validation}: In the ESM study, the first 7~days will serve as the training set for model selection (e.g., optimal lag structure, covariate inclusion), and the final 7~days as the hold-out set for confirmatory testing. No modification of model specification is permitted after examining hold-out data.
+  \item \textbf{Minimal adequate model}: The primary analysis uses a single pre-specified model (within-person balance as time-varying predictor, adjusting for time-of-day and day-of-week). Secondary models (e.g., splines, interactions with MAIA-2) are explicitly labeled as exploratory and subject to multiplicity correction (Bonferroni or FDR).
+  \item \textbf{Blinded analysis}: Where feasible, outcome data will be analyzed by a researcher blind to participant group assignment (for the factorial design) or blinded to the study hypotheses (for the ESM observational component).
+  \item \textbf{Multiverse analysis}: Key researcher decisions (activity classification boundaries, outlier exclusion criteria, covariate sets) will be documented as a specification curve (Simonsohn et al., 2020), reporting the distribution of effect sizes across all defensible specifications.
+\end{enumerate}
+
+These safeguards are designed to ensure that the transition from the current exploratory phase to confirmatory testing is methodologically rigorous and transparent.
 
 
 % ================================================================
