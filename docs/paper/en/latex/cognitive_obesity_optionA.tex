@@ -155,7 +155,7 @@ Several theoretical traditions converge on the processing mode distinction that 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig01_balance_model.png}
-\caption{Balance model of cognitive load: $L = \alpha_1 \cdot I - \alpha_2 \cdot C$. Term~1 (cognitive input) and Term~2 (experiential processing) contribute as independent additive channels (interaction $p = 0.95$).}
+\caption{Balance model of cognitive load: $L = \alpha_1 \cdot I - \alpha_2 \cdot C$. Term~1 (cognitive input) and Term~2 (experiential processing) contribute as independent additive channels (interaction $p = 0.95$). Source: Author's original.}
 \label{fig:balance_model}
 \end{figure}
 
@@ -240,19 +240,41 @@ Video games serve as a test case. Game research has shifted from ``games = harmf
 
 Critically, loop closure varies within the same game depending on individual engagement mode. Category-based classification is an approximation; loop closure is a momentary state of agent-environment causal coupling, not a fixed attribute of activity categories. Rigorous measurement requires real-time ESM assessment (\cref{sec:operationalization}), constituting this framework's most important operationalization challenge.
 
-\begin{figure}[htbp]
+\begin{table}[htbp]
 \centering
-\includegraphics[width=\textwidth]{fig05_loop_closure_spectrum.png}
-\caption{Sensorimotor loop closure spectrum. The same activity can shift along the spectrum depending on engagement mode.}
-\label{fig:loop_closure_spectrum}
-\end{figure}
+\caption{Sensorimotor loop closure spectrum: activity classification by degree of agent--environment causal coupling. Drawing on Skulmowski \& Rey's~(2018) bodily engagement taxonomy, Powers'~(1973) perceptual control hierarchy, and Poulton's~(1957) open/closed skill continuum. Note: loop closure is a momentary state, not a fixed attribute; the same activity can shift along the spectrum depending on engagement mode.}
+\label{tab:loop_closure_spectrum}
+\begin{tabular}{p{2.2cm}p{3.8cm}p{3.5cm}p{4cm}}
+\toprule
+\textbf{Loop closure} & \textbf{Activity examples} & \textbf{Feedback structure} & \textbf{Theoretical basis} \\
+\midrule
+\textbf{High} (closed) & Sports, dance, crafts, musical performance, manual labor & Continuous bidirectional: act $\to$ environment response $\to$ adjust & Poulton's ``open skills'' (1957); flow state (Csikszentmihalyi, 1990) \\
+\addlinespace
+\textbf{Medium} & Cooking, gardening, board games, video chat, interactive learning & Intermittent feedback with partial motor engagement & Skulmowski \& Rey (2018): integrated bodily engagement \\
+\addlinespace
+\textbf{Low} (open) & TV viewing, social media scrolling, podcast listening, passive lecture & Unidirectional input; minimal motor output & Powers (1973): upper-hierarchy abstract processing; Epstein (2014): rational mode \\
+\addlinespace
+\textbf{Self-referential} & Rumination, worry, obsessive comparison & Output feeds back to self without external grounding & Watkins \& Teasdale (2001); Nolen-Hoeksema (1991) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\begin{figure}[htbp]
+\begin{table}[htbp]
 \centering
-\includegraphics[width=0.85\textwidth]{fig06_game_typology.png}
-\caption{Video game typology by sensorimotor loop closure. Creative and competitive games have high closure (Term~2); gacha and idle games have low closure (Term~1).}
-\label{fig:game_typology}
-\end{figure}
+\caption{Video game typology by sensorimotor loop closure. Drawing on Caillois's~(1961) \emph{agon}--\emph{alea} and \emph{paidia}--\emph{ludus} continua (applied to digital games by Apperley, 2006), Csikszentmihalyi's~(1990) skill--challenge flow model, and King, Delfabbro, \& Griffiths's~(2010) structural feature taxonomy.}
+\label{tab:game_typology}
+\begin{tabular}{p{2cm}p{3.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Closure} & \textbf{Game type} & \textbf{Caillois category} & \textbf{Loop structure} & \textbf{Balance model} \\
+\midrule
+\textbf{High} & Creative (Minecraft), competitive FPS/fighting, rhythm games & Agon + Ludus & Skill-contingent: action $\to$ feedback $\to$ mastery & Term~2 (experiential) \\
+\addlinespace
+\textbf{Medium} & Strategy, narrative RPG with branching, puzzle games & Agon + Mimicry & Partially skill-contingent; alternates closed/open & Mixed \\
+\addlinespace
+\textbf{Low} & Gacha, idle/incremental, autoplay mobile, loot-box grinding & Alea + Paidia & Pseudo-closed: stochastic outcomes mimic skill feedback & Term~1 (cognitive input) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 \subsection{Self-Referential Loop as General Pathology}\label{sec:self-ref}
@@ -333,7 +355,7 @@ We constructed a panel dataset of 177 countries $\times$ 1990--2023 (34 years) b
 
 The panel is unbalanced; each analysis uses listwise deletion on the relevant variables. Im-Pesaran-Shin panel unit root tests confirm that depression prevalence and log(GDP) are I(1), while all first-differenced series are stationary ($p < 10^{-100}$), justifying the first-difference specification. Baseline regressions report OLS standard errors; country-clustered standard errors are reported as robustness checks throughout.
 
-Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator~\cite{Pesaran2006}, and Bai Interactive Fixed Effects~\cite{Bai2009}. Implementation scripts for all estimators are available in the replication repository (\texttt{analysis/block\_b/r\_cce\_ife\_estimators.R} and \texttt{alternative\_estimators.py}). The key qualitative pattern---sign reversal under TWFE---is robust: TWFE coefficients remain negative in both pre-2010 ($\beta = -0.000032$, $t = -5.45$) and post-2010 ($\beta = -0.000151$, $t = -7.21$) sub-periods, confirming that the TWFE reversal is not driven by a single epoch. We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
+Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator~(Pesaran, 2006), and Bai Interactive Fixed Effects~(Bai, 2009). Implementation scripts for all estimators are available in the replication repository (\texttt{analysis/block\_b/r\_cce\_ife\_estimators.R} and \texttt{alternative\_estimators.py}). The key qualitative pattern---sign reversal under TWFE---is robust: TWFE coefficients remain negative in both pre-2010 ($\beta = -0.000032$, $t = -5.45$) and post-2010 ($\beta = -0.000151$, $t = -7.21$) sub-periods, confirming that the TWFE reversal is not driven by a single epoch. We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
 
 
 \subsection{Main Findings}\label{sec:main-findings}
@@ -345,7 +367,7 @@ The global Pearson correlation between depression prevalence and homicide rate a
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_depression_homicide_global.png}
-\caption{Depression prevalence vs homicide rate: global analysis (1990--2023). A: Global time-series trends. B: Cross-sectional scatter (post-2019, log scale). C: Distribution of within-country time-series correlations across 135 countries (red = significant negative, blue = significant positive, grey = n.s.). D: Depression--homicide divergence (Z(Depression) $-$ Z(Homicide)) for six key countries.}
+\caption{Depression prevalence vs homicide rate: global analysis (1990--2023). A: Global time-series trends. B: Cross-sectional scatter (post-2019, log scale). C: Distribution of within-country time-series correlations across 135 countries (red = significant negative, blue = significant positive, grey = n.s.). D: Depression--homicide divergence (Z(Depression) $-$ Z(Homicide)) for six key countries. Data: IHME GBD 2021 (depression), UNODC (homicide).}
 \label{fig:dep-hom-global}
 \end{figure}
 
@@ -354,7 +376,7 @@ Suicide and homicide show positive correlations (within-country median $r = +0.2
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{fig_internalization_externalization.png}
-\caption{Internalization--externalization symmetry analysis (1990--2023). Top row: within-country Pearson $r$ distributions. Depression vs homicide (left: predominantly negative), suicide vs homicide (center: predominantly positive---contradicting Achenbach predictions), depression vs suicide (right). Bottom row: global Z-score time series. Red = significant negative, blue = significant positive, grey = n.s.}
+\caption{Internalization--externalization symmetry analysis (1990--2023). Top row: within-country Pearson $r$ distributions. Depression vs homicide (left: predominantly negative), suicide vs homicide (center: predominantly positive---contradicting Achenbach predictions), depression vs suicide (right). Bottom row: global Z-score time series. Red = significant negative, blue = significant positive, grey = n.s. Data: IHME GBD 2021 (depression, suicide), UNODC (homicide).}
 \label{fig:int-ext-symmetry}
 \end{figure}
 
@@ -365,14 +387,14 @@ This phase transition is the macro-level manifestation of the theoretical predic
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_a1_correlation_distribution.png}
-\caption{Distribution of country-level time-series correlations between advertising exposure proxy and depression prevalence. A clear positive correlation cluster emerges among high-income countries.}
+\caption{Distribution of country-level time-series correlations between advertising exposure proxy and depression prevalence. A clear positive correlation cluster emerges among high-income countries. Data: World Bank WDI (internet, GDP), IHME GBD 2021 (depression).}
 \label{fig:correlation-dist}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{phase_transition_threshold.png}
-\caption{Internet penetration threshold scan. TWFE coefficients computed at each threshold level. A: Depression, B: Suicide. Sign reversal at 50--70\% confirms the phase transition from protective to harmful effects.}
+\caption{Internet penetration threshold scan. TWFE coefficients computed at each threshold level. A: Depression, B: Suicide. Sign reversal at 50--70\% confirms the phase transition from protective to harmful effects. Data: World Bank WDI, IHME GBD 2021.}
 \label{fig:phase-transition-threshold}
 \end{figure}
 
@@ -386,7 +408,7 @@ TWFE specification comparison (depression as outcome): Pooled OLS ($\beta > 0$, 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{fig02_twfe_reversal.png}
-\caption{TWFE sign reversal. A: Country FE only shows positive association ($\beta = +0.074$). B: Adding Year FE reverses the sign ($\beta = -0.031$). Common time trends drove the apparent association.}
+\caption{TWFE sign reversal. A: Country FE only shows positive association ($\beta = +0.074$). B: Adding Year FE reverses the sign ($\beta = -0.031$). Common time trends drove the apparent association. Data: World Bank WDI, IHME GBD 2021, UNDP HDR.}
 \label{fig:twfe_reversal}
 \end{figure}
 
@@ -400,14 +422,14 @@ For suicide, a discontinuous threshold is identified via Hansen PTR: $\gamma^* =
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{dose_response_reversal.png}
-\caption{Dose-response reversal analysis. Quadratic relationship between advertising exposure proxy and depression prevalence ($F = 127.0$, $p \approx 0$). Low proxy values are protective; high values become harmful. Reversal point bootstrap median $= 9{,}220$; 95\%~CI $= [7{,}616, 14{,}614]$.}
+\caption{Dose-response reversal analysis. Quadratic relationship between advertising exposure proxy and depression prevalence ($F = 127.0$, $p \approx 0$). Low proxy values are protective; high values become harmful. Reversal point bootstrap median $= 9{,}220$; 95\%~CI $= [7{,}616, 14{,}614]$. Data: World Bank WDI, IHME GBD 2021.}
 \label{fig:dose-response-data}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{ad_proxy_phase_transition.png}
-\caption{Phase transition by advertising exposure proxy. TWFE threshold scan reveals sign reversal at proxy~$\approx$~\$1,000, confirming the transition from protective to harmful effects.}
+\caption{Phase transition by advertising exposure proxy. TWFE threshold scan reveals sign reversal at proxy~$\approx$~\$1,000, confirming the transition from protective to harmful effects. Data: World Bank WDI, IHME GBD 2021.}
 \label{fig:ad-proxy-phase}
 \end{figure}
 
@@ -431,14 +453,14 @@ In the model $\Delta y_{it} = \beta_1 \cdot \Delta\log(\text{proxy})_{it} + \bet
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{fig03_first_difference.png}
-\caption{First-difference identification (internet $> 30\%$ subsample, $N = 1{,}988$). Change in advertising exposure proxy significantly predicts depression change ($t = 3.16^{**}$) after controlling GDP change ($t = -4.46^{***}$). Both terms significant; proxy carries independent predictive power.}
+\caption{First-difference identification (internet $> 30\%$ subsample, $N = 1{,}988$). Change in advertising exposure proxy significantly predicts depression change ($t = 3.16^{**}$) after controlling GDP change ($t = -4.46^{***}$). Both terms significant; proxy carries independent predictive power. Data: World Bank WDI, IHME GBD 2021.}
 \label{fig:first_difference}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{first_difference_horse_race.png}
-\caption{First-difference horse race. Predictive power comparison: $\Delta\log(\text{proxy})$ vs $\Delta\log(\text{GDP})$. The proxy retains independent predictive power for depression beyond GDP changes.}
+\caption{First-difference horse race. Predictive power comparison: $\Delta\log(\text{proxy})$ vs $\Delta\log(\text{GDP})$. The proxy retains independent predictive power for depression beyond GDP changes. Data: World Bank WDI, IHME GBD 2021.}
 \label{fig:first-diff-horse}
 \end{figure}
 
@@ -455,7 +477,7 @@ Service sector employment share moderates the proxy--depression relationship: th
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{service_sector_moderation.png}
-\caption{Service sector moderation effect. Quadratic fits stratified by service employment tercile. Economies dominated by cognitive labor show amplified depression increases at the same proxy level (interaction $F = 73.5$, $p \approx 0$).}
+\caption{Service sector moderation effect. Quadratic fits stratified by service employment tercile. Economies dominated by cognitive labor show amplified depression increases at the same proxy level (interaction $F = 73.5$, $p \approx 0$). Data: World Bank WDI, IHME GBD 2021, ILO ILOSTAT.}
 \label{fig:service-sector-data}
 \end{figure}
 
@@ -475,7 +497,7 @@ Limitations: (1)~Annual frequency is too coarse for rapid digital market changes
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{granger_causality.png}
-\caption{Granger-style causal direction tests. A: Directional asymmetry (forward $t = 17.2^{***}$ vs reverse $t = -4.1^{***}$). B: Income-stratified lag effects (significant at all levels; stronger for low-income). C: Lag length effect (2-year lag amplifies, $t = 24.7^{***}$). $N = 3{,}616$, 126 countries.}
+\caption{Granger-style causal direction tests. A: Directional asymmetry (forward $t = 17.2^{***}$ vs reverse $t = -4.1^{***}$). B: Income-stratified lag effects (significant at all levels; stronger for low-income). C: Lag length effect (2-year lag amplifies, $t = 24.7^{***}$). $N = 3{,}616$, 126 countries. Data: World Bank WDI, IHME GBD 2021, UNDP HDR.}
 \label{fig:granger-data}
 \end{figure}
 
@@ -486,7 +508,7 @@ To directly test the balance equation's core prediction, we estimated the follow
 
 \begin{table}[htbp]
 \centering
-\caption{Structural balance test: $L = \alpha_1 \cdot I - \alpha_2 \cdot C$}
+\caption{Structural balance test: $L = \alpha_1 \cdot I - \alpha_2 \cdot C$. Data: World Bank WDI, IHME GBD 2021, UNDP HDR.}
 \label{tab:structural-balance}
 \small
 \begin{tabular}{lccccc}
@@ -584,14 +606,14 @@ The 2$\times$2 analysis (high/low exercise $\times$ high/low passive leisure) re
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{fig04_atus_quadrant.png}
-\caption{ATUS $2 \times 2$ contrapositive test ($N = 21{,}736$). A: Cantril ladder (life satisfaction). B: Fair/Poor self-rated health rate. Groups lacking both physical exercise and active cognitive leisure show the worst outcomes (Fair/Poor rate $3.1\times$).}
+\caption{ATUS $2 \times 2$ contrapositive test ($N = 21{,}736$). A: Cantril ladder (life satisfaction). B: Fair/Poor self-rated health rate. Groups lacking both physical exercise and active cognitive leisure show the worst outcomes (Fair/Poor rate $3.1\times$). Data: BLS ATUS Wellbeing Module (2010, 2012, 2013).}
 \label{fig:atus_quadrant}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{atus_wellbeing_analysis.png}
-\caption{ATUS Wellbeing Module analysis ($N = 21{,}736$). A: $2\times2$ contrapositive test (mean Cantril, $\Delta = 0.45^{***}$, $d = 0.23$). B: $3\times3$ dose-response heatmap. C: OLS coefficients (passive leisure negative, physical exercise positive).}
+\caption{ATUS Wellbeing Module analysis ($N = 21{,}736$). A: $2\times2$ contrapositive test (mean Cantril, $\Delta = 0.45^{***}$, $d = 0.23$). B: $3\times3$ dose-response heatmap. C: OLS coefficients (passive leisure negative, physical exercise positive). Data: BLS ATUS Wellbeing Module (2010, 2012, 2013).}
 \label{fig:atus-data}
 \end{figure}
 
@@ -626,7 +648,7 @@ The ratio $R$ quintile dose-response is directionally consistent (Q1: Cantril $=
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{atus_ratio_test.png}
-\caption{Direct test of the cognitive obesity ratio ($N = 21{,}736$). A: Quintile dose-response of $R$ (Cantril ladder). B: Continuous dose-response curve. C: Model comparison ($\Delta$AIC; additive model best). D: Fair/Poor health by quintile (Q1 $= 13.8\%$ $\to$ Q5 $= 25.2\%$).}
+\caption{Direct test of the cognitive obesity ratio ($N = 21{,}736$). A: Quintile dose-response of $R$ (Cantril ladder). B: Continuous dose-response curve. C: Model comparison ($\Delta$AIC; additive model best). D: Fair/Poor health by quintile (Q1 $= 13.8\%$ $\to$ Q5 $= 25.2\%$). Data: BLS ATUS Wellbeing Module (2010, 2012, 2013).}
 \label{fig:ratio-test}
 \end{figure}
 
@@ -907,6 +929,14 @@ This paper is a working paper and welcomes all forms of feedback: methodological
   \item Noetel, M., et al. (2024). Effect of exercise for depression: Systematic review and network meta-analysis of randomised controlled trials. \textit{BMJ}, 384, e075847.
   \item Bettmann, J.~E., et al. (2025). Nature exposure and mental health: A meta-analysis of 78 studies. \textit{Journal of Environmental Psychology}.
   \item Watkins, E., \& Teasdale, J.~D. (2001). Rumination and overgeneral memory in depression. \textit{Journal of Abnormal Psychology}, 110(2), 353--357.
+  \item Skulmowski, A., \& Rey, G.~D. (2018). Embodied learning: Introducing a taxonomy based on bodily engagement and task integration. \textit{Cognitive Research: Principles and Implications}, 3, 6.
+  \item Powers, W.~T. (1973). \textit{Behavior: The Control of Perception}. Aldine.
+  \item Poulton, E.~C. (1957). On prediction in skilled movements. \textit{Psychological Bulletin}, 54(6), 467--478.
+  \item Caillois, R. (1961). \textit{Man, Play and Games} (trans.\ M.\ Barash). University of Illinois Press.
+  \item Apperley, T.~H. (2006). Genre and game studies: Toward a critical approach to video game genres. \textit{Simulation \& Gaming}, 37(1), 6--23.
+  \item King, D.~L., Delfabbro, P.~H., \& Griffiths, M.~D. (2010). Video game structural characteristics: A new psychological taxonomy. \textit{International Journal of Mental Health and Addiction}, 8, 90--106.
+  \item Epstein, S. (2014). Cognitive-Experiential Theory: An integrative theory of personality. Oxford University Press.
+  \item Friston, K. (2010). The free-energy principle: A unified brain theory? \textit{Nature Reviews Neuroscience}, 11(2), 127--138.
 \end{enumerate}
 
 
