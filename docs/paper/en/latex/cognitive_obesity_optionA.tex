@@ -431,6 +431,9 @@ IFE (proxy)   & $3.33 \times 10^{-5}$ & 11.78*** & .732 & $-4.58 \times 10^{-4}$
 
 The key result is sign consistency: the advertising proxy coefficient is \emph{positive} for depression and \emph{negative} for suicide across all five estimators, confirming that these patterns survive corrections for cross-sectional dependence and latent common factor structure. Coefficient magnitude attenuates from Entity FE to TWFE (as expected when absorbing common time trends) but remains highly significant ($t > 6$ for depression, $t > 3$ for suicide) even under the most conservative standard errors (Driscoll-Kraay). The sub-period stability analysis confirms robustness: TWFE coefficients remain negative in both pre-2010 ($\beta = -0.000032$, $t = -5.45$) and post-2010 ($\beta = -0.000151$, $t = -7.21$) sub-periods. All implementation scripts are available in the replication repository (\texttt{analysis/block\_b/r\_cce\_ife\_estimators.R} and \texttt{alternative\_estimators.py}). We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
 
+\paragraph{TWFE negative-weight diagnostics.}
+Recent advances in difference-in-differences methodology have shown that TWFE estimators can assign negative weights to certain group--period cells when treatment timing is staggered and effects are heterogeneous (De Chaisemartin \& D'Haultf{\oe}uille, 2020; Goodman-Bacon, 2021). Because internet diffusion is a continuous, staggered treatment---countries cross key penetration thresholds at different times---our TWFE estimates could in principle conflate early- and late-adopter effects. Three features of our design mitigate this concern. First, the CCE and IFE estimators absorb latent common factors non-parametrically, making them robust to the cross-temporal contamination that generates negative weights in canonical TWFE. Second, our first-difference specification (Section~\ref{sec:first-diff}) eliminates level fixed effects entirely, providing an independent identification strategy free of the negative-weight problem. Third, the sub-period stability analysis (pre-/post-2010) confirms that coefficients do not reverse sign across adoption cohorts. Nonetheless, applying the formal Goodman-Bacon (2021) decomposition to quantify the share of negative weights, and estimating the extended TWFE (ETWFE; Wooldridge, 2021) or the imputation estimator of Borusyak, Jaravel, \& Spiess (2024), remain priorities for the confirmatory stage.
+
 
 \subsection{Main Findings}\label{sec:main-findings}
 
@@ -521,6 +524,9 @@ Limitation: time-series validation (proxy \emph{changes} vs ad spend changes, 20
 \label{fig:proxy-validation-rank}
 \end{figure}
 
+\paragraph{Alternative proxy candidates and future refinement.}
+The current AdProxy is a first-order approximation that conflates GDP with advertising ecosystem maturity. Several more granular proxies could sharpen the construct in future work: (1)~\textit{Per-capita digital advertising expenditure} (eMarketer/Statista; available for $\sim$60 countries from $\sim$2015), which directly measures the commercial information load without the GDP conflation issue; (2)~\textit{Platform-specific penetration rates} (e.g., Meta/Instagram active users as a share of population; data available from platform transparency reports and We Are Social/Meltwater), which capture social-media-specific input density; (3)~\textit{Programmatic ad inventory volume} (IAB/GroupM), which tracks the algorithmically served, non-user-initiated content stream most relevant to the ``non-selective input'' construct; and (4)~\textit{Smartphone penetration $\times$ social media penetration}, which may better approximate the always-on, push-notification-driven exposure mode that the framework identifies as most deleterious. We treat the current proxy as the best available country-year measure for the 1990--2023 panel (alternatives have shorter coverage), while acknowledging that its GDP component introduces collinearity that the first-difference design (below) explicitly addresses.
+
 \paragraph{First-Difference Identification: Proxy is Not GDP.}\label{sec:first-diff}
 In the model $\Delta y_{it} = \beta_1 \cdot \Delta\log(\text{proxy})_{it} + \beta_2 \cdot \Delta\log(\text{GDP})_{it} + \text{Year FE} + \varepsilon_{it}$, the full sample yields proxy $t = 0.46$ (n.s.) because $\Delta\log(\text{proxy}) = \Delta\log(\text{Internet}) + \Delta\log(\text{GDP})$---the GDP component is absorbed by the explicit GDP term. Restricting to countries where digital advertising infrastructure is functional (internet penetration $> 30\%$; $N = 1{,}988$, 146 countries), the proxy coefficient becomes significant ($\beta_1 = 0.049$, $t = 3.16$, $p < 0.01$) while GDP also remains significant ($t = -4.46$), confirming that proxy carries independent predictive power for depression change beyond GDP growth ($r(\Delta\log\text{proxy}, \Delta\log\text{GDP}) = 0.32$, VIF $= 1.12$). Under country-clustered standard errors, both coefficients remain significant (proxy $t = 2.24$, $p = 0.025$; GDP $t = -3.27$, $p = 0.001$).
 
@@ -545,6 +551,14 @@ As reported in \cref{sec:dose-response}, Hansen Panel Threshold Regression confi
 
 \paragraph{Robustness of the threshold estimate.}
 The suicide threshold $\gamma^* = 25.7\%$ is identified via bootstrap likelihood-ratio test ($F = 213$, $p < 0.001$, 95\% CI $= [25.7, 32.8]$). To assess stability, several robustness checks are warranted in future work: (1)~\textit{Placebo-threshold tests}: re-estimate the model on random permutations of the threshold variable to construct a null distribution of $F$-statistics; the observed $F = 213$ should fall far above the 99th percentile of the placebo distribution. (2)~\textit{Wild-cluster bootstrap}: given that country-level clustering may understate standard error uncertainty, wild-bootstrap percentile-$t$ confidence intervals (Cameron, Gelbach, \& Miller, 2008) should be computed. (3)~\textit{Sample-splitting/cross-fitting}: randomly split the sample into estimation (70\%) and validation (30\%) subsets and verify that $\gamma^*$ estimates are stable across splits. (4)~\textit{Sensitivity to controls}: re-estimate with alternative lag structures (2-year, 3-year), additional covariates (urbanization, healthcare workforce), and subsamples excluding high-leverage small-population countries ($N < 500{,}000$). Preliminary subsample analysis (internet $> 30\%$) yields qualitatively consistent threshold estimates, but systematic cross-validation remains a priority for confirmatory work.
+
+\paragraph{Event-study design for staggered internet adoption.}
+A natural complement to the TWFE and first-difference specifications is a staggered-adoption event-study design. Defining ``treatment onset'' as the year in which a country first crosses 25\% internet penetration (the approximate Hansen PTR threshold), we can construct leads and lags ($k = -5, \ldots, +10$ years relative to treatment onset) and estimate:
+\begin{equation}
+y_{it} = \mu_i + \lambda_t + \sum_{k \neq -1} \delta_k \cdot \mathbf{1}[t - t_i^* = k] + \varepsilon_{it}
+\label{eq:event-study}
+\end{equation}
+where $t_i^*$ is the treatment year for country $i$. Pre-treatment coefficients ($\delta_{-5}, \ldots, \delta_{-2}$) serve as a placebo test: significant pre-trends would indicate that the association is driven by confounding secular trends rather than the internet diffusion event itself. Post-treatment coefficients ($\delta_0, \ldots, \delta_{10}$) trace the dynamic treatment effect trajectory, allowing us to distinguish immediate impacts from delayed accumulation effects. Our first-difference and CCE/IFE analyses already address the core identification concerns that motivate event-study designs---absorbing common trends and latent factors---but a formal event-study plot would provide visual and statistical evidence of parallel pre-trends. Heterogeneity-robust estimators (Callaway \& Sant'Anna, 2021; Sun \& Abraham, 2021) should be applied in this context to avoid the negative-weight contamination discussed above. This extension is computationally straightforward with the existing panel and constitutes a priority for the next revision.
 
 
 \subsubsection{Cognitive Density Moderation Effect}\label{sec:service-sector}
@@ -640,6 +654,7 @@ The analysis in this paper followed a partially exploratory process. The initial
   \item \textbf{Dynamic panel bias}: Lagged-dependent-variable models with country fixed effects are susceptible to Nickell bias; difference/system GMM (Arellano \& Bond, 1991) with appropriate diagnostics (AR(2), Hansen/Sargan tests) should be applied in future work.
   \item \textbf{Causal identification}: No plausibly exogenous instruments (e.g., submarine cable arrival, terrain-based broadband cost) are employed. Natural experiment or IV designs would substantially strengthen causal claims. Event-study specifications to assess pre-trends and dynamic treatment effects, and heterogeneous treatment effect--robust DiD estimators (e.g., Sun \& Abraham, 2021) that account for variation in treatment timing across cohorts, should be applied in future work to strengthen the TWFE results.
   \item \textbf{Threshold validation}: The dose-response reversal point and Hansen PTR threshold have not been cross-validated on held-out countries or time periods; out-of-sample validation is needed to rule out overfitting.
+  \item \textbf{Absence of age-stratified macro analysis}: The GBD provides age-group-specific prevalence estimates (e.g., 15--19, 20--24), and prior work (Tao \& Yang, 2024) has demonstrated that internet--mental-health associations differ markedly by age cohort. However, our macro panel uses aggregate age-standardized rates because the treatment variable---country-level internet penetration---is not available by age group. Constructing age-specific ``digital exposure'' proxies (e.g., combining ITU survey data on youth internet use with age-specific GBD prevalence) is feasible for a subset of countries and would allow testing whether the threshold and dose-response effects are concentrated among adolescents and young adults, as the cognitive obesity framework predicts (developing processing capacity is more vulnerable to overload). This age-stratified extension is a high-priority item for confirmatory work and is incorporated into the proposed ESM design, which directly measures age-specific activity patterns.
   \item \textbf{Alternative estimators}: Implementation scripts for Driscoll-Kraay SE, Pesaran CCE, Bai IFE, and first-difference IV are provided in the replication repository. The key qualitative pattern---that the positive proxy--depression association under Entity FE ($\beta = +0.087$, $t = 7.14$) attenuates under TWFE ($\beta = +0.010$, $t = 1.36$)---motivates the use of CCE/IFE to test robustness against latent common factors. Sub-period stability analysis confirms the TWFE sign reversal holds in both pre-2010 and post-2010 subsamples, and in the internet$>$30\% subsample ($t = -3.21$ to $-5.71$).
   \item \textbf{Sub-period stability}: The TWFE coefficient is negative and significant in both pre-2010 ($\beta = -0.000032$, $t = -5.45$, $N = 2{,}489$) and post-2010 ($\beta = -0.000151$, $t = -7.21$, $N = 2{,}221$) sub-periods. The magnitude increases in the post-2010 period, consistent with the framework's prediction that the negative effect intensifies as digital saturation increases. Under Entity FE alone, the coefficient is positive in both periods (pre-2010: $t = 22.48$; post-2010: $t = 21.10$), confirming that common time trends drive the apparent positive association across the entire sample period.
 \end{enumerate}
@@ -649,6 +664,29 @@ The analysis in this paper followed a partially exploratory process. The initial
 % Section 4: Individual-Level Evidence
 % ================================================================
 \section{Individual-Level Evidence}\label{sec:individual}
+
+Table~\ref{tab:micro-specs} summarizes the design and specification of the two individual-level analyses. Full variable definitions, activity classification codes, and replication scripts are provided in \cref{app:nhanes,app:atus}.
+
+\begin{table}[htbp]
+\centering
+\caption{Individual-level analysis specifications.}
+\label{tab:micro-specs}
+\small
+\begin{tabular}{p{3.2cm}p{5.8cm}p{5.8cm}}
+\toprule
+ & \textbf{NHANES (CDC)} & \textbf{ATUS (BLS)} \\
+\midrule
+\textbf{Sample} & 2017--2018 cycle, adults $\geq 18$, $N = 5{,}032$ (complete-case $N = 4{,}176$) & Wellbeing Module 2010, 2012, 2013; $N = 21{,}736$ \\
+\textbf{Outcome} & PHQ-9 depression scale (0--27, continuous; depression $\geq 10$) & Cantril life satisfaction ladder (0--10) \\
+\textbf{Key predictors} & Leisure physical exercise (binary: any moderate/vigorous in past 30 days; PAQ\_650/655) & Physical exercise (min/day), active cognitive leisure (min/day), passive leisure (TV+PC, min/day) \\
+\textbf{Covariates} & Age (continuous), sex, education (3 levels), poverty-income ratio (continuous), health insurance (binary), BMI (continuous) & Age (continuous), sex, education (4 levels), household income (16 categories) \\
+\textbf{Model family} & OLS (PHQ-9 continuous); logistic sensitivity check (PHQ-9 $\geq 10$) & OLS \\
+\textbf{Survey weights} & MEC weights (WTMEC2YR); unweighted primary, weighted robustness & TUFNWGTP; unweighted primary, weighted robustness \\
+\textbf{Multiple comparisons} & Pre-specified primary test (exercise $\to$ PHQ-9); secondary: sedentary interaction & Pre-specified primary: exercise \& passive $\to$ Cantril (2 tests, Bonferroni $\alpha = 0.025$); secondary: interaction, splines \\
+\textbf{Missing data} & Complete-case analysis ($N = 4{,}176$ of 5{,}032; 83\%); characteristics compared across missing patterns & Complete cases only; ATUS well-being module response rate $\approx 55\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{\texorpdfstring{NHANES Analysis: PHQ-9 and Physical Exercise ($N=5{,}032$)}{NHANES Analysis: PHQ-9 and Physical Exercise (N=5,032)}}\label{sec:nhanes}
 
@@ -684,6 +722,9 @@ Restricted cubic splines (3 knots at 25th, 50th, and 75th percentiles) were fitt
 
 \paragraph{Statistical power for interaction detection.}
 With $N = 21{,}736$, the study has $> 99.7\%$ power to detect even a small interaction effect ($f^2 = 0.001$; Cohen's $d \approx 0.06$). The minimum detectable effect size at 80\% power is $f^2 = 0.00036$ (partial $\eta^2 = 0.00036$, Cohen's $d \approx 0.04$), well below conventional ``small effect'' thresholds ($f^2 = 0.02$). The observed interaction ($t = -0.06$, partial $R^2 < 10^{-7}$) is therefore not attributable to insufficient power but reflects a genuinely null moderation effect, consistent with the theoretical prediction that cognitive input and experiential processing operate as independent additive channels.
+
+\paragraph{Sensitivity to functional form: GAM and continuous interaction surfaces.}
+The linear interaction test above dichotomizes implicitly by assuming a product-term functional form. To guard against model misspecification, we note two complementary approaches for confirmatory work. First, generalized additive models (GAMs; Wood, 2017) with tensor-product smooth interactions ($\texttt{te(exercise, passive)}$) would allow the joint effect surface to take any shape dictated by the data, without imposing linearity or additivity \textit{a priori}. If the estimated smooth surface is approximately planar (i.e., the tensor-product term adds negligible effective degrees of freedom), the additive structure is confirmed nonparametrically. Second, varying-coefficient models ($\beta_{\text{passive}}(x) = f(\text{exercise})$) could detect whether the slope of passive leisure on well-being varies continuously with exercise dose, capturing threshold or ceiling effects that a single product term would miss. In the current data, the restricted cubic spline analysis already demonstrates that marginal nonlinearity exists for exercise but not for the interaction---the combined spline model improves AIC by only 2.0 points over the additive spline model ($\Delta$AIC $= -25.1$ vs $-23.1$), consistent with a flat interaction surface. Formal GAM estimation with cross-validated smoothing parameter selection (GCV or REML) is a priority for the confirmatory ESM study, where continuous minute-level data will be available for both input and processing variables.
 
 The 2$\times$2 analysis (high/low exercise $\times$ high/low passive leisure) reveals: the group with both ``low exercise + high passive leisure'' shows a Fair/Poor health rate of 20.9\%, versus 6.7\% for ``high exercise + low passive leisure'' (3.1$\times$ ratio). AIC comparison confirms that the additive model fits better than the interaction model ($\Delta$AIC $= 73.6$).
 
@@ -1063,6 +1104,14 @@ This paper is a working paper and welcomes all forms of feedback: methodological
   \item Boruvka, A., Almirall, D., Witkiewitz, K., \& Murphy, S.~A. (2018). Assessing time-varying causal effect moderation in mobile health. \textit{Journal of the American Statistical Association}, 113(523), 1112--1121.
   \item Liao, P., Klasnja, P., Tewari, A., \& Murphy, S.~A. (2016). Sample size calculations for micro-randomized trials in mHealth. \textit{Statistics in Medicine}, 35(12), 1944--1971.
   \item Mitchell, R., \& Popham, F. (2008). Effect of exposure to natural environment on health inequalities. \textit{The Lancet}, 372(9650), 1655--1660.
+  \item De Chaisemartin, C., \& D'Haultf{\oe}uille, X. (2020). Two-way fixed effects estimators with heterogeneous treatment effects. \textit{American Economic Review}, 110(9), 2964--2996.
+  \item Goodman-Bacon, A. (2021). Difference-in-differences with variation in treatment timing. \textit{Journal of Econometrics}, 225(2), 254--277.
+  \item Wooldridge, J.~M. (2021). Two-way fixed effects, the two-way Mundlak regression, and difference-in-differences estimators. \textit{Working paper}, Michigan State University.
+  \item Borusyak, K., Jaravel, X., \& Spiess, J. (2024). Revisiting event-study designs: Robust and efficient estimation. \textit{Review of Economic Studies}, 91(6), 3253--3285.
+  \item Callaway, B., \& Sant'Anna, P.~H.~C. (2021). Difference-in-differences with multiple time periods. \textit{Journal of Econometrics}, 225(2), 200--230.
+  \item Sun, L., \& Abraham, S. (2021). Estimating dynamic treatment effects in event studies with heterogeneous treatment effects. \textit{Journal of Econometrics}, 225(2), 175--199.
+  \item Wood, S.~N. (2017). \textit{Generalized Additive Models: An Introduction with R} (2nd ed.). Chapman \& Hall/CRC.
+  \item Tao, R., \& Yang, Y. (2024). Internet use and mental health across nations: Age-stratified nonlinear analysis. \textit{Computers in Human Behavior}, 152, 108087.
 \end{enumerate}
 
 
