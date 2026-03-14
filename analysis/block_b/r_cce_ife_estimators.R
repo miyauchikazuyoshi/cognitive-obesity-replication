@@ -23,8 +23,10 @@ suppressPackageStartupMessages({
 })
 
 # ---- Configuration ----
-DATA_FILE <- file.path(dirname(sys.frame(1)$ofile %||% "."),
-                       "..", "..", "data", "macro", "panel_merged.csv")
+DATA_FILE <- tryCatch(
+  file.path(dirname(sys.frame(1)$ofile), "..", "..", "data", "macro", "panel_merged.csv"),
+  error = function(e) "data/macro/panel_merged.csv"
+)
 
 # Fallback paths
 if (!file.exists(DATA_FILE)) {
@@ -54,9 +56,10 @@ load_panel <- function() {
   # Identify columns (flexible naming)
   entity_cols <- c("country", "entity", "iso3", "country_code")
   time_cols <- c("year", "time")
-  dep_cols <- c("dep_rate", "depression", "depression_rate", "dep")
+  dep_cols <- c("depression_prevalence", "dep_rate", "depression", "depression_rate", "dep")
   sui_cols <- c("suicide_rate", "suicide", "sui_rate")
   proxy_cols <- c("ad_proxy", "proxy", "adproxy")
+  edu_cols <- c("education_index", "edu_index", "mean_years_schooling")
   gdp_cols <- c("gdp_pc", "gdp", "gdp_per_capita", "NY.GDP.PCAP.CD")
   inet_cols <- c("internet", "internet_pct", "IT.NET.USER.ZS")
 
@@ -75,7 +78,8 @@ load_panel <- function() {
     suicide = find_col(sui_cols, "suicide"),
     proxy = find_col(proxy_cols, "ad proxy"),
     gdp = find_col(gdp_cols, "GDP"),
-    internet = find_col(inet_cols, "internet")
+    internet = find_col(inet_cols, "internet"),
+    education = find_col(edu_cols, "education")
   )
 
   # Rename
@@ -240,14 +244,69 @@ run_ife <- function(pdf, outcome, xvars) {
   library(phtt)
   fml <- as.formula(paste(outcome, "~", paste(xvars, collapse = " + ")))
 
-  ife <- tryCatch({
-    Kss(fml, data = as.data.frame(pdf),
-        additive.effects = "twoways",
-        consult.dim.crit = FALSE, d.max = 5)
-  }, error = function(e) {
-    cat("  Kss() failed:", e$message, "\n")
-    NULL
-  })
+  # phtt::KSS requires balanced panel — balance by taking complete entity-year pairs
+  df_tmp <- as.data.frame(pdf)
+  df_tmp <- df_tmp[complete.cases(df_tmp[, c("entity", "year", outcome, xvars)]), ]
+  entity_counts <- table(df_tmp$entity)
+  max_T <- max(entity_counts)
+  balanced_entities <- names(entity_counts[entity_counts == max_T])
+
+  if (length(balanced_entities) >= 10) {
+    df_bal <- df_tmp[df_tmp$entity %in% balanced_entities, ]
+    cat(sprintf("  Balanced sub-panel: %d entities × %d periods\n",
+                length(balanced_entities), max_T))
+
+    ife <- tryCatch({
+      phtt::KSS(fml, data = df_bal,
+          additive.effects = "twoways",
+          consult.dim.crit = FALSE, d.max = 5)
+    }, error = function(e) {
+      cat("  Kss() failed:", e$message, "\n")
+      cat("  Falling back to proxy IFE (PCA-augmented FE)...\n")
+      NULL
+    })
+  } else {
+    cat(sprintf("  Too few balanced entities (%d) for KSS; using proxy IFE\n",
+                length(balanced_entities)))
+    ife <- NULL
+  }
+
+  # If KSS failed or too few entities, fall back to PCA proxy IFE
+  if (is.null(ife)) {
+    cat("  Using proxy IFE (entity FE + PCA-extracted latent factors)...\n\n")
+    df <- as.data.frame(pdf)
+    fml_fe <- as.formula(paste(outcome, "~", paste(xvars, collapse = " + ")))
+    fe <- plm(fml_fe, data = pdf, model = "within", effect = "individual")
+    resid_df <- data.frame(entity = df$entity, year = df$year, resid = as.numeric(residuals(fe)))
+
+    resid_wide <- reshape(resid_df, idvar = "entity", timevar = "year",
+                          direction = "wide", v.names = "resid")
+    resid_mat <- as.matrix(resid_wide[, -1])
+    resid_mat[is.na(resid_mat)] <- 0
+
+    if (nrow(resid_mat) > 5 && ncol(resid_mat) > 5) {
+      pc <- prcomp(resid_mat, center = TRUE, scale. = FALSE)
+      n_factors <- min(3, ncol(pc$rotation))
+      cat(sprintf("  Using %d principal components as latent factors\n", n_factors))
+      cat(sprintf("  Variance explained: %.1f%%\n",
+                  100 * sum(pc$sdev[1:n_factors]^2) / sum(pc$sdev^2)))
+
+      factors <- pc$rotation[, 1:n_factors, drop = FALSE]
+      colnames(factors) <- paste0("F", 1:n_factors)
+      years <- as.numeric(gsub("resid\\.", "", colnames(resid_wide)[-1]))
+      factor_df <- data.frame(year = years, factors)
+
+      df <- merge(df, factor_df, by = "year", all.x = TRUE)
+      factor_vars <- paste0("F", 1:n_factors)
+      fml_ife <- as.formula(paste(outcome, "~",
+                                  paste(c(xvars, factor_vars), collapse = " + ")))
+      pdf_ife <- pdata.frame(df, index = c("entity", "year"))
+      ife <- plm(fml_ife, data = pdf_ife, model = "within", effect = "individual")
+      cat("\n  Proxy IFE (FE + PCA factors):\n")
+      print(summary(ife))
+      return(ife)
+    }
+  }
 
   if (!is.null(ife)) print(summary(ife))
   return(ife)

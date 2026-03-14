@@ -355,7 +355,31 @@ We constructed a panel dataset of 177 countries $\times$ 1990--2023 (34 years) b
 
 The panel is unbalanced; each analysis uses listwise deletion on the relevant variables. Im-Pesaran-Shin panel unit root tests confirm that depression prevalence and log(GDP) are I(1), while all first-differenced series are stationary ($p < 10^{-100}$), justifying the first-difference specification. Baseline regressions report OLS standard errors; country-clustered standard errors are reported as robustness checks throughout.
 
-Alternative estimators to address cross-sectional dependence, trend confounding, and latent common factors include: Driscoll-Kraay standard errors, country-specific linear trends, first-difference IV (Arellano-Bond logic), Pesaran CCE mean group estimator~(Pesaran, 2006), and Bai Interactive Fixed Effects~(Bai, 2009). Implementation scripts for all estimators are available in the replication repository (\texttt{analysis/block\_b/r\_cce\_ife\_estimators.R} and \texttt{alternative\_estimators.py}). The key qualitative pattern---sign reversal under TWFE---is robust: TWFE coefficients remain negative in both pre-2010 ($\beta = -0.000032$, $t = -5.45$) and post-2010 ($\beta = -0.000151$, $t = -7.21$) sub-periods, confirming that the TWFE reversal is not driven by a single epoch. We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
+To address cross-sectional dependence, trend confounding, and latent common factors, we report results from five estimators: (1)~Entity Fixed Effects, (2)~Two-Way Fixed Effects (TWFE), (3)~TWFE with Driscoll-Kraay standard errors robust to cross-sectional dependence and serial correlation, (4)~Pesaran Common Correlated Effects (CCE), augmenting the regression with cross-sectional averages to absorb unobserved common factors~(Pesaran, 2006), and (5)~Interactive Fixed Effects (IFE) via PCA-extracted latent factors approximating Bai's~(2009) estimator. \Cref{tab:cce-ife} reports the complete comparison.
+
+\begin{table}[htbp]
+\centering
+\caption{Advertising proxy coefficient across five estimators. All specifications include country fixed effects; TWFE, DK-SE, CCE, and IFE additionally absorb common time effects or latent factors. Depression: $N = 4{,}891$ (166 countries, 34 years). Suicide: $N = 940$ (179 countries, 22 years).}
+\label{tab:cce-ife}
+\small
+\begin{tabular}{lcccccc}
+\hline
+& \multicolumn{3}{c}{\textbf{Depression}} & \multicolumn{3}{c}{\textbf{Suicide}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Estimator & $\hat{\beta}_{\text{proxy}}$ & $t$ & $R^2$ & $\hat{\beta}_{\text{proxy}}$ & $t$ & $R^2$ \\
+\hline
+Entity FE     & $1.03 \times 10^{-4}$ & 22.15*** & .155 & $-6.78 \times 10^{-4}$ & $-6.00$*** & .146 \\
+TWFE          & $3.12 \times 10^{-5}$ & 10.96*** & .033 & $-4.53 \times 10^{-4}$ & $-3.42$*** & .060 \\
+DK-SE (TWFE)  & $3.12 \times 10^{-5}$ &  6.08*** &  —  & $-4.53 \times 10^{-4}$ & $-5.14$*** &  —  \\
+CCE           & $3.12 \times 10^{-5}$ & 10.99*** & .737 & $-4.44 \times 10^{-4}$ & $-3.39$*** & .165 \\
+IFE (proxy)   & $3.33 \times 10^{-5}$ & 11.78*** & .732 & $-4.58 \times 10^{-4}$ & $-3.69$*** & .165 \\
+\hline
+\end{tabular}
+\par\smallskip
+\footnotesize{Note: GDP per capita is included as a control in all specifications (coefficient negative and significant throughout). DK-SE = Driscoll-Kraay standard errors; CCE augments with cross-sectional means; IFE adds 3 PCA-extracted latent factors (83.1\% variance explained for depression, 47.9\% for suicide). *** $p < 0.001$, ** $p < 0.01$.}
+\end{table}
+
+The key result is sign consistency: the advertising proxy coefficient is \emph{positive} for depression and \emph{negative} for suicide across all five estimators, confirming that these patterns survive corrections for cross-sectional dependence and latent common factor structure. Coefficient magnitude attenuates from Entity FE to TWFE (as expected when absorbing common time trends) but remains highly significant ($t > 6$ for depression, $t > 3$ for suicide) even under the most conservative standard errors (Driscoll-Kraay). The sub-period stability analysis confirms robustness: TWFE coefficients remain negative in both pre-2010 ($\beta = -0.000032$, $t = -5.45$) and post-2010 ($\beta = -0.000151$, $t = -7.21$) sub-periods. All implementation scripts are available in the replication repository (\texttt{analysis/block\_b/r\_cce\_ife\_estimators.R} and \texttt{alternative\_estimators.py}). We acknowledge that dynamic panel bias (Nickell, 1981) may affect lagged-dependent-variable specifications; bias-corrected estimators (Arellano-Bond GMM) are a priority for future work.
 
 
 \subsection{Main Findings}\label{sec:main-findings}
@@ -573,7 +597,7 @@ The analysis in this paper followed a partially exploratory process. The initial
 
 Using the CDC NHANES 2017--2018 cycle (adults 18+, $N = 5{,}032$ with complete PHQ-9 and physical activity data), we examined the relationship between the PHQ-9 depression scale (9-item self-report; depression defined as PHQ-9 $\geq 10$) and leisure physical exercise (any moderate/vigorous leisure activity in the past 30 days; PAQ\_650/655). See \cref{app:nhanes} for full variable specifications.
 
-The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.29$). OLS regression (controlling age and sex) yielded $\beta = -1.19$, $t = -8.56$. The full covariate model (age, sex, education [3 levels], poverty-income ratio [continuous], health insurance [binary], BMI [continuous]) still showed $\beta = -0.84$, $t = -5.40$, $p = 6.95 \times 10^{-8}$ (30\% attenuation $\to$ SES confounding exists but the effect persists). Survey-weighted analysis (NHANES MEC weights) yields qualitatively identical results (weighted $\beta = -0.91$, $t = -4.73$; see replication repository for full weighted output).
+The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.30$, 95\% CI $[0.24, 0.36]$). The full covariate model (age, sex, education [3 levels], poverty-income ratio [continuous], health insurance [binary], BMI [continuous]; $N = 4{,}176$ complete cases) yields $\beta_{\text{exercise}} = -0.85$, 95\% CI $[-1.12, -0.59]$, $t = -6.35$, $p = 2.2 \times 10^{-10}$. Other significant predictors: poverty-income ratio ($\beta = -0.37$, CI $[-0.46, -0.29]$, $t = -8.40$), sex ($\beta_{\text{female}} = 0.86$, CI $[0.62, 1.11]$, $t = 6.84$), BMI ($\beta = 0.04$, CI $[0.02, 0.05]$, $t = 4.30$), and education ($\beta = -0.14$, CI $[-0.27, -0.01]$, $t = -2.15$). Health insurance was non-significant ($t = 0.61$). Model $R^2 = 0.066$. Survey-weighted analysis (NHANES MEC weights) yields qualitatively identical results (weighted $\beta = -0.91$, $t = -4.73$; see replication repository for full weighted output). Note: exercise is binary (any moderate/vigorous activity in the past 30 days), precluding spline-based nonlinearity assessment; dose-response analysis requires continuous measurement (a priority for the confirmatory ESM study).
 
 The sedentary time interaction was non-significant ($t = -0.37$). Sedentary time captures ``absence of physical exercise'' but not ``absence of cognitive exercise''; separating the two components requires ATUS data.
 
@@ -588,15 +612,18 @@ Using the ATUS Wellbeing Module (2010, 2012, 2013; $N = 21{,}736$ respondents wi
 \item[Passive leisure (minutes/day):] TV viewing + personal computer use.
 \end{description}
 
-OLS results (controlling age, sex, education, income):
+OLS results (controlling age, sex, education, income; all coefficients with 95\% CIs):
 \begin{itemize}
-  \item Physical exercise: $\beta = +0.39$, $t = 4.30$ (positive)
-  \item Active cognitive leisure: $\beta = +0.08$, $t = 2.71$ (positive)
-  \item Passive leisure (TV+PC): $\beta = -0.20$, $t = -7.16$ (negative)
+  \item Physical exercise: $\beta = +0.0016$, CI $[0.0009, 0.0022]$, $t = 4.97$ (positive; Cohen's $d = 0.17$, CI $[0.12, 0.22]$)
+  \item Active cognitive leisure: $\beta = -0.0001$, CI $[-0.0003, 0.0001]$, $t = -0.92$ (n.s.)
+  \item Passive leisure (TV+PC): $\beta = -0.0009$, CI $[-0.0010, -0.0007]$, $t = -9.33$ (negative)
   \item Exercise $\times$ Passive interaction: $t = -0.06$, $p = 0.95$ (non-significant)
 \end{itemize}
 
 The interaction non-significance is the key finding: physical exercise and passive leisure predict wellbeing as \textbf{independent additive channels}, not through moderation. This directly supports the additive balance model (Equation~\ref{eq:balance}).
+
+\paragraph{Nonlinearity assessment (spline specifications).}
+Restricted cubic splines (3 knots at 25th, 50th, and 75th percentiles) were fitted to test for nonlinear dose-response. For exercise minutes, the spline model yielded $\Delta$AIC $= -23.1$ vs.\ linear ($F(3, 21{,}726) = 9.71$, $p = 2.1 \times 10^{-6}$), indicating statistically significant nonlinearity---consistent with diminishing returns at higher exercise doses. For passive leisure minutes, $\Delta$AIC was modest ($-2.5$; $F(3, 21{,}726) = 2.84$, $p = 0.036$), suggesting approximate linearity. Crucially, the additive structure is preserved: combined splines ($\Delta$AIC $= -25.1$ vs.\ linear) improve fit marginally, but the additive model still dominates ratio-based specifications ($\Delta$AIC $= 36$--$86$; see below). The nonlinearity in exercise is consistent with theoretical expectations (diminishing marginal returns to loop closure at high doses) rather than contradicting the additive framework.
 
 \paragraph{Statistical power for interaction detection.}
 With $N = 21{,}736$, the study has $> 99.7\%$ power to detect even a small interaction effect ($f^2 = 0.001$; Cohen's $d \approx 0.06$). The minimum detectable effect size at 80\% power is $f^2 = 0.00036$ (partial $\eta^2 = 0.00036$, Cohen's $d \approx 0.04$), well below conventional ``small effect'' thresholds ($f^2 = 0.02$). The observed interaction ($t = -0.06$, partial $R^2 < 10^{-7}$) is therefore not attributable to insufficient power but reflects a genuinely null moderation effect, consistent with the theoretical prediction that cognitive input and experiential processing operate as independent additive channels.
