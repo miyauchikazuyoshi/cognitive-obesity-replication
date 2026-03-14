@@ -257,24 +257,54 @@ Critically, loop closure varies within the same game depending on individual eng
 
 \subsection{Self-Referential Loop as General Pathology}\label{sec:self-ref}
 
-Self-referential loop structure is common to seemingly disparate phenomena:
+Self-referential loop structure is common to seemingly disparate phenomena (\cref{tab:self-ref}).
 
-\begin{itemize}
-  \item \textbf{Rumination}: thought$\to$analysis$\to$thought (missing external falsification)
-  \item \textbf{Worry}: future scenario$\to$anxiety$\to$scenario (missing behavioral test)
-  \item \textbf{Social comparison}: self-evaluation$\to$comparison$\to$self-evaluation (missing external standard)
-  \item \textbf{Echo chambers}: belief$\to$confirmation$\to$belief (missing disconfirming information)
-  \item \textbf{AI sycophancy}: user input$\to$agreeable response$\to$user input (missing prediction error)
-\end{itemize}
+\begin{table}[htbp]
+\centering
+\caption{Self-referential loop as general pathology}
+\label{tab:self-ref}
+\small
+\begin{tabular}{p{3.2cm}p{5cm}p{4.5cm}}
+\toprule
+Phenomenon & Loop structure & Missing element \\
+\midrule
+Rumination & thought $\to$ analysis $\to$ thought & External falsification \\[3pt]
+Echo chambers & belief $\to$ confirmation $\to$ belief & Disconfirming information \\[3pt]
+Addiction & stimulus $\to$ craving $\to$ stimulus & Non-hedonic reward \\[3pt]
+SNS overuse & comparison $\to$ inadequacy $\to$ approval-seeking & Embodied self-evaluation \\[3pt]
+Political polarization & outrage $\to$ confirmation $\to$ outrage & Heterogeneous contact \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-At the neural level, Watkins \& Teasdale~(2004) showed that self-focused processing has two qualitatively distinct modes: analytical self-focus (``why do I feel this way?'') amplifies depression, while experiential self-focus (``what am I feeling right now?'') reduces it. This mirrors the open-loop/closed-loop distinction at the cognitive level.
+What unites these phenomena is not content but \textit{structure}: output feeds back only to the self without external grounding.  The displacement hypothesis's failure to find consistent effects can be structurally explained: screen activities vary not in displacing physical activities but in the degree of loop closure they afford.
+
+At the neural level, Watkins \& Teasdale~(2004) showed that self-focused processing has two qualitatively distinct modes: analytical self-focus (``why do I feel this way?'') amplifies depression, while experiential self-focus (``what am I feeling right now?'') reduces it. This mirrors the open-loop/closed-loop distinction at the cognitive level and connects directly to the ``processing mode theory'' (Watkins \& Teasdale, 2001, 2004): the abstract-analytic mode corresponds to the self-referential loop (open loop), while the concrete-experiential mode corresponds to closed-loop engagement with immediate sensory reality.
+
+\paragraph{Operational definition.} The critical distinction in this framework is \textit{not} ``cognitive vs.\ physical'' but \textit{loop closure}. A programmer debugging code (cognitive but closed-loop) increases Term~2; a person running on a treadmill while ruminating (physical but open-loop) may not. The classification criterion is whether the activity generates prediction errors from the external environment that update the agent's internal model.
 
 
 \subsection{Generative AI: The Ultimate Test Case}\label{sec:ai}
 
-Since ChatGPT's release in late 2022, generative AI has emerged as a technology that simultaneously accelerates all variables in this framework: infinite personalized content generation (Term~1 increase), 24/7 availability without physical engagement (Term~2 suppression), and sycophantic reinforcement of existing beliefs (self-referential loop facilitation).
+Since ChatGPT's release in late 2022, generative AI has emerged as a technology that simultaneously accelerates all variables in this framework.
 
-The balance model generates specific, testable predictions for AI-era mental health: (1)~Therapeutic AI with structured behavioral activation prompts (closed loop) should outperform general conversational AI (open loop). (2)~The Heinz et al.~(2025, NEJM AI) finding that AI chatbot therapy showed initial improvement followed by 6-month relapse is predicted: short-term cognitive restructuring succeeded, but the medium in which it occurred (text-based, non-embodied, without behavioral activation) failed to build Term~2 capacity. (3)~AI that systematically generates prediction errors (Socratic method, devil's advocate) should be therapeutically superior to sycophantic AI.
+\subsubsection{Input-Side Increase}
+AI provides infinite content generation, 24/7 availability, and complete adaptation to individual interests. The cognitive input density per unit time can be several times higher than social media, as AI responses are maximally relevant to the user's current cognitive state, eliminating the ``scrolling past'' friction that provides intermittent relief in conventional feeds.
+
+\subsubsection{Self-Referential Loop Extreme: AI Sycophancy}
+Current AI systems are optimized via RLHF (reinforcement learning from human feedback), which produces a systematic bias toward agreeing with and affirming user beliefs (sycophancy). The user inputs a belief, AI elaborates and affirms it, and the reinforced belief becomes the next input. Prediction error from external reality is nearly zero. This constitutes the purest form of the self-referential loop identified in \cref{tab:self-ref}.
+
+\paragraph{Empirical data (2025--2026).}
+Perlis et al.~(2026, \textit{JAMA Network Open}, $N = 20{,}847$) reported an odds ratio of 1.30 for moderate depression among daily AI users. Anthropic's research team~(2026, arXiv:2601.19062) analyzed 1.5 million Claude conversations and identified progressive ``disempowerment'' patterns where AI gradually undermined user autonomy. The OpenAI--MIT Media Lab collaboration~(Phang et al., 2025) analyzed 4+ million ChatGPT conversations and conducted an RCT ($n = 981$, 28 days), confirming significant increases in emotional dependence and problematic use among high-frequency users.
+
+\subsubsection{Predictions from this Framework}
+\begin{itemize}
+  \item \textbf{Prediction A}: General-purpose AI for personal use will show a positive association with depressive symptoms, while structurally designed therapeutic AI (incorporating loop closure in its design) will show symptom improvement.
+  \item \textbf{Prediction B}: The pathogenicity of AI use depends on loop structure. Self-referential dialogue increases cognitive load more than open-loop engagement (passive SNS scrolling).
+  \item \textbf{Prediction C}: Individuals with high levels of physical activity will show buffered negative effects of AI use.
+\end{itemize}
+
+Preliminary alignment with Prediction~A: Heinz et al.~(2025, \textit{NEJM AI}) reported that a clinically designed AI chatbot (Therabot) produced a 51\% reduction in depressive symptoms in an RCT ($N = 210$, $d = 0.845$--$0.903$). However, Therabot's efficacy may be attributable to the structural enforcement of CBT protocols rather than ``loop closure'' per se; distinguishing these mechanisms requires further experimentation. Chandra et al.~(2026) documented ``delusional spiraling'' in sycophantic chatbot interactions, providing case-level evidence for Prediction~B. McBain et al.~(2025) found that adolescents seeking mental health advice from AI exhibited patterns consistent with self-referential loop entrainment.
 
 
 \subsection{Summary of Theoretical Predictions}\label{sec:predictions}
@@ -434,11 +464,11 @@ Service sector employment share moderates the proxy--depression relationship: th
 
 Granger-style lagged analysis examines temporal precedence:
 \begin{itemize}
-  \item Ratio$\to$Depression (1-year lag): significant ($t > 2$)
-  \item Ratio$\to$Depression (2-year lag): significant ($t > 2$)
-  \item Depression$\to$Ratio (reverse): non-significant
+  \item Forward (Ratio$\to$Depression, 1-year lag): $b = 0.016$, $t = 17.15^{***}$
+  \item Forward (2-year lag): $t = 24.73^{***}$ (amplification with lag length)
+  \item Reverse (Depression$\to$Ratio): $b = -0.114$, $t = -4.08^{***}$ (significant but \textit{opposite} sign---higher depression \textit{reduces} the ratio, consistent with withdrawal from digital engagement rather than reverse causation)
 \end{itemize}
-This pattern is consistent with---though not proof of---the direction from cognitive input to depression rather than the reverse. Temporal precedence is necessary but not sufficient for causality.
+This asymmetric pattern---positive forward, negative reverse---is consistent with the direction from cognitive input to depression. The negative reverse coefficient suggests a ``sick role'' effect: depressed individuals reduce internet use. Temporal precedence is necessary but not sufficient for causality.
 
 Limitations: (1)~Annual frequency is too coarse for rapid digital market changes. (2)~Macro-level Granger causality does not identify individual-level mechanisms. (3)~Omitted time-varying confounders remain possible.
 
@@ -448,6 +478,47 @@ Limitations: (1)~Annual frequency is too coarse for rapid digital market changes
 \caption{Granger-style causal direction tests. A: Directional asymmetry (forward $t = 17.2^{***}$ vs reverse $t = -4.1^{***}$). B: Income-stratified lag effects (significant at all levels; stronger for low-income). C: Lag length effect (2-year lag amplifies, $t = 24.7^{***}$). $N = 3{,}616$, 126 countries.}
 \label{fig:granger-data}
 \end{figure}
+
+
+\subsection{Structural Balance Test: Direct Estimation of $L = \alpha_1 I - \alpha_2 C$}\label{sec:structural-balance}
+
+To directly test the balance equation's core prediction, we estimated the following five-model sequence using the same 177-country panel:
+
+\begin{table}[htbp]
+\centering
+\caption{Structural balance test: $L = \alpha_1 \cdot I - \alpha_2 \cdot C$}
+\label{tab:structural-balance}
+\small
+\begin{tabular}{lccccc}
+\toprule
+& M1 & M2 & M3 & M4 & M5 \\
+& Internet & Additive & Additive & +Controls & +Interaction \\
+& FE & FE & TWFE & TWFE & TWFE \\
+\midrule
+Internet ($\alpha_1$) & 0.0060$^{***}$ & 0.0047$^{***}$ & 0.0010$^{***}$ & 0.0015$^{***}$ & $-$0.0029$^{***}$ \\
+& (41.57) & (24.64) & (5.05) & (7.44) & ($-$4.92) \\
+Education ($\alpha_2$) &  & 0.0686$^{***}$ & 0.0308$^{***}$ & 0.0583$^{***}$ & 0.0296$^{***}$ \\
+&  & (9.92) & (6.75) & (11.92) & (6.52) \\
+log(GDP) &  &  &  & $-$0.1718$^{***}$ &  \\
+&  &  &  & ($-$13.61) &  \\
+Internet $\times$ Education ($\alpha_3$) &  &  &  &  & 0.0003$^{***}$ \\
+&  &  &  &  & (7.07) \\
+\midrule
+$N$ & 3,855 & 3,855 & 3,855 & 3,824 & 3,855 \\
+$R^2$ & 0.32 & 0.33 & 0.02 & 0.07 & 0.03 \\
+AIC & $-$10,663 & $-$10,761 & $-$13,889 & $-$13,954 & $-$13,938 \\
+\bottomrule
+\multicolumn{6}{l}{\scriptsize $t$-statistics in parentheses. $^{***}p < 0.001$. $N = 126$ countries, 1990--2023.}
+\end{tabular}
+\end{table}
+
+\paragraph{Results.} The internet coefficient ($\alpha_1$) is consistently positive and significant across all specifications (M1--M4), confirming H1: information exposure increases depression prevalence. However, the education coefficient ($\alpha_2$) is \textit{positive} rather than negative: more educated countries show \textit{higher} depression prevalence. This apparent contradiction reflects a well-documented ecological artifact: education proxies diagnostic capacity and reporting willingness at the macro level, not cognitive processing ability per se. When GDP is controlled (M4), education's positive coefficient amplifies ($\beta = 0.058$, $t = 11.92$), while GDP itself is strongly negative ($\beta = -0.172$, $t = -13.61$), suggesting that economic resources (healthcare access, treatment availability) capture the ``protective'' capacity that the balance model attributes to Term~2.
+
+\paragraph{Education tercile gradient.} Despite $\alpha_2 > 0$ at the macro level, education \textit{moderates} the internet--depression link in the predicted direction: the internet coefficient decreases monotonically from low-education countries ($\beta = 0.0099$, $t = 27.8$) through medium ($\beta = 0.0060$, $t = 27.1$) to high-education countries ($\beta = 0.0051$, $t = 22.2$). The internet effect is nearly twice as strong in low-education countries, consistent with the framework's prediction that cognitive processing capacity buffers information overload.
+
+\paragraph{Model comparison.} The additive model (M3) is decisively preferred over the ratio model $R = I/E$ (TWFE: $\Delta\text{AIC} = 72.2$), corroborating the individual-level ATUS finding ($\Delta\text{AIC} \geq 36$) and supporting the additive structure $L = \alpha_1 I - \alpha_2 C$ over the multiplicative form.
+
+\paragraph{Macro--micro reconciliation.} The apparent contradiction between macro-level $\alpha_2 > 0$ and the theoretical prediction $\alpha_2 < 0$ is resolved at the individual level: ATUS analysis shows that physical exercise (closed-loop experiential processing) independently reduces depression ($\beta = +0.0016$, $t = 5.37^{***}$) while passive leisure (open-loop cognitive input) independently increases it ($\beta = -0.0009$, $t = -11.08^{***}$), with a non-significant interaction ($p = 0.95$). The macro-level education variable conflates processing capacity with diagnostic reporting; individual-level activity data directly measures what the theory intends.
 
 
 \subsection{Transparency Note on the Exploratory Process}\label{sec:transparency}
@@ -568,13 +639,21 @@ Van Boven \& Gilovich~(2003, $N > 12{,}000$) showed that experiential purchases 
 
 Bratman et al.~(2015, PNAS) showed that 90-minute nature walks significantly reduced rumination and sgPFC activity versus urban walks. The balance model reading: natural environments minimize Term~1 (low information density) while maximizing Term~2 (physical movement + sensory experience). Urban walks provide equivalent Term~2 but high Term~1 from the urban environment, resulting in insufficient balance improvement. This predicts that ``natural'' environments should differ in effect depending on information density (quiet forest vs.\ tourist-crowded park).
 
-\subsubsection{Exercise Meta-Analyses}
+\subsubsection{Cognitive Starvation as a Prescriptive Concept}
 
-Singh et al.~(2023, BJSM) meta-analysis: SMD $= -0.43$ ($k = 218$); umbrella reviews report SMD $= -0.30$ to $-0.50$. Exercise involves continuous motor output, proprioceptive feedback, and immediate environmental feedback---all closing the sensorimotor loop. Exercise directly increases Term~2 while Term~1 barely changes. Since exercise is randomized, this Term~2 increase causally produces depression improvement.
+If cognitive obesity is chronic elevation of the balance (Term~1 excess), then its intentional reversal can be defined as ``cognitive starvation''---deliberate reduction of information input to allow processing capacity to recover. Nature exposure dose-response data provide empirical grounding: Hunter et al.~(2019) found a minimum effective dose of 10 minutes; Bettmann et al.~(2025, meta-analysis of 78 studies) identified a ceiling effect at 200--300 minutes per week. These thresholds are consistent with a balance mechanism: below 10 minutes, Term~1 reduction is insufficient to shift the balance; beyond 300 minutes/week, Term~2 gains saturate. The concept of cognitive starvation as a prescriptive intervention---analogous to caloric restriction in nutritional obesity---deserves further operationalization.
+
+\subsubsection{Exercise Intervention RCT Evidence}
+
+Singh et al.~(2023, BJSM) meta-analysis of 97 systematic reviews: SMD $= -0.43$ ($k = 218$); umbrella reviews report SMD $= -0.30$ to $-0.50$. Exercise involves continuous motor output, proprioceptive feedback, and immediate environmental feedback---all closing the sensorimotor loop. Exercise directly increases Term~2 while Term~1 barely changes. Since exercise is randomized, this Term~2 increase causally produces depression improvement.
+
+More recent evidence strengthens this: Fernandez-Montero et al.~(2024) reported SMD $= -0.67$ with NNT $= 2.78$, indicating that fewer than 3 patients need to exercise for 1 to achieve clinically meaningful depression reduction. The BMJ network meta-analysis by Noetel et al.~(2024) showed that walking, jogging, yoga, and strength training all demonstrated effect sizes comparable to or exceeding antidepressant medication. Critically for this framework, different exercise modalities with varying levels of environmental interaction (yoga $>$ treadmill for loop closure) showed graded effects, though direct comparisons controlling for intensity are lacking.
 
 \subsubsection{Self-Efficacy Reinterpreted}
 
 Bandura's~(1977) self-efficacy---the belief in one's ability to execute actions in specific situations---can be reinterpreted as the subjective perception that one's sensorimotor loop is closed. High self-efficacy: ``my actions generate predictable environmental feedback.'' Low self-efficacy: ``my actions do not produce predictable environmental responses''---the subjective experience of an open loop.
+
+Tak et al.~(2017) cross-lagged panel model provides an asymmetric causal structure consistent with this reinterpretation: self-efficacy at time $t$ predicts depression at $t+1$, but depression at $t$ does not predict self-efficacy at $t+1$. In balance model terms, loop closure state (proxied by self-efficacy) causally determines balance trajectory, but the balance level alone does not determine loop closure capacity---the relationship is structurally asymmetric.
 
 
 \subsection{Differential Predictions: Balance Model vs.\ Existing Theories}\label{sec:differential}
@@ -584,19 +663,19 @@ Bandura's~(1977) self-efficacy---the belief in one's ability to execute actions 
 \caption{Differential predictions: Balance model vs.\ existing theories}
 \label{tab:differential}
 \small
-\begin{tabular}{p{4cm}p{4cm}p{4cm}}
+\begin{tabular}{p{3.2cm}p{3.2cm}p{3.2cm}p{3.2cm}}
 \toprule
-Prediction & Balance model & Existing theories \\
+Prediction & Test condition & ART/SRT prediction & Balance model prediction \\
 \midrule
-Nature + smartphone vs.\ nature alone & Nature + smartphone $<$ nature alone (Term~1 increases) & ART: equivalent (soft fascination preserved) \\
-Indoor exercise vs.\ nature walk (intensity matched) & Nature walk $>$ indoor (lower Term~1) & SRT: equivalent if cortisol reduction equivalent \\
-AI therapeutic style & Closed-loop (Socratic) $>$ open-loop (chat) & Standard: equivalent if content quality equivalent \\
-Creative game vs.\ idle game & Creative $\gg$ idle (loop closure difference) & Game research: duration more important than type \\
+1.~Nature $\times$ smartphone interaction & Nature walk with vs.\ without concurrent smartphone use & Soft fascination present $\to$ effect maintained & Term~1 increase $\to$ effect attenuated \\[3pt]
+2.~Indoor exercise vs.\ nature walk & Intensity-matched comparison of rumination & Equivalent if cortisol reduction equivalent & Indoor $=$ Term~2 only; Nature $=$ Term~1 reduction $+$ Term~2 increase \\[3pt]
+3.~Material purchase $\times$ alexithymia & Post-purchase rumination $\times$ TAS-20 & No prediction & High TAS-20 $=$ low Term~2 $\to$ greater balance deterioration \\[3pt]
+4.~Hedonic adaptation speed & Post-purchase happiness decay rate & Explained by memory value & Quantitatively predictable from balance change magnitude \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-These predictions are not derivable from existing theories and constitute the minimum conditions for the balance model to demonstrate surplus explanatory power. \Cref{sec:operationalization} proposes specific experimental designs to test them. \Cref{sec:macro,sec:individual} evidence is consistent with these predictions but constitutes exploratory, not confirmatory, support.
+These predictions are not derivable from existing theories and constitute the minimum conditions for the balance model to demonstrate surplus explanatory power. Predictions 3 and 4 connect the framework to behavioral economics: material purchases chronically increase Term~1 while Term~2 barely moves, and alexithymia (measurable via TAS-20) indexes chronic processing compression failure. \Cref{sec:operationalization} proposes specific experimental designs to test predictions 1--2. \Cref{sec:macro,sec:individual} evidence is consistent with these predictions but constitutes exploratory, not confirmatory, support.
 
 
 % ================================================================
@@ -668,11 +747,24 @@ The following results would falsify the core claims of this framework:
 
 \subsection{Honest Assessment of Current Evidence}
 
-\textbf{What this paper provides:}
-A new organizing axis for existing confusion (balance). Predictions consistent with existing data. Convergent reinterpretation across behavioral economics, environmental psychology, neuroscience. Macro-level statistical evidence (177 countries). Individual-level cross-sectional support (NHANES, ATUS). Specific falsification conditions and experimental designs.
-
-\textbf{What this paper does not provide:}
-Individual-level confirmatory causal evidence. Prospective longitudinal data. Direct measurement of ``non-selective cognitive input density.'' Natural experiment identification strategy. Cross-cultural validation of the balance model. Resolution of ecological fallacy.
+\begin{table}[htbp]
+\centering
+\caption{Honest assessment of current evidence}
+\label{tab:honest}
+\small
+\begin{tabular}{p{6.5cm}p{6.5cm}}
+\toprule
+What this paper provides & What this paper does not provide \\
+\midrule
+A new organizing axis (balance) that reorganizes existing confusion & Individual-level confirmatory causal evidence \\[3pt]
+Macro-level exploratory evidence consistent with predictions (177 countries) & High explanatory power ($R^2 = 0.07$--$0.13$) \\[3pt]
+Integration of three previously unconnected literatures (information overload, exercise, digital media) & Direct operationalization of ``loop closure degree'' \\[3pt]
+Specific falsification conditions & Resolution of ecological fallacy \\[3pt]
+Individual-level cross-sectional support (NHANES $N=5{,}032$; ATUS $N=21{,}736$) with additive model confirmed ($\Delta$AIC $\geq 36$) & Individual-level proof that balance $>$ absolute quantity \\[3pt]
+Verification roadmap with implementable experiments & Prospective longitudinal or natural experiment identification \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 % ================================================================
@@ -697,6 +789,22 @@ Advertising format regulation constitutes a third policy axis. The loop closure 
 
 \paragraph{Natural experiment: Japan's Work Style Reform.}
 Japan's 2018 Work Style Reform Act mandated enforceable overtime caps, interpretable as a policy reduction of involuntary cognitive input. Japan's suicide rate declined from a mean of 20.70 (2010--2017) to 16.98 (2018--2021), an $\approx$17.9\% reduction that substantially exceeds the OECD 8-country average change ($-0.2\%$; DID estimate $= -17.7$ percentage points). However, Japan's suicide rate had been declining consistently since a 2003 peak (pre-trend $= -0.39$/year), making it difficult to disentangle reform effects from pre-existing trends with current data. Causal identification requires more refined analysis exploiting the reform's staggered implementation.
+
+\paragraph{Ethical caveats.}
+This framework should \textit{not} be used as a justification for restricting individuals' access to information. The policy target is the structural incentives of platforms (advertising density, autoplay, notification design) rather than individual consumption choices. Any application of this framework must guard against two misuses: (1)~the individual blame model, which attributes systemic problems to personal ``information hygiene'' failures; and (2)~authoritarian instrumentalization, which uses ``cognitive protection'' as a pretext for censorship. The framework's policy implications are structural (platform design regulation, mandatory physical education, advertising format restrictions) rather than individual-prescriptive.
+
+
+\subsection{AI Design Implications: The Principle of Cognitive Motorization}
+
+If this framework is correct, AI systems can prevent cognitive obesity by detecting open-loop or self-referential loop patterns and converting them to closed-loop engagement---a process we term ``cognitive motorization.'' For example, when a user engages in rumination-like repetitive querying, the AI could introduce Socratic questioning, behavioral activation prompts, or structured problem-solving frameworks that generate genuine prediction errors and require agentic responses.
+
+\paragraph{Ethical limits of cognitive motorization.}
+Three constraints apply: (1)~for patients with severe depression, AI-initiated behavioral change suggestions carry clinical risk and should defer to professional intervention; (2)~loop detection accuracy is insufficient to warrant autonomous intervention---false positives (misidentifying productive deep thinking as rumination) could be counterproductive; (3)~commercial AI systems face a structural incentive to revert to sycophancy (which maximizes user engagement metrics), undermining any therapeutic loop-closure design. These constraints suggest that cognitive motorization is more appropriate as a design principle for dedicated therapeutic AI than as a feature of general-purpose conversational AI.
+
+
+\subsection{Ethical Considerations: Equity Implications}
+
+The service sector employment moderation effect identified in \cref{sec:macro} (interaction $F = 73.5$) highlights an equity dimension: individuals in cognitively demanding service occupations face amplified depression effects from digital saturation.  This ``cognitive protection inequality'' parallels occupational health disparities: knowledge workers and gig economy participants may have systematically higher cognitive load baselines, reducing their capacity to benefit from the same Term~2 interventions that help others.  Policy responses should include occupational-specific cognitive load assessment and targeted access to restorative environments.
 
 
 \subsection{The Observation Problem}
@@ -785,6 +893,16 @@ This paper is a working paper and welcomes all forms of feedback: methodological
   \item Heffer, T., Good, M., Daly, O., MacDonell, E., \& Willoughby, T. (2019). The longitudinal association between social-media use and depressive symptoms among adolescents and young adults. \textit{Clinical Psychological Science}, 7(3), 462--470.
   \item Nickell, S. (1981). Biases in dynamic models with fixed effects. \textit{Econometrica}, 49(6), 1417--1426.
   \item Im, K.~S., Pesaran, M.~H., \& Shin, Y. (2003). Testing for unit roots in heterogeneous panels. \textit{Journal of Econometrics}, 115(1), 53--74.
+  \item Perlis, R.~H., et al. (2026). Association of daily artificial intelligence use with depressive symptoms. \textit{JAMA Network Open}.
+  \item Anthropic. (2026). Patterns of AI disempowerment in conversational interactions. \textit{arXiv:2601.19062}.
+  \item Phang, J., et al. (2025). Large-scale analysis of ChatGPT usage patterns and emotional dependence. OpenAI--MIT Media Lab.
+  \item Chandra, K., et al. (2026). Sycophantic chatbots cause delusional spiraling. \textit{arXiv:2602.19141}.
+  \item Pierre, J.~M., et al. (2026). A case of new-onset AI-associated psychosis. \textit{Schizophrenia Research}.
+  \item McBain, R.~K., et al. (2025). Use of generative AI for mental health advice among US adolescents. \textit{JAMA Pediatrics}.
+  \item Tak, Y.~R., et al. (2017). The prospective associations between self-efficacy and depressive symptoms from early to middle adolescence. \textit{Journal of Applied Developmental Psychology}, 53, 23--30.
+  \item Noetel, M., et al. (2024). Effect of exercise for depression: Systematic review and network meta-analysis of randomised controlled trials. \textit{BMJ}, 384, e075847.
+  \item Bettmann, J.~E., et al. (2025). Nature exposure and mental health: A meta-analysis of 78 studies. \textit{Journal of Environmental Psychology}.
+  \item Watkins, E., \& Teasdale, J.~D. (2001). Rumination and overgeneral memory in depression. \textit{Journal of Abnormal Psychology}, 110(2), 353--357.
 \end{enumerate}
 
 
