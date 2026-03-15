@@ -443,6 +443,7 @@
     <span><strong>Year:</strong> 2026</span>
     <span><strong>Status:</strong> Preprint · PsyArXiv</span>
     <span><strong>Data:</strong> 177 countries × 1990–2023</span>
+    <span><strong>Pages:</strong> EN 60pp · JA 50pp</span>
   </div>
   <div class="links" style="margin-top:1.5rem">
     <a href="#findings" class="link-primary">Key Findings ↓</a>
@@ -504,20 +505,20 @@
 <div class="stat-callout">
   <div class="stat-callout-inner">
     <div class="stat-pill">
-      <span class="num">135</span>
-      <span class="desc">countries<br>analyzed</span>
+      <span class="num">177</span>
+      <span class="desc">countries<br>macro panel</span>
     </div>
     <div class="stat-pill">
-      <span class="num">−0.87</span>
-      <span class="desc">Japan dep–hom<br>correlation</span>
+      <span class="num">27k</span>
+      <span class="desc">individuals<br>NHANES+ATUS</span>
     </div>
     <div class="stat-pill">
       <span class="num">86</span>
       <span class="desc">ΔAIC additive<br>vs ratio model</span>
     </div>
     <div class="stat-pill">
-      <span class="num">21k</span>
-      <span class="desc">individuals<br>NHANES+ATUS</span>
+      <span class="num">5</span>
+      <span class="desc">estimators<br>FE/TWFE/CCE/IFE/FD</span>
     </div>
   </div>
 </div>
@@ -576,6 +577,17 @@
         1.8× the Fair/Poor health rate of the lowest.
         <span class="stat">Q5: 25.2% vs Q1: 13.8%</span>
         <span class="stat">p &lt; 10⁻⁷</span>
+      </p>
+    </div>
+    <div class="finding-card">
+      <div class="block-label">Theory · Operationalization</div>
+      <h3>Loop closure as the classifying variable</h3>
+      <p>
+        Activities classified not by "screen vs non-screen" but by
+        sensorimotor loop closure — with operational definitions,
+        boundary cases (†), and inter-rater reliability targets.
+        <span class="stat">κ ≥ 0.70</span>
+        <span class="stat">ICC ≥ 0.75</span>
       </p>
     </div>
   </div>
@@ -642,7 +654,7 @@
     </div>
     <div class="status-item">
       <span class="pending">△</span>
-      <span>Ad proxy construct validity limited (indirect measure)</span>
+      <span>Ad proxy embeds GDP — orthogonalization/DML planned</span>
     </div>
     <div class="status-item">
       <span class="pending">△</span>
@@ -650,7 +662,7 @@
     </div>
     <div class="status-item">
       <span class="pending">△</span>
-      <span>No natural experiment tied to advertising ecosystems</span>
+      <span>Quasi-experiments proposed (cable outages, GDPR, ad-blocking) but not yet executed</span>
     </div>
     <div class="status-item">
       <span class="pending">△</span>
@@ -712,8 +724,12 @@
       <div class="status-item"><span class="check">✓</span> <span>Pesaran CCE estimator</span></div>
       <div class="status-item"><span class="check">✓</span> <span>Bai IFE (Interactive FE)</span></div>
       <div class="status-item"><span class="check">✓</span> <span>Survey weight variants</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>TWFE negative-weight diagnostics</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>Event-study design (equation + staggered DiD)</span></div>
+      <div class="status-item"><span class="check">✓</span> <span>FD stationarity diagnostics (IPS, Pesaran CD, Wooldridge AR(1))</span></div>
+      <div class="status-item"><span class="pending">○</span> <span class="label">DML orthogonalization (planned)</span></div>
       <div class="status-item"><span class="pending">○</span> <span class="label">System GMM (planned)</span></div>
-      <div class="status-item"><span class="pending">○</span> <span class="label">Event-study design (needs data)</span></div>
+      <div class="status-item"><span class="pending">○</span> <span class="label">Synthetic control / SDID (planned)</span></div>
     </div>
 
     <div class="links">
