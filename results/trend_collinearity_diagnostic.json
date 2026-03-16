@@ -1,0 +1,26 @@
+{
+  "internet_r2": {
+    "median": 0.8959,
+    "mean": 0.8652,
+    "p25": 0.8116,
+    "p75": 0.9493,
+    "n_countries": 240
+  },
+  "ad_proxy_r2": {
+    "median": 0.8839,
+    "mean": 0.8491,
+    "p25": 0.7759,
+    "p75": 0.948,
+    "n_countries": 228
+  },
+  "depression_r2": {
+    "median": 0.4471,
+    "mean": 0.4283,
+    "p25": 0.2081,
+    "p75": 0.6541,
+    "n_countries": 173
+  },
+  "variance_ratio_after_detrend": 0.0951,
+  "pct_variance_absorbed": 90.49,
+  "interpretation": "On average, 85% of within-country AdProxy variation is captured by a linear trend (median R² = 0.88). Adding country-specific trends absorbs 90% of demeaned variance, leaving insufficient residual signal for coefficient estimation — an over-controlling problem rather than evidence of null effect."
+}

@@ -717,6 +717,15 @@ IFE (PCA proxy)    & $3.327 \times 10^{-5}$ & $< 10^{-16}$ & $-4.583 \times 10^{
 
 When country-specific linear trends are added to the entity FE specification, the proxy coefficient for depression loses significance ($\beta = 1.03 \times 10^{-5}$, $p = 0.236$), as does the suicide estimate ($p = 0.466$). This sensitivity indicates that the proxy--outcome associations in levels may partly reflect country-specific secular trends correlated with both internet adoption and mental health reporting. By contrast, Driscoll--Kraay standard errors preserve significance for both outcomes (depression $p = 0.013$; suicide $p < 0.001$), confirming robustness to cross-sectional dependence. First-difference specifications, which absorb unit-specific trends by construction, show directionally consistent but attenuated estimates. We interpret this pattern as indicating that the cross-country variation is informative but should be complemented by within-country dynamic designs.
 
+\paragraph{Over-controlling diagnostic.}
+This sensitivity reflects a collinearity problem rather than evidence of a null effect. Within countries, internet penetration and AdProxy follow near-linear adoption trajectories: the median within-country $R^2$ of AdProxy regressed on a simple linear trend is $0.88$ (IQR: $0.78$--$0.95$), meaning that country-specific trends absorb $90.5\%$ of the within-country AdProxy variance (Figure~\ref{fig:trend-collinearity}). By contrast, depression prevalence is far less collinear with linear trends (median $R^2 = 0.45$), so the dependent variable retains variation while the key regressor does not. This is a textbook instance of over-controlling: the trend dummies absorb the same variation that identifies the treatment effect, collapsing statistical power without providing a valid falsification. First-difference specifications, which structurally remove unit-specific linear trends, yield directionally consistent estimates and partially circumvent this problem.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/trend_collinearity.pdf}
+\caption{Over-controlling diagnostic for country-specific linear trends. \textbf{(a)}~Internet penetration trajectories for selected countries with overlaid linear trend fits, illustrating the near-linear adoption curves that drive high collinearity. \textbf{(b)}~Distribution of within-country $R^2$ values from regressing AdProxy on a linear time trend; the median $R^2 = 0.88$ indicates that country-specific trend controls absorb most of the identifying variation.}\label{fig:trend-collinearity}
+\end{figure}
+
 Sign and significance are preserved across all five estimators, confirming that the proxy--depression association ($+$) and proxy--suicide association ($-$) survive CSD-robust inference. The depression coefficient ranges from $3.12 \times 10^{-5}$ to $1.03 \times 10^{-4}$; the suicide coefficient ranges from $-6.78 \times 10^{-4}$ to $-4.44 \times 10^{-4}$. All estimates are significant at $p < 0.001$.
 
 \paragraph{Multiple testing correction.}
