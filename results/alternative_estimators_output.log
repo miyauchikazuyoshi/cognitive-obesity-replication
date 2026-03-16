@@ -1,0 +1,52 @@
+======================================================================
+ Block B: Alternative Estimators for Robustness
+ (Driscoll-Kraay SE / Country Trends / FD-IV)
+======================================================================
+
+Loading panel data...
+  Loaded: /Users/miyauchikazuyoshi/Documents/GitHub/cognitive_obesity_archive/analysis/block_b/../../data/macro/panel_with_inactivity.csv (9,010 rows)
+  Available variables: ['suicide', 'proxy', 'gdp', 'internet']
+  Entities: 265, Years: 34
+
+======================================================================
+ Outcome: Suicide | X = ['proxy', 'gdp']
+======================================================================
+
+--- 1. Driscoll-Kraay SE (max_lag=3) ---
+
+  [DK-SE] N = 940
+    proxy                      β= -0.000678  SE=  0.000089  t=  -7.58  p=0.0000 ***
+    gdp                        β= -0.000111  SE=  0.000030  t=  -3.64  p=0.0017 **
+
+--- 2. Country-Specific Linear Trends ---
+
+  [FE+Trends] N = 940
+    proxy                      β= -0.000129  SE=  0.000177  t=  -0.73  p=0.4661 
+    gdp                        β= -0.000054  SE=  0.000019  t=  -2.86  p=0.0043 **
+
+--- 3. First-Difference IV ---
+  First-stage F = 26.24 (>10 = strong instrument)
+
+  [FD-IV] N = 587
+    Δsuicide(t-1)              β=  0.642749  SE=  0.190977  t=   3.37  p=0.0008 ***
+    Δproxy                     β= -0.000243  SE=  0.000221  t=  -1.10  p=0.2725 
+    Δgdp                       β= -0.000056  SE=  0.000025  t=  -2.24  p=0.0254 *
+
+======================================================================
+ INTERPRETATION GUIDE
+======================================================================
+
+  Driscoll-Kraay SE:
+    If significance survives → results robust to cross-sectional dependence.
+    If SE inflates substantially → standard TWFE inference was anticonservative.
+
+  Country-Specific Trends:
+    If proxy remains significant → effect is not driven by country-specific
+    linear trends (e.g., secular improvements in healthcare).
+    If proxy loses significance → the effect may be confounded with trends.
+
+  First-Difference IV:
+    If Δproxy significant after instrumenting Δy(t-1) → survives Nickell bias.
+    First-stage F > 10 indicates strong instrument.
+    If ρ (Δy lag) is large → strong persistence; dynamic structure matters.
+    

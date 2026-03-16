@@ -1,0 +1,66 @@
+{
+  "nhanes_exercise": {
+    "cohens_d": 0.3016383709133744,
+    "cohens_d_se": 0.031160788633940967,
+    "ci": [
+      0.24056434746098504,
+      0.3627123943657638
+    ],
+    "beta": -0.8534167811899628,
+    "n": 4176
+  },
+  "atus_active_leisure": {
+    "cohens_d": -0.012487,
+    "ci": [
+      -0.000301,
+      0.000109
+    ],
+    "beta": -9.629568656167889e-05,
+    "p": 0.35732618013185546,
+    "note": "Cohen's d approximated as 2*t/sqrt(n); predictor not significant (p=0.357)"
+  },
+  "atus_exercise": {
+    "cohens_d": 0.16631473214041567,
+    "cohens_d_se": 0.026114529068388917,
+    "ci": [
+      0.11513119569314906,
+      0.2174982685876823
+    ],
+    "beta": 0.0015593476190597932,
+    "n": 21736
+  },
+  "macro_proxy_depression": {
+    "standardized_beta": -0.104436835,
+    "beta": -7.76618e-05,
+    "se": 1.47987e-05,
+    "p": 1.539e-07,
+    "cohens_d": -0.0005583327,
+    "partial_eta_sq": 0.0057972637,
+    "model": "First Difference",
+    "n": 4725
+  },
+  "macro_proxy_suicide": {
+    "standardized_beta": -0.2033668006,
+    "beta": -0.0007545737,
+    "se": 0.0002040861,
+    "p": 0.0002178795,
+    "cohens_d": -0.0004062318,
+    "partial_eta_sq": 0.0176922107,
+    "model": "First Difference",
+    "n": 761
+  },
+  "macro_proxy_depression_entityFE": {
+    "standardized_beta": 0.2439764687,
+    "beta": 8.6827e-05,
+    "p": 0.0,
+    "cohens_d": 0.0001236829,
+    "n": 4891
+  },
+  "macro_proxy_suicide_entityFE": {
+    "standardized_beta": -0.260842739,
+    "beta": -0.0009747241,
+    "p": 1.53338e-05,
+    "cohens_d": -0.000138985,
+    "n": 940
+  }
+}

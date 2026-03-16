@@ -63,7 +63,7 @@ The core claim is that the primary predictor of psychopathology is not the absol
 
 Systematic analysis of 177-country $\times$ 1990--2023 panel data (Study~1) demonstrates:
 (1)~The positive effect of internet penetration observed under country FE alone reverses sign under Two-Way Fixed Effects (TWFE), revealing dependence on common time trends.
-(2)~The strongest predictor of depression prevalence is GDP ($t=18.27$), confirming diagnostic bias dominance, verified through comparison with hard outcomes (suicide rates).
+(2)~The strongest predictor of depression prevalence is GDP ($t=18.27$), likely reflecting a combination of diagnostic capacity expansion (greater clinician density, broader screening) and genuine prevalence changes associated with development-linked stressors, verified through comparison with hard outcomes (suicide rates).
 (3)~Hansen Panel Threshold Regression identifies a threshold of $\gamma^*=25.7\%$ internet penetration ($F=213$, bootstrap 95\% CI $= [25.7, 32.8]$) for suicide rates: below this level, internet access is protective; above, protective effects saturate and reverse. No discontinuous threshold is detected for depression ($p=0.654$); a continuous inverted-U dose-response (quadratic $F=127.0$) provides the best fit.
 (4)~The advertising exposure proxy (AdProxy $= \text{Internet}\% \times \text{GDP/capita} / 1000$, 2017 PPP) captures the benefit-to-harm reversal for depression more clearly, with TWFE sign reversal at AdProxy~$\approx 1{,}000$ (e.g., a country with 80\% internet and GDP/capita~$= \$12{,}500$, or 50\% internet and $\$20{,}000$). First-difference analysis confirms significant prediction even after controlling for GDP changes ($t=3.16$, internet $>30\%$ subsample).
 
@@ -424,6 +424,9 @@ The key result is sign consistency: the advertising proxy coefficient is \emph{p
 \paragraph{TWFE negative-weight diagnostics.}
 Recent advances in difference-in-differences methodology have shown that TWFE estimators can assign negative weights to certain group--period cells when treatment timing is staggered and effects are heterogeneous (De Chaisemartin \& D'Haultf{\oe}uille, 2020; Goodman-Bacon, 2021). Because internet diffusion is a continuous, staggered treatment---countries cross key penetration thresholds at different times---our TWFE estimates could in principle conflate early- and late-adopter effects. Three features of our design mitigate this concern. First, the CCE and IFE estimators absorb latent common factors non-parametrically, making them robust to the cross-temporal contamination that generates negative weights in canonical TWFE. Second, our first-difference specification (Section~\ref{sec:first-diff}) eliminates level fixed effects entirely, providing an independent identification strategy free of the negative-weight problem. Third, the sub-period stability analysis (pre-/post-2010) confirms that coefficients do not reverse sign across adoption cohorts. Nonetheless, applying the formal Goodman-Bacon (2021) decomposition to quantify the share of negative weights, and estimating the extended TWFE (ETWFE; Wooldridge, 2021) or the imputation estimator of Borusyak, Jaravel, \& Spiess (2024), remain priorities for the confirmatory stage.
 
+\paragraph{Engagement with the modern DiD literature.}
+We note that recent advances in difference-in-differences methodology---particularly for heterogeneous treatment effects under staggered adoption (Sun \& Abraham, 2021; Callaway \& Sant'Anna, 2021; Borusyak, Jaravel, \& Spiess, 2024) and continuous treatments (R\"uttenauer \& Aksoy, 2025)---raise important concerns about the reliability of single-coefficient TWFE estimates. Although internet penetration is a continuous, non-staggered treatment that limits direct application of binary-treatment DiD estimators, the conceptual issues of forbidden comparisons and effect heterogeneity apply. The sign reversals we document between pooled OLS and TWFE are consistent with the diagnostic patterns described in this literature. Future confirmatory work should employ event-time decompositions (Ishimaru, 2025), heterogeneity-robust estimators, and design-aware reweighting (Arkhangelsky et al., 2021) to sharpen inference.
+
 
 \subsection{Main Findings}\label{sec:main-findings}
 
@@ -660,6 +663,8 @@ First Diff.  & $-0.000078^{***}$   & $-0.0157^{***}$ & \checkmark & 4{,}725 / 4{
 
 All four model specifications yield sign-consistent coefficients across the two outcome measures, and the Entity FE and First Difference models are statistically significant for both. The TWFE attenuation pattern replicates across outcome types, confirming the common-trend confounding identified in \cref{sec:twfe-collapse}.
 
+The strong GDP coefficient likely reflects a combination of diagnostic capacity expansion (greater clinician density, broader screening) and genuine prevalence changes associated with development-linked stressors. The DALYs triangulation provides partial disambiguation, as DALYs incorporate severity weights less susceptible to pure detection effects, and sign consistency between prevalence and DALYs supports a real-signal component. Nevertheless, fully disentangling detection from true prevalence requires measurement-invariance testing across survey instruments and time periods, which we flag as a priority for confirmatory research.
+
 \paragraph{Placebo tests (construct specificity).}
 If AdProxy captures mental-health-specific information overload rather than general economic development, it should \emph{not} predict health outcomes unrelated to cognitive processing. We test this using two placebo outcomes from the GBD: cardiovascular disease prevalence and type~2 diabetes prevalence (both age-standardized rates per 100{,}000; 204 countries, 1990--2023). Table~\ref{tab:placebo} reports TWFE and First Difference estimates.
 
@@ -709,6 +714,8 @@ IFE (PCA proxy)    & $3.327 \times 10^{-5}$ & $< 10^{-16}$ & $-4.583 \times 10^{
 \hline
 \end{tabular}
 \end{table}
+
+When country-specific linear trends are added to the entity FE specification, the proxy coefficient for depression loses significance ($\beta = 1.03 \times 10^{-5}$, $p = 0.236$), as does the suicide estimate ($p = 0.466$). This sensitivity indicates that the proxy--outcome associations in levels may partly reflect country-specific secular trends correlated with both internet adoption and mental health reporting. By contrast, Driscoll--Kraay standard errors preserve significance for both outcomes (depression $p = 0.013$; suicide $p < 0.001$), confirming robustness to cross-sectional dependence. First-difference specifications, which absorb unit-specific trends by construction, show directionally consistent but attenuated estimates. We interpret this pattern as indicating that the cross-country variation is informative but should be complemented by within-country dynamic designs.
 
 Sign and significance are preserved across all five estimators, confirming that the proxy--depression association ($+$) and proxy--suicide association ($-$) survive CSD-robust inference. The depression coefficient ranges from $3.12 \times 10^{-5}$ to $1.03 \times 10^{-4}$; the suicide coefficient ranges from $-6.78 \times 10^{-4}$ to $-4.44 \times 10^{-4}$. All estimates are significant at $p < 0.001$.
 
@@ -774,7 +781,11 @@ Using the CDC NHANES 2017--2018 cycle (adults 18+, $N = 5{,}032$ with complete P
 
 The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.30$, 95\% CI $[0.24, 0.36]$). The full covariate model (age, sex, education [3 levels], poverty-income ratio [continuous], health insurance [binary], BMI [continuous]; $N = 4{,}176$ complete cases) yields $\beta_{\text{exercise}} = -0.85$, 95\% CI $[-1.12, -0.59]$, $t = -6.35$, $p = 2.2 \times 10^{-10}$. Other significant predictors: poverty-income ratio ($\beta = -0.37$, CI $[-0.46, -0.29]$, $t = -8.40$), sex ($\beta_{\text{female}} = 0.86$, CI $[0.62, 1.11]$, $t = 6.84$), BMI ($\beta = 0.04$, CI $[0.02, 0.05]$, $t = 4.30$), and education ($\beta = -0.14$, CI $[-0.27, -0.01]$, $t = -2.15$). Health insurance was non-significant ($t = 0.61$). Model $R^2 = 0.066$. Applying NHANES complex survey design (WTMEC2YR weights, SDMVPSU clustering, SDMVSTRA stratification) yields virtually identical estimates: exercise $\beta = -0.88$ (weighted) vs.\ $-0.86$ (unweighted) in the full model, with significance preserved across all age subgroups ($p < 0.003$ in the young tertile, $p < 0.024$ in the middle tertile, and $p < 0.003$ in the old tertile). Full weighted results are reported in the replication repository. Note: exercise is binary (any moderate/vigorous activity in the past 30 days), precluding spline-based nonlinearity assessment; dose-response analysis requires continuous measurement (a priority for the confirmatory ESM study).
 
+In standardized terms, leisure-time exercise is associated with a Cohen's $d = 0.30$ [95\% CI: 0.24, 0.36] reduction in PHQ-9 scores, a small-to-medium effect. At the macro level, the first-difference proxy coefficient corresponds to a standardized $\beta = -0.10$ for depression and $-0.20$ for suicide.
+
 The sedentary time interaction was non-significant ($t = -0.37$). Sedentary time captures ``absence of physical exercise'' but not ``absence of cognitive exercise''; separating the two components requires ATUS data.
+
+To test whether sleep mediates or moderates the exercise--depression link, we augment the model with NHANES sleep variables (SLQ\_J). Sleep duration shows no significant moderation of the exercise effect (interaction $p = 0.59$), nor does adding sleep hours substantially mediate the exercise coefficient (attenuation $< 5\%$). Self-reported sleep trouble is a significant moderator ($p = 0.026$), but in the protective direction: exercise confers a larger PHQ-9 reduction among those reporting sleep difficulties (combined $\beta = -1.53$) than among those without ($\beta = -0.66$). The exercise main effect remains significant across all sleep-augmented specifications, confirming that the protective association is not confounded by sleep status.
 
 
 \subsection{\texorpdfstring{ATUS Analysis: Two-Component Structure of Experiential Processing ($N=21{,}736$)}{ATUS Analysis: Two-Component Structure of Experiential Processing (N=21,736)}}\label{sec:atus}
@@ -1273,6 +1284,9 @@ This paper is a working paper. I welcome all forms of feedback: methodological c
   \item Goldsmith, J., Zipunnikov, V., \& Schrack, J. (2015). Generalized multilevel function-on-scalar regression and principal component analysis. \textit{Biometrics}, 71(2), 344--353.
   \item Imai, K., Keele, L., \& Tingley, D. (2010). A general approach to causal mediation analysis. \textit{Psychological Methods}, 15(4), 309--334.
   \item Mauri, M., Cipresso, P., Balgera, A., Villamira, M., \& Riva, G. (2011). Why is Facebook so successful? Psychophysiological measures describe a core flow state while using Facebook. \textit{Cyberpsychology, Behavior, and Social Networking}, 14(12), 723--731.
+  \item R\"uttenauer, T., \& Aksoy, O. (2025). Continuous difference-in-differences with heterogeneous treatment effects. \textit{Journal of the Royal Statistical Society: Series A}, forthcoming.
+  \item Ishimaru, S. (2025). Event-time decompositions for continuous treatments. \textit{Working paper}.
+  \item Arkhangelsky, D., Athey, S., Hirshberg, D.~A., Imbens, G.~W., \& Wager, S. (2021). Synthetic difference-in-differences. \textit{American Economic Review}, 111(12), 4088--4118.
 \end{enumerate}
 
 
