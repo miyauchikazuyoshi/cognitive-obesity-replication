@@ -1,0 +1,168 @@
+{
+  "analysis": "ITU Mobile Broadband Convergent Validity",
+  "indicator": "IT.CEL.SETS.P2 (mobile cellular subs per 100 inh.)",
+  "source": "World Bank Open Data API",
+  "convergent_validity": {
+    "levels": {
+      "pearson_r": 0.5882,
+      "pearson_p": 0.0,
+      "spearman_rho": 0.8493,
+      "spearman_p": 0.0,
+      "n": 6169
+    },
+    "first_diff": {
+      "pearson_r": 0.2263,
+      "pearson_p": 7.01e-70,
+      "spearman_rho": 0.2362,
+      "spearman_p": 3.89e-76,
+      "n": 5944
+    }
+  },
+  "substitution_test": {
+    "depression_prevalence": {
+      "adproxy_twfe": {
+        "coef": 1e-05,
+        "se": 2e-06,
+        "p": 1.2692e-05,
+        "ci95": [
+          6e-06,
+          1.5e-05
+        ],
+        "n": 4838,
+        "r2_adj": 0.9521
+      },
+      "adproxy_fd": {
+        "coef": -7.8e-05,
+        "se": 1.4e-05,
+        "p": 3.5765e-08,
+        "ci95": [
+          -0.000105,
+          -5e-05
+        ],
+        "n": 4672,
+        "r2_adj": 0.0106
+      },
+      "mobile_twfe": {
+        "coef": -0.000335,
+        "se": 0.000102,
+        "p": 0.001038,
+        "ci95": [
+          -0.000536,
+          -0.000135
+        ],
+        "n": 5669,
+        "r2_adj": 0.9507
+      },
+      "mobile_fd": {
+        "coef": -0.00118,
+        "se": 0.000213,
+        "p": 3.1939e-08,
+        "ci95": [
+          -0.001598,
+          -0.000762
+        ],
+        "n": 5496,
+        "r2_adj": 0.0045
+      }
+    },
+    "suicide": {
+      "adproxy_twfe": {
+        "coef": -0.000671,
+        "se": 0.000161,
+        "p": 3.0695e-05,
+        "ci95": [
+          -0.000986,
+          -0.000355
+        ],
+        "n": 936,
+        "r2_adj": 0.9128
+      },
+      "adproxy_fd": {
+        "coef": -0.000756,
+        "se": 0.000181,
+        "p": 2.9505e-05,
+        "ci95": [
+          -0.001111,
+          -0.000401
+        ],
+        "n": 757,
+        "r2_adj": 0.0401
+      },
+      "mobile_twfe": {
+        "coef": -0.003095,
+        "se": 0.00498,
+        "p": 0.53436,
+        "ci95": [
+          -0.012856,
+          0.006667
+        ],
+        "n": 991,
+        "r2_adj": 0.9083
+      },
+      "mobile_fd": {
+        "coef": -0.008249,
+        "se": 0.004234,
+        "p": 0.051347,
+        "ci95": [
+          -0.016547,
+          4.8e-05
+        ],
+        "n": 806,
+        "r2_adj": 0.0115
+      }
+    }
+  },
+  "horse_race": {
+    "depression_prevalence": {
+      "ad_proxy": {
+        "coef": 1.2e-05,
+        "se": 2e-06,
+        "p": 6.6406e-07,
+        "ci95": [
+          7e-06,
+          1.7e-05
+        ]
+      },
+      "mobile_cellular": {
+        "coef": -0.000591,
+        "se": 0.000119,
+        "p": 7.327e-07,
+        "ci95": [
+          -0.000825,
+          -0.000357
+        ]
+      },
+      "n": 4838,
+      "r2_adj": 0.9524
+    },
+    "suicide": {
+      "ad_proxy": {
+        "coef": -0.000679,
+        "se": 0.000164,
+        "p": 3.452e-05,
+        "ci95": [
+          -0.001001,
+          -0.000358
+        ]
+      },
+      "mobile_cellular": {
+        "coef": -0.004045,
+        "se": 0.005224,
+        "p": 0.43872,
+        "ci95": [
+          -0.014284,
+          0.006194
+        ]
+      },
+      "n": 936,
+      "r2_adj": 0.9128
+    }
+  },
+  "factor_analysis": {
+    "loading_ad_proxy": 0.7668,
+    "loading_mobile_cellular": 0.7668,
+    "communality_ad_proxy": 0.5877,
+    "communality_mobile_cellular": 0.5877,
+    "n": 6169
+  }
+}

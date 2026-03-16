@@ -512,6 +512,17 @@ Limitation: time-series validation (proxy \emph{changes} vs ad spend changes, 20
 
 External construct validation shows AdProxy correlates $r = 0.77$ with Internet penetration and $r = 0.84$ with GDP per capita at levels. A Davidson--MacKinnon $J$-test finds the additive Internet + GDP specification statistically encompasses AdProxy ($t = 7.77$, $p < 0.001$), while AdProxy does not encompass Internet + GDP ($t = -1.67$, $p = 0.095$). However, in cross-income-tier generalization (training on high-income countries, predicting low-income), AdProxy outperforms the additive specification (RMSE $0.211$ vs.\ $0.246$), suggesting the multiplicative form captures supply-side advertising conditions more portably. We retain AdProxy as an interpretable single-index summary while acknowledging that it does not add incremental explanatory power beyond its components ($\Delta R^2 = 0.0006$, $F = 2.80$, $p = 0.095$).
 
+\paragraph{Convergent validity with an independent proxy.}
+To address the concern that AdProxy is an ad hoc construct, we test convergent validity against an independently constructed measure: ITU mobile cellular subscriptions per 100 inhabitants (World Bank indicator IT.CEL.SETS.P2), which captures physical information-access density through an entirely different operationalization. The two proxies correlate at Spearman $\rho = 0.85$ in levels ($n = 6{,}169$, $p < 10^{-300}$; Figure~\ref{fig:itu-convergent}a), and both load equally (0.77) on a single latent factor, confirming they measure the same underlying construct.
+
+In a substitution test, replacing AdProxy with mobile subscriptions in the first-difference specification yields a significant negative coefficient for depression ($\beta = -0.0012$, $p < 10^{-7}$) and a marginally significant effect for suicide ($p = 0.051$). When both proxies enter simultaneously (``horse race''; Figure~\ref{fig:itu-convergent}b), both survive for depression ($p_{\text{AdProxy}} < 10^{-6}$, $p_{\text{mobile}} < 10^{-6}$), suggesting partially independent information channels. For suicide, AdProxy dominates ($p < 10^{-4}$) while mobile subscriptions drop out ($p = 0.44$), indicating the multiplicative AdProxy formulation captures advertising-relevant variation beyond mere connectivity.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/itu_convergent.pdf}
+\caption{Convergent validity of AdProxy with ITU mobile cellular subscriptions. \textbf{(a)}~Scatter plot of AdProxy vs.\ mobile subscriptions per 100 inhabitants (Spearman $\rho = 0.85$). \textbf{(b)}~Standardized TWFE coefficients for depression: AdProxy-only, mobile-only, and horse-race models. Both proxies survive simultaneously, suggesting partially independent information channels.}\label{fig:itu-convergent}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{proxy_validation_rank.png}
