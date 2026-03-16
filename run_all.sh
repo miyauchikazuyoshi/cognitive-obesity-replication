@@ -163,6 +163,15 @@ else
     echo "  Ad proxy validation..."
     $PYTHON analysis/block_b/proxy_validation.py 2>&1 | tee results/proxy_validation.log
 
+    echo "  R14: Effect size table..."
+    $PYTHON analysis/block_b/effect_size_table.py 2>&1 | tee results/effect_size_table.log
+
+    echo "  R14: DALYs triangulation..."
+    $PYTHON analysis/block_b/dalys_triangulation.py 2>&1 | tee results/dalys_triangulation.log
+
+    echo "  R14: Placebo test (construct specificity)..."
+    $PYTHON analysis/block_b/placebo_test.py 2>&1 | tee results/placebo_test.log
+
     echo "  CCE / IFE estimators (R)..."
     if command -v Rscript &> /dev/null; then
       Rscript analysis/block_b/r_cce_ife_estimators.R 2>&1 | tee results/r_estimators.log

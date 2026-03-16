@@ -478,6 +478,38 @@ def main() -> int:
         print(f"Education interpolated: {edu_before:,} → {edu_after:,} non-null values "
               f"(linear within-country)")
 
+    # ── Extended IHME outcomes (R14: DALYs triangulation + placebo) ──
+    extended_ihme = [
+        ("ihme_depression_dalys_clean.csv", "depression_dalys",
+         {"expected_cause": "Depressive disorders", "expected_measure": "DALYs", "expected_metric": "Rate"}),
+        ("ihme_cardiovascular_clean.csv", "cardiovascular_prevalence",
+         {"expected_cause": "Cardiovascular diseases", "expected_measure": "Prevalence", "expected_metric": "Rate"}),
+        ("ihme_diabetes_clean.csv", "diabetes_prevalence",
+         {"expected_cause": "Diabetes", "expected_measure": "Prevalence", "expected_metric": "Rate"}),
+    ]
+    for fname, col, spec in extended_ihme:
+        path = os.path.join(macro_dir, fname)
+        if not os.path.exists(path):
+            # Try raw IHME file and process on the fly
+            raw_fname = fname.replace("_clean.csv", ".csv")
+            raw_path = os.path.join(macro_dir, raw_fname)
+            if os.path.exists(raw_path):
+                try:
+                    ihme_ext = load_ihme(raw_path, col, **spec)
+                    panel = panel.merge(ihme_ext, on=["country_key", "year"], how="left")
+                    print(f"Merged {raw_fname} → '{col}'")
+                    continue
+                except Exception as e:
+                    print(f"[WARN] {raw_fname} parse failed: {e}")
+            print(f"[INFO] {fname} not found (run download_ihme_extended.py to add)")
+            continue
+        try:
+            ext_df = pd.read_csv(path)
+            panel = panel.merge(ext_df, on=["country_key", "year"], how="left")
+            print(f"Merged {fname} → '{col}'")
+        except Exception as e:
+            print(f"[WARN] {fname} merge failed: {e}")
+
     # Derived variables
     if "education" in panel.columns and "internet" in panel.columns:
         internet = pd.to_numeric(panel["internet"], errors="coerce")
