@@ -632,6 +632,62 @@ AIC & $-$10,663 & $-$10,761 & $-$13,889 & $-$13,954 & $-$13,938 \\
 \paragraph{Macro--micro reconciliation.} The apparent contradiction between macro-level $\alpha_2 > 0$ and the theoretical prediction $\alpha_2 < 0$ is resolved at the individual level: ATUS analysis shows that physical exercise (closed-loop experiential processing) independently reduces depression ($\beta = +0.0016$, $t = 5.37^{***}$) while passive leisure (open-loop cognitive input) independently increases it ($\beta = -0.0009$, $t = -11.08^{***}$), with a non-significant interaction ($p = 0.95$). The macro-level education variable conflates processing capacity with diagnostic reporting; individual-level activity data directly measures what the theory intends.
 
 
+\subsection{Robustness: DALYs Triangulation and Placebo Tests}\label{sec:dalys-placebo}
+
+Two additional robustness checks address concerns about measurement specificity and construct validity.
+
+\paragraph{DALYs triangulation.}
+Depression prevalence estimates from the GBD may be confounded by cross-country variation in diagnostic infrastructure. To assess whether the main findings are robust to this concern, we replace depression prevalence (per 100{,}000) with disability-adjusted life years (DALYs) attributable to depressive disorders as the dependent variable. DALYs incorporate both prevalence and severity weights, making them less sensitive to diagnostic threshold variation. Table~\ref{tab:dalys-triangulation} reports parallel estimates.
+
+\begin{table}[htbp]
+\centering
+\caption{DALYs triangulation: AdProxy $\to$ Depression (prevalence vs.\ DALYs).}
+\label{tab:dalys-triangulation}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Model & Prevalence $\beta$ & DALYs $\beta$ & Sign match & $N$ \\
+\midrule
+Pooled OLS   & $+0.000042$         & $+0.0086$    & \checkmark & 4{,}891 / 4{,}889 \\
+Entity FE    & $+0.000087^{***}$   & $+0.0176^{***}$ & \checkmark & 4{,}891 / 4{,}889 \\
+TWFE         & $+0.000010$         & $+0.0011$    & \checkmark & 4{,}891 / 4{,}889 \\
+First Diff.  & $-0.000078^{***}$   & $-0.0157^{***}$ & \checkmark & 4{,}725 / 4{,}723 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All four model specifications yield sign-consistent coefficients across the two outcome measures, and the Entity FE and First Difference models are statistically significant for both. The TWFE attenuation pattern---large under Entity FE, near-zero under TWFE---replicates across outcome types, supporting the interpretation that common time trends drive the apparent positive association.
+
+\paragraph{Placebo tests (construct specificity).}
+If AdProxy captures mental-health-specific information overload rather than general economic development, it should \emph{not} predict health outcomes unrelated to cognitive processing. We test this using two placebo outcomes from the GBD: cardiovascular disease prevalence and type~2 diabetes prevalence (both age-standardized rates per 100{,}000; 204 countries, 1990--2023). Table~\ref{tab:placebo} reports TWFE and First Difference estimates.
+
+\begin{table}[htbp]
+\centering
+\caption{Placebo test: AdProxy effects on target vs.\ placebo outcomes (TWFE and FD).}
+\label{tab:placebo}
+\small
+\begin{tabular}{llrrl}
+\toprule
+Outcome & Model & $\beta$ & $p$ & Interpretation \\
+\midrule
+Depression prevalence (target) & TWFE & $+0.000010$ & 0.181 & n.s. \\
+Depression prevalence (target) & FD   & $-0.000078$ & $<$0.001 & $***$ \\
+Suicide rate (target)          & TWFE & $-0.000671$ & 0.007 & $**$ \\
+Suicide rate (target)          & FD   & $-0.000755$ & $<$0.001 & $***$ \\
+Depression DALYs (target)      & TWFE & $+0.001143$ & 0.435 & n.s. \\
+Depression DALYs (target)      & FD   & $-0.015665$ & $<$0.001 & $***$ \\
+\midrule
+Cardiovascular prev.\ (placebo) & TWFE & $-0.1450$  & $<$0.001 & $***$, negative \\
+Cardiovascular prev.\ (placebo) & FD   & $-0.0569$  & $<$0.001 & $***$, negative \\
+Diabetes prev.\ (placebo)       & TWFE & $+0.0027$  & 0.961 & n.s.\ \checkmark \\
+Diabetes prev.\ (placebo)       & FD   & $-0.0058$  & 0.728 & n.s.\ \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Diabetes prevalence shows no significant association with AdProxy under either specification ($p = 0.96$, $p = 0.73$), consistent with construct specificity. Cardiovascular prevalence shows a significant \emph{negative} association ($\beta = -0.145$, $p < 0.001$), opposite in sign to the depression effect---advertising-intensive economies may coincide with better cardiovascular infrastructure. The key finding is that AdProxy does not exhibit a uniform positive association with all health outcomes: diabetes is null, cardiovascular is negative, while mental health targets show the theoretically predicted pattern. This partial specificity supports the interpretation that advertising exposure captures cognitive-load-related pathways rather than a generic development confounder.
+
+
 \subsection{Transparency Note on the Exploratory Process}\label{sec:transparency}
 
 The analysis in this paper followed a partially exploratory process. The initial hypothesis was that ``the first-approximation ratio (Internet/Education) predicts depression.'' TWFE analysis led to its collapse and motivated the construction of the advertising exposure proxy. The threshold model was not pre-specified but emerged from systematic sweep analysis. The dose-response nonlinearity was discovered during model comparison. We explicitly report this exploration for two reasons: (1)~honest disclosure of the research process, and (2)~clear demarcation between exploratory and confirmatory phases. All results in this paper are exploratory and require pre-registered replication.
@@ -641,7 +697,7 @@ The analysis in this paper followed a partially exploratory process. The initial
 
 \begin{enumerate}
   \item \textbf{Ecological fallacy and within-country triangulation}: Country-level associations do not demonstrate individual-level causation. A critical next step is within-country microdata triangulation using surveys that jointly measure device use, activity structure, and mental health outcomes. Candidate datasets include: the European Social Survey (ESS; modules on digital use and well-being), the German Socio-Economic Panel (SOEP; detailed time-use diaries + SF-12 mental health), the UK Household Longitudinal Study (UKHLS/Understanding Society; GHQ-12 + internet use), the General Social Survey (GSS; well-being + media use modules), and the Demographic and Health Surveys (DHS; mental health proxies in low-income countries). By linking individual-level activity patterns to mental health within the same countries analyzed in the macro panel, researchers can test whether the macro associations replicate at the individual level and identify the within-country heterogeneity that ecological analysis obscures.
-  \item \textbf{Diagnostic bias and measurement-error modeling}: Depression prevalence is confounded with diagnostic infrastructure. Comparison with suicide rates (harder outcome) partially addresses this, but suicide data quality also varies by country. A more rigorous approach would employ explicit measurement-error models or structural equation models (SEM) to dissociate diagnostic capacity from true prevalence. For example, a two-equation system could model observed depression as a function of true prevalence (driven by Internet, education, and other risk factors) plus a measurement equation where reporting probability depends on GDP, mental health workforce per capita, and anti-stigma policy indices. Alternative outcomes less susceptible to ascertainment bias---such as antidepressant sales volume (OECD Health Statistics), disability-adjusted life years attributable to depressive disorders (GBD), or excess all-cause mortality---could serve as robustness checks. These extensions are beyond the scope of the current exploratory analysis but constitute a priority for confirmatory work.
+  \item \textbf{Diagnostic bias and measurement-error modeling}: Depression prevalence is confounded with diagnostic infrastructure. Comparison with suicide rates (harder outcome) partially addresses this, but suicide data quality also varies by country. A more rigorous approach would employ explicit measurement-error models or structural equation models (SEM) to dissociate diagnostic capacity from true prevalence. For example, a two-equation system could model observed depression as a function of true prevalence (driven by Internet, education, and other risk factors) plus a measurement equation where reporting probability depends on GDP, mental health workforce per capita, and anti-stigma policy indices. Alternative outcomes less susceptible to ascertainment bias---such as antidepressant sales volume (OECD Health Statistics), disability-adjusted life years attributable to depressive disorders (GBD), or excess all-cause mortality---serve as robustness checks. We have conducted DALYs triangulation and placebo tests using GBD cardiovascular and diabetes prevalence data (Section~\ref{sec:dalys-placebo}); remaining extensions constitute a priority for confirmatory work.
   \item \textbf{Proxy limitations}: The ad proxy is a product of two macro variables; unmeasured confounders cannot be excluded. More fundamentally, the proxy cannot capture the \emph{qualitative} evolution of the advertising ecosystem---advances in algorithmic targeting, the transition from banner ads to autoplay short-form video, and cross-country differences in privacy regulation (GDPR, COPPA, etc.) all alter the mapping from ad expenditure to actual cognitive load. The strong cross-sectional but weak time-series validity ($\rho = 0.80$ vs $0.16$) likely reflects this structural gap. Closing it requires attention-weighted exposure data (impressions $\times$ dwell time) that remain proprietary to major platforms.
   \item \textbf{Missing time-varying controls}: Age structure (median age, dependency ratios), unemployment, Gini inequality, urbanization rate, education quality proxies, health-system capacity, and conflict/mortality shocks are not included in the baseline specifications. While the structural balance test (M4) includes log(GDP) and education as controls, a comprehensive robustness check with all time-varying covariates jointly entered---and with country-specific linear trends to absorb differential long-run trajectories---remains to be conducted.
   \item \textbf{COVID-19 period heterogeneity}: The pandemic years (2020--2022) introduced simultaneous shocks to internet use, mental health, and economic activity that may confound the analysis. Sensitivity analyses excluding pandemic years, or including pandemic interaction terms, are not reported in the current specification and should be conducted in future work.

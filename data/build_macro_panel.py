@@ -203,7 +203,7 @@ def load_ihme(
             df = df[s == exp]
 
     if expected_measure is not None:
-        _filter_eq(measure_col, expected_measure)
+        _filter_contains(measure_col, expected_measure)
     if expected_metric is not None:
         _filter_eq(metric_col, expected_metric)
     if expected_sex is not None:
