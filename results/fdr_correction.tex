@@ -1,0 +1,53 @@
+\begin{table}[htbp]
+\centering
+\caption{Multiple Testing Correction: Benjamini--Hochberg FDR}
+\label{tab:fdr}
+\footnotesize
+\begin{tabular}{llccc}
+\toprule
+Family & Specification & Raw $p$ & BH $q$ & Bonferroni $p$ \\
+\midrule
+  Macro panel: Depression prevalence & AdProxy / Pooled OLS & 0.0780 & 0.1040 & 0.6243 \\
+   & AdProxy / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & AdProxy / TWFE & 0.1811 & 0.2069 & 1.0000 \\
+   & AdProxy / First Difference & $1.5 \times 10^{-7}$*** & $4.1 \times 10^{-7}$*** & $1.2 \times 10^{-6}$*** \\
+   & Internet \% / Pooled OLS & $9.0 \times 10^{-4}$*** & 0.0014** & 0.0072** \\
+   & Internet \% / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & Internet \% / TWFE & 0.3319 & 0.3319 & 1.0000 \\
+   & Internet \% / First Difference & $4.5 \times 10^{-5}$*** & $9.1 \times 10^{-5}$*** & $3.6 \times 10^{-4}$*** \\
+\addlinespace
+  Macro panel: Suicide rate & AdProxy / Pooled OLS & 0.5641 & 0.5641 & 1.0000 \\
+   & AdProxy / Entity FE & $1.5 \times 10^{-5}$*** & $1.2 \times 10^{-4}$*** & $1.2 \times 10^{-4}$*** \\
+   & AdProxy / TWFE & 0.0070** & 0.0112* & 0.0559 \\
+   & AdProxy / First Difference & $2.2 \times 10^{-4}$*** & $5.8 \times 10^{-4}$*** & 0.0017** \\
+   & Internet \% / Pooled OLS & 0.1885 & 0.2154 & 1.0000 \\
+   & Internet \% / Entity FE & $5.1 \times 10^{-5}$*** & $2.1 \times 10^{-4}$*** & $4.1 \times 10^{-4}$*** \\
+   & Internet \% / TWFE & 0.1558 & 0.2077 & 1.0000 \\
+   & Internet \% / First Difference & 0.0033** & 0.0067** & 0.0267* \\
+\addlinespace
+  Macro panel: Depression DALYs & AdProxy / Pooled OLS & 0.0677 & 0.0902 & 0.5413 \\
+   & AdProxy / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & AdProxy / TWFE & 0.4351 & 0.4972 & 1.0000 \\
+   & AdProxy / First Difference & $1.5 \times 10^{-7}$*** & $3.9 \times 10^{-7}$*** & $1.2 \times 10^{-6}$*** \\
+   & Internet \% / Pooled OLS & $4.0 \times 10^{-4}$*** & $6.4 \times 10^{-4}$*** & 0.0032** \\
+   & Internet \% / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & Internet \% / TWFE & 0.7322 & 0.7322 & 1.0000 \\
+   & Internet \% / First Difference & $5.0 \times 10^{-5}$*** & $1.0 \times 10^{-4}$*** & $4.0 \times 10^{-4}$*** \\
+\addlinespace
+  Placebo / falsification tests & Cardiovascular prevalence / Twfe & $4.3 \times 10^{-9}$*** & $9.5 \times 10^{-9}$*** & $1.7 \times 10^{-8}$*** \\
+   & Cardiovascular prevalence / First Diff & $4.7 \times 10^{-9}$*** & $9.5 \times 10^{-9}$*** & $1.9 \times 10^{-8}$*** \\
+   & Diabetes prevalence / Twfe & 0.9606 & 0.9606 & 1.0000 \\
+   & Diabetes prevalence / First Diff & 0.7280 & 0.9606 & 1.0000 \\
+\addlinespace
+  Micro-level (NHANES + ATUS) & NHANES: Exercise -> PHQ-9 & $2.2 \times 10^{-10}$*** & $5.0 \times 10^{-10}$*** & $1.5 \times 10^{-9}$*** \\
+   & ATUS: exercise\_min -> Cantril & $6.7 \times 10^{-7}$*** & $1.2 \times 10^{-6}$*** & $4.7 \times 10^{-6}$*** \\
+   & ATUS: active\_cognitive\_min -> Cantril & 0.3573 & 0.3573 & 1.0000 \\
+   & ATUS: passive\_min -> Cantril & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & ATUS OLS: Exercise (binary) -> Cantril & $1.7 \times 10^{-5}$*** & $2.4 \times 10^{-5}$*** & $1.2 \times 10^{-4}$*** \\
+   & ATUS OLS: Active leisure (binary) -> Cantril & 0.0067** & 0.0078** & 0.0470* \\
+   & ATUS OLS: High passive (binary) -> Cantril & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+\addlinespace
+\bottomrule
+\end{tabular}
+\par\smallskip\noindent\textit{Note.} $^{*}p<.05$; $^{**}p<.01$; $^{***}p<.001$. BH $q$-values computed within each family using the Benjamini--Hochberg step-up procedure. 23 of 35 tests remain significant after BH-FDR correction at α = 0.05 (23 significant before correction; 22 survive Bonferroni).
+\end{table}

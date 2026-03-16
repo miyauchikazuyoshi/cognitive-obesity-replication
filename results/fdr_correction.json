@@ -1,0 +1,312 @@
+{
+  "method": "Benjamini-Hochberg",
+  "alpha": 0.05,
+  "families": {
+    "macro_depression": {
+      "label": "Macro panel: Depression prevalence",
+      "n_tests": 8,
+      "specifications": [
+        "AdProxy / Pooled OLS",
+        "AdProxy / Entity FE",
+        "AdProxy / TWFE",
+        "AdProxy / First Difference",
+        "Internet % / Pooled OLS",
+        "Internet % / Entity FE",
+        "Internet % / TWFE",
+        "Internet % / First Difference"
+      ],
+      "raw_p_values": [
+        0.0780339378,
+        0.0,
+        0.1810772229,
+        1.539e-07,
+        0.0008991139,
+        4.891799599e-58,
+        0.3319303266,
+        4.53371e-05
+      ],
+      "bh_adjusted_p_values": [
+        0.1040452504,
+        0.0,
+        0.2069453976,
+        4.104e-07,
+        0.0014385822,
+        0.0,
+        0.3319303266,
+        9.06742e-05
+      ],
+      "bonferroni_adjusted_p_values": [
+        0.6242715024,
+        0.0,
+        1.0,
+        1.2312e-06,
+        0.0071929112,
+        0.0,
+        1.0,
+        0.0003626968
+      ],
+      "reject_bh_005": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "reject_bonferroni_005": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "n_significant_raw": 5,
+      "n_significant_bh": 5,
+      "n_significant_bonferroni": 5
+    },
+    "macro_suicide": {
+      "label": "Macro panel: Suicide rate",
+      "n_tests": 8,
+      "specifications": [
+        "AdProxy / Pooled OLS",
+        "AdProxy / Entity FE",
+        "AdProxy / TWFE",
+        "AdProxy / First Difference",
+        "Internet % / Pooled OLS",
+        "Internet % / Entity FE",
+        "Internet % / TWFE",
+        "Internet % / First Difference"
+      ],
+      "raw_p_values": [
+        0.5640726336,
+        1.53338e-05,
+        0.0069876416,
+        0.0002178795,
+        0.1884989628,
+        5.13323e-05,
+        0.1557813358,
+        0.0033363635
+      ],
+      "bh_adjusted_p_values": [
+        0.5640726336,
+        0.0001226704,
+        0.0111802266,
+        0.000581012,
+        0.2154273861,
+        0.0002053292,
+        0.2077084477,
+        0.006672727
+      ],
+      "bonferroni_adjusted_p_values": [
+        1.0,
+        0.0001226704,
+        0.0559011328,
+        0.001743036,
+        1.0,
+        0.0004106584,
+        1.0,
+        0.026690908
+      ],
+      "reject_bh_005": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "reject_bonferroni_005": [
+        false,
+        true,
+        false,
+        true,
+        false,
+        true,
+        false,
+        true
+      ],
+      "n_significant_raw": 5,
+      "n_significant_bh": 5,
+      "n_significant_bonferroni": 4
+    },
+    "macro_dalys": {
+      "label": "Macro panel: Depression DALYs",
+      "n_tests": 8,
+      "specifications": [
+        "AdProxy / Pooled OLS",
+        "AdProxy / Entity FE",
+        "AdProxy / TWFE",
+        "AdProxy / First Difference",
+        "Internet % / Pooled OLS",
+        "Internet % / Entity FE",
+        "Internet % / TWFE",
+        "Internet % / First Difference"
+      ],
+      "raw_p_values": [
+        0.0676574495,
+        0.0,
+        0.4350683009,
+        1.476e-07,
+        0.000401625,
+        1.178544423e-59,
+        0.7321707181,
+        5.02668e-05
+      ],
+      "bh_adjusted_p_values": [
+        0.0902099327,
+        0.0,
+        0.4972209153,
+        3.936e-07,
+        0.0006426,
+        0.0,
+        0.7321707181,
+        0.0001005336
+      ],
+      "bonferroni_adjusted_p_values": [
+        0.541259596,
+        0.0,
+        1.0,
+        1.1808e-06,
+        0.003213,
+        0.0,
+        1.0,
+        0.0004021344
+      ],
+      "reject_bh_005": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "reject_bonferroni_005": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ],
+      "n_significant_raw": 5,
+      "n_significant_bh": 5,
+      "n_significant_bonferroni": 5
+    },
+    "placebo": {
+      "label": "Placebo / falsification tests",
+      "n_tests": 4,
+      "specifications": [
+        "Cardiovascular prevalence / Twfe",
+        "Cardiovascular prevalence / First Diff",
+        "Diabetes prevalence / Twfe",
+        "Diabetes prevalence / First Diff"
+      ],
+      "raw_p_values": [
+        4.264975221742095e-09,
+        4.736579965643819e-09,
+        0.9605927758704002,
+        0.7279695754955458
+      ],
+      "bh_adjusted_p_values": [
+        9.5e-09,
+        9.5e-09,
+        0.9605927759,
+        0.9605927759
+      ],
+      "bonferroni_adjusted_p_values": [
+        1.71e-08,
+        1.89e-08,
+        1.0,
+        1.0
+      ],
+      "reject_bh_005": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "reject_bonferroni_005": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "n_significant_raw": 2,
+      "n_significant_bh": 2,
+      "n_significant_bonferroni": 2
+    },
+    "micro": {
+      "label": "Micro-level (NHANES + ATUS)",
+      "n_tests": 7,
+      "specifications": [
+        "NHANES: Exercise -> PHQ-9",
+        "ATUS: exercise_min -> Cantril",
+        "ATUS: active_cognitive_min -> Cantril",
+        "ATUS: passive_min -> Cantril",
+        "ATUS OLS: Exercise (binary) -> Cantril",
+        "ATUS OLS: Active leisure (binary) -> Cantril",
+        "ATUS OLS: High passive (binary) -> Cantril"
+      ],
+      "raw_p_values": [
+        2.1965728108578628e-10,
+        6.669536521928188e-07,
+        0.35732618013185546,
+        1.0542222852249292e-20,
+        1.6841209819151715e-05,
+        0.0067128675293275375,
+        8.359979375427429e-13
+      ],
+      "bh_adjusted_p_values": [
+        5e-10,
+        1.1672e-06,
+        0.3573261801,
+        0.0,
+        2.35777e-05,
+        0.0078316788,
+        0.0
+      ],
+      "bonferroni_adjusted_p_values": [
+        1.5e-09,
+        4.6687e-06,
+        1.0,
+        0.0,
+        0.0001178885,
+        0.0469900727,
+        0.0
+      ],
+      "reject_bh_005": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "reject_bonferroni_005": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "n_significant_raw": 6,
+      "n_significant_bh": 6,
+      "n_significant_bonferroni": 6
+    }
+  },
+  "summary": "23 of 35 tests remain significant after BH-FDR correction at \u03b1 = 0.05 (23 significant before correction; 22 survive Bonferroni)"
+}

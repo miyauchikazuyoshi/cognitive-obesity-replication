@@ -1,0 +1,329 @@
+====================================================================== 
+ Block B: CCE / IFE / Driscoll-Kraay Estimators (R)
+ Stanford Reviewer response: cross-sectional dependence
+====================================================================== 
+
+Loading panel data...
+  Loaded: data/macro/panel_merged.csv (9010 rows)
+  Entities: 265, Periods: 34
+
+ ====================================================================== 
+ OUTCOME: DEP | X = proxy, gdp
+====================================================================== 
+  N = 4891 (entities = 166, periods = 34)
+
+--- 2a. Entity FE (within) ---
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = fml, data = pdf, effect = "individual", model = "within")
+
+Unbalanced Panel: n = 166, T = 4-34, N = 4891
+
+Residuals:
+     Min.   1st Qu.    Median   3rd Qu.      Max. 
+-0.715206 -0.152157 -0.058469  0.062204  2.187056 
+
+Coefficients:
+         Estimate  Std. Error t-value  Pr(>|t|)    
+proxy  1.0329e-04  4.6631e-06 22.1496 < 2.2e-16 ***
+gdp   -4.6409e-06  1.0098e-06 -4.5959 4.421e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    410.75
+Residual Sum of Squares: 347.09
+R-Squared:      0.15499
+Adj. R-Squared: 0.12511
+F-statistic: 433.15 on 2 and 4723 DF, p-value: < 2.22e-16
+
+--- 2b. Two-Way FE (entity + time) ---
+Twoways effects Within Model
+
+Call:
+plm(formula = fml, data = pdf, effect = "twoways", model = "within")
+
+Unbalanced Panel: n = 166, T = 4-34, N = 4891
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-0.7169495 -0.0785964  0.0029292  0.0749131  1.7026565 
+
+Coefficients:
+         Estimate  Std. Error t-value  Pr(>|t|)    
+proxy  3.1178e-05  2.8449e-06  10.959 < 2.2e-16 ***
+gdp   -6.8837e-06  5.7885e-07 -11.892 < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    111.21
+Residual Sum of Squares: 107.51
+R-Squared:      0.033309
+Adj. R-Squared: -0.0079147
+F-statistic: 80.8005 on 2 and 4690 DF, p-value: < 2.22e-16
+
+--- 3. Driscoll-Kraay SE ---
+
+  TWFE with Driscoll-Kraay SE:
+
+t test of coefficients:
+
+         Estimate  Std. Error t value  Pr(>|t|)    
+proxy  3.1178e-05  5.1303e-06  6.0774 1.319e-09 ***
+gdp   -6.8838e-06  1.8429e-06 -3.7353 0.0001897 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+--- 4. Pesaran CCE (Common Correlated Effects) ---
+  Augments regression with cross-sectional averages of y and X
+  to absorb unobserved common factors.
+
+  pcce() failed: システムは数値的に特異です: 条件数の逆数 = 5.42929e-18 
+  Trying manual CCE implementation...
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = fml_cce, data = pdf_cce, effect = "individual", 
+    model = "within")
+
+Unbalanced Panel: n = 166, T = 4-34, N = 4891
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-0.7280638 -0.0791319  0.0030628  0.0739692  1.7108267 
+
+Coefficients:
+             Estimate  Std. Error  t-value Pr(>|t|)    
+proxy      3.1221e-05  2.8419e-06  10.9862  < 2e-16 ***
+gdp       -6.8986e-06  5.7325e-07 -12.0341  < 2e-16 ***
+dep_bar    1.0239e+00  1.2615e-02  81.1667  < 2e-16 ***
+proxy_bar -9.4132e-06  6.4958e-06  -1.4491  0.14737    
+gdp_bar    2.7717e-06  1.3486e-06   2.0552  0.03991 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    410.75
+Residual Sum of Squares: 108.19
+R-Squared:      0.7366
+Adj. R-Squared: 0.72711
+F-statistic: 2639.91 on 5 and 4720 DF, p-value: < 2.22e-16
+
+--- 5. Bai IFE (Interactive Fixed Effects) ---
+  y_it = alpha_i + lambda_i' * f_t + beta * X_it + e_it
+  Absorbs unit-specific loadings on common latent factors.
+
+  Balanced sub-panel: 33 entities × 34 periods
+  Kss() failed: オブジェクト 'dep' がありません 
+  Falling back to proxy IFE (PCA-augmented FE)...
+  Using proxy IFE (entity FE + PCA-extracted latent factors)...
+
+  Using 3 principal components as latent factors
+  Variance explained: 83.1%
+
+  Proxy IFE (FE + PCA factors):
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = fml_ife, data = pdf_ife, effect = "individual", 
+    model = "within")
+
+Unbalanced Panel: n = 166, T = 4-34, N = 4891
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-0.6949447 -0.0803829  0.0034334  0.0744978  1.7120202 
+
+Coefficients:
+         Estimate  Std. Error t-value  Pr(>|t|)    
+proxy  3.3269e-05  2.8238e-06  11.781 < 2.2e-16 ***
+gdp   -6.6746e-06  5.7696e-07 -11.568 < 2.2e-16 ***
+F1    -1.2281e+00  1.5406e-02 -79.717 < 2.2e-16 ***
+F2    -5.2901e-01  1.3209e-02 -40.051 < 2.2e-16 ***
+F3     3.0616e-01  1.2665e-02  24.173 < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    410.75
+Residual Sum of Squares: 109.93
+R-Squared:      0.73236
+Adj. R-Squared: 0.72272
+F-statistic: 2583.18 on 5 and 4720 DF, p-value: < 2.22e-16
+
+ ====================================================================== 
+ COMPARISON TABLE: Coefficient estimates across estimators
+====================================================================== 
+
+  Variable                             FE          TWFE           CCE           IFE
+--------------------------------------------------------------------------------- 
+  proxy                            0.0001        0.0000        0.0000        0.0000
+  gdp                             -0.0000       -0.0000       -0.0000       -0.0000
+
+  Interpretation:
+    - Sign consistency across estimators = robust direction
+    - Magnitude stability = robust effect size
+    - Significance under DK-SE/CCE/IFE = survives CSD correction
+
+ ====================================================================== 
+ OUTCOME: SUICIDE | X = proxy, gdp
+====================================================================== 
+  N = 940 (entities = 179, periods = 22)
+
+--- 2a. Entity FE (within) ---
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = fml, data = pdf, effect = "individual", model = "within")
+
+Unbalanced Panel: n = 179, T = 1-10, N = 940
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-14.244054  -0.625807  -0.048391   0.493490  11.856476 
+
+Coefficients:
+         Estimate  Std. Error t-value  Pr(>|t|)    
+proxy -6.7844e-04  1.1303e-04 -6.0021 3.016e-09 ***
+gdp   -1.1051e-04  2.3488e-05 -4.7052 3.014e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    3725.9
+Residual Sum of Squares: 3181.2
+R-Squared:      0.1462
+Adj. R-Squared: -0.056288
+F-statistic: 64.981 on 2 and 759 DF, p-value: < 2.22e-16
+
+--- 2b. Two-Way FE (entity + time) ---
+Twoways effects Within Model
+
+Call:
+plm(formula = fml, data = pdf, effect = "twoways", model = "within")
+
+Unbalanced Panel: n = 179, T = 1-10, N = 940
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-14.982779  -0.656995  -0.047223   0.553083  12.075555 
+
+Coefficients:
+         Estimate  Std. Error t-value  Pr(>|t|)    
+proxy -4.5303e-04  1.3255e-04 -3.4178 0.0006658 ***
+gdp   -9.9738e-05  2.4197e-05 -4.1220 4.182e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    3264.7
+Residual Sum of Squares: 3067.4
+R-Squared:      0.060423
+Adj. R-Squared: -0.19548
+F-statistic: 23.73 on 2 and 738 DF, p-value: 1.028e-10
+
+--- 3. Driscoll-Kraay SE ---
+
+  TWFE with Driscoll-Kraay SE:
+
+t test of coefficients:
+
+         Estimate  Std. Error t value  Pr(>|t|)    
+proxy -4.5303e-04  8.8147e-05 -5.1395 3.532e-07 ***
+gdp   -9.9738e-05  3.1358e-05 -3.1807  0.001531 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+--- 4. Pesaran CCE (Common Correlated Effects) ---
+  Augments regression with cross-sectional averages of y and X
+  to absorb unobserved common factors.
+
+  pcce() failed: Insufficient number of time periods 
+  Trying manual CCE implementation...
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = fml_cce, data = pdf_cce, effect = "individual", 
+    model = "within")
+
+Unbalanced Panel: n = 179, T = 1-10, N = 940
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-14.930345  -0.652821  -0.058944   0.494044  12.007245 
+
+Coefficients:
+               Estimate  Std. Error t-value  Pr(>|t|)    
+proxy       -4.4443e-04  1.3101e-04 -3.3923 0.0007291 ***
+gdp         -1.0120e-04  2.3603e-05 -4.2874 2.042e-05 ***
+suicide_bar  1.9891e-01  8.0392e-02  2.4743 0.0135699 *  
+proxy_bar   -7.9121e-04  2.6181e-04 -3.0220 0.0025956 ** 
+gdp_bar      9.2389e-05  3.6141e-05  2.5564 0.0107712 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    3725.9
+Residual Sum of Squares: 3112.2
+R-Squared:      0.16473
+Adj. R-Squared: -0.037464
+F-statistic: 29.8183 on 5 and 756 DF, p-value: < 2.22e-16
+
+--- 5. Bai IFE (Interactive Fixed Effects) ---
+  y_it = alpha_i + lambda_i' * f_t + beta * X_it + e_it
+  Absorbs unit-specific loadings on common latent factors.
+
+  Too few balanced entities (4) for KSS; using proxy IFE
+  Using proxy IFE (entity FE + PCA-extracted latent factors)...
+
+  Using 3 principal components as latent factors
+  Variance explained: 47.9%
+
+  Proxy IFE (FE + PCA factors):
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = fml_ife, data = pdf_ife, effect = "individual", 
+    model = "within")
+
+Unbalanced Panel: n = 179, T = 1-10, N = 940
+
+Residuals:
+      Min.    1st Qu.     Median    3rd Qu.       Max. 
+-15.229399  -0.637723  -0.057624   0.509349  12.013718 
+
+Coefficients:
+         Estimate  Std. Error t-value  Pr(>|t|)    
+proxy -4.5834e-04  1.2421e-04 -3.6902 0.0002402 ***
+gdp   -1.0045e-04  2.3439e-05 -4.2853  2.06e-05 ***
+F1    -1.7228e+00  4.1328e-01 -4.1686  3.42e-05 ***
+F2    -2.1423e-02  3.2547e-01 -0.0658 0.9475386    
+F3     8.7035e-03  3.5148e-01  0.0248 0.9802509    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total Sum of Squares:    3725.9
+Residual Sum of Squares: 3109.6
+R-Squared:      0.16542
+Adj. R-Squared: -0.036607
+F-statistic: 29.968 on 5 and 756 DF, p-value: < 2.22e-16
+
+ ====================================================================== 
+ COMPARISON TABLE: Coefficient estimates across estimators
+====================================================================== 
+
+  Variable                             FE          TWFE           CCE           IFE
+--------------------------------------------------------------------------------- 
+  proxy                           -0.0007       -0.0005       -0.0004       -0.0005
+  gdp                             -0.0001       -0.0001       -0.0001       -0.0001
+
+  Interpretation:
+    - Sign consistency across estimators = robust direction
+    - Magnitude stability = robust effect size
+    - Significance under DK-SE/CCE/IFE = survives CSD correction
+
+ ====================================================================== 
+ ANALYSIS COMPLETE
+====================================================================== 
+
+  Files produced: console output (redirect with > results/r_estimators.log)
+  Usage: Rscript analysis/block_b/r_cce_ife_estimators.R > results/r_estimators.log 2>&1
+警告メッセージ:
+find_col(edu_cols, "education") で: Column not found for education

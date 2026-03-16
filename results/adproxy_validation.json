@@ -1,0 +1,174 @@
+{
+  "correlation_matrix": {
+    "n_obs": 6321,
+    "pearson_levels": {
+      "adproxy_internet": 0.7733,
+      "adproxy_gdp": 0.8441,
+      "internet_gdp": 0.5606
+    },
+    "spearman": {
+      "adproxy_internet": 0.9516,
+      "adproxy_gdp": 0.7846,
+      "internet_gdp": 0.601
+    }
+  },
+  "vif": {
+    "ln_internet_pct": 41.49,
+    "ln_gdp_pc": 10.55,
+    "ln_ad_proxy": 67.76,
+    "ln_internet_pct_in_component_model": 1.25,
+    "ln_gdp_pc_in_component_model": 1.25
+  },
+  "partial_correlations": {
+    "zero_order_r": 0.0563,
+    "zero_order_p": 8.276513374001372e-05,
+    "partial_r_ctrl_internet": -0.0988,
+    "partial_p_ctrl_internet": 4.462966598597393e-12,
+    "partial_r_ctrl_gdp": 0.1093,
+    "partial_p_ctrl_gdp": 1.8126440120376938e-14,
+    "partial_r_ctrl_both": -0.0239,
+    "partial_p_ctrl_both": 0.09451369369148763,
+    "n_obs": 4891
+  },
+  "incremental_r2": {
+    "n_obs": 4891,
+    "models": {
+      "internet_only": {
+        "k": 1,
+        "r2": 0.006169,
+        "adj_r2": 0.005965,
+        "aic": -680.42,
+        "bic": -667.43
+      },
+      "gdp_only": {
+        "k": 2,
+        "r2": 0.002964,
+        "adj_r2": 0.00276,
+        "aic": -664.67,
+        "bic": -651.68
+      },
+      "internet___gdp": {
+        "k": 3,
+        "r2": 0.015317,
+        "adj_r2": 0.014914,
+        "aic": -723.65,
+        "bic": -704.16
+      },
+      "adproxy_only": {
+        "k": 4,
+        "r2": 0.003164,
+        "adj_r2": 0.002961,
+        "aic": -665.66,
+        "bic": -652.67
+      },
+      "internet_gdp_adproxy": {
+        "k": 5,
+        "r2": 0.01588,
+        "adj_r2": 0.015276,
+        "aic": -724.45,
+        "bic": -698.46
+      }
+    },
+    "delta_r2_adproxy_over_components": 0.000563,
+    "f_test_incremental": {
+      "f_stat": 2.7957,
+      "p_value": 0.09458116060478927,
+      "df_num": 1,
+      "df_denom": 4887
+    },
+    "aic_winner": "Internet+GDP"
+  },
+  "anova_j_test": {
+    "n_obs": 4891,
+    "j_test_fitted_adproxy_in_components": {
+      "t_stat": -1.672,
+      "p_value": 0.09458116060460774
+    },
+    "j_test_fitted_components_in_adproxy": {
+      "t_stat": 7.7677,
+      "p_value": 9.673883051464072e-15
+    },
+    "verdict": "Internet+GDP preferred"
+  },
+  "oos_prediction": {
+    "n_obs": 4891,
+    "n_folds": 10,
+    "internet_only": {
+      "rmse": 0.2256,
+      "r2_oos": 0.0033,
+      "mae": 0.1731
+    },
+    "gdp_only": {
+      "rmse": 0.226,
+      "r2_oos": -0.0001,
+      "mae": 0.173
+    },
+    "internet___gdp": {
+      "rmse": 0.2246,
+      "r2_oos": 0.012,
+      "mae": 0.1729
+    },
+    "adproxy_only": {
+      "rmse": 0.2259,
+      "r2_oos": 0.0003,
+      "mae": 0.1731
+    },
+    "leave_country_out": {
+      "adproxy_only_lco": {
+        "rmse": 0.1908,
+        "n_countries": 166
+      },
+      "internet___gdp_lco": {
+        "rmse": 0.1903,
+        "n_countries": 166
+      }
+    }
+  },
+  "temporal_validation": {
+    "benchmarks": {
+      "2015-2019": {
+        "market_cagr_pct": 18.5,
+        "source": "eMarketer/GroupM",
+        "adproxy_cagr_pct": 4.33,
+        "cagr_ratio": 0.234
+      },
+      "2019-2023": {
+        "market_cagr_pct": 14.2,
+        "source": "eMarketer/Statista",
+        "adproxy_cagr_pct": 3.75,
+        "cagr_ratio": 0.264
+      },
+      "2010-2020": {
+        "market_cagr_pct": 18.0,
+        "source": "IAB/PwC",
+        "adproxy_cagr_pct": 4.08,
+        "cagr_ratio": 0.226
+      }
+    },
+    "interpretation": "AdProxy CAGR tracks market direction. Lower magnitude expected because proxy omits platform-specific pricing dynamics."
+  },
+  "country_split_cv": {
+    "n_high_income": 83,
+    "n_low_income": 83,
+    "train_high_income_test_low_income_adproxy": {
+      "rmse": 0.2111,
+      "r2": -0.0908
+    },
+    "train_high_income_test_low_income_internet_gdp": {
+      "rmse": 0.2458,
+      "r2": -0.4791
+    },
+    "train_low_income_test_high_income_adproxy": {
+      "rmse": 0.2475,
+      "r2": -0.0145
+    },
+    "train_low_income_test_high_income_internet_gdp": {
+      "rmse": 0.2647,
+      "r2": -0.1607
+    }
+  },
+  "summary": {
+    "r2_ratio_adproxy_vs_components": 0.2066,
+    "verdict": "WEAK \u2014 Components outperform AdProxy substantially"
+  }
+}

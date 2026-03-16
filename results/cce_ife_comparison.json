@@ -1,0 +1,302 @@
+{
+  "description": "CCE/IFE estimator comparison (R plm/phtt)",
+  "estimators": {
+    "FE": "Entity fixed effects (within)",
+    "TWFE": "Two-way fixed effects (entity + time)",
+    "DK-SE": "TWFE with Driscoll-Kraay standard errors (vcovSCC)",
+    "CCE": "Pesaran Common Correlated Effects (manual, cross-sectional averages)",
+    "IFE": "Interactive Fixed Effects (PCA-augmented proxy)"
+  },
+  "results": {
+    "dep": {
+      "FE": {
+        "proxy": {
+          "beta": 0.00010329,
+          "se": 4.6631e-06,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -4.6409e-06,
+          "se": 1.0098e-06,
+          "p": 4.421e-06,
+          "significant": true,
+          "stars": "***"
+        }
+      },
+      "TWFE": {
+        "proxy": {
+          "beta": 3.1178e-05,
+          "se": 2.8449e-06,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -6.8837e-06,
+          "se": 5.7885e-07,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        }
+      },
+      "DK-SE": {
+        "proxy": {
+          "beta": 3.1178e-05,
+          "se": 5.1303e-06,
+          "p": 1.319e-09,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -6.8838e-06,
+          "se": 1.8429e-06,
+          "p": 0.0001897,
+          "significant": true,
+          "stars": "***"
+        }
+      },
+      "CCE": {
+        "proxy": {
+          "beta": 3.1221e-05,
+          "se": 2.8419e-06,
+          "p": 2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -6.8986e-06,
+          "se": 5.7325e-07,
+          "p": 2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "dep_bar": {
+          "beta": 1.0239,
+          "se": 0.012615,
+          "p": 2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "proxy_bar": {
+          "beta": -9.4132e-06,
+          "se": 6.4958e-06,
+          "p": 0.14737,
+          "significant": false,
+          "stars": ""
+        },
+        "gdp_bar": {
+          "beta": 2.7717e-06,
+          "se": 1.3486e-06,
+          "p": 0.03991,
+          "significant": true,
+          "stars": "*"
+        }
+      },
+      "IFE": {
+        "proxy": {
+          "beta": 3.3269e-05,
+          "se": 2.8238e-06,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -6.6746e-06,
+          "se": 5.7696e-07,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "F1": {
+          "beta": -1.2281,
+          "se": 0.015406,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "F2": {
+          "beta": -0.52901,
+          "se": 0.013209,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        },
+        "F3": {
+          "beta": 0.30616,
+          "se": 0.012665,
+          "p": 2.2e-16,
+          "significant": true,
+          "stars": "***"
+        }
+      }
+    },
+    "suicide": {
+      "FE": {
+        "proxy": {
+          "beta": -0.00067844,
+          "se": 0.00011303,
+          "p": 3.016e-09,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -0.00011051,
+          "se": 2.3488e-05,
+          "p": 3.014e-06,
+          "significant": true,
+          "stars": "***"
+        }
+      },
+      "TWFE": {
+        "proxy": {
+          "beta": -0.00045303,
+          "se": 0.00013255,
+          "p": 0.0006658,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -9.9738e-05,
+          "se": 2.4197e-05,
+          "p": 4.182e-05,
+          "significant": true,
+          "stars": "***"
+        }
+      },
+      "DK-SE": {
+        "proxy": {
+          "beta": -0.00045303,
+          "se": 8.8147e-05,
+          "p": 3.532e-07,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -9.9738e-05,
+          "se": 3.1358e-05,
+          "p": 0.001531,
+          "significant": true,
+          "stars": "**"
+        }
+      },
+      "CCE": {
+        "proxy": {
+          "beta": -0.00044443,
+          "se": 0.00013101,
+          "p": 0.0007291,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -0.0001012,
+          "se": 2.3603e-05,
+          "p": 2.042e-05,
+          "significant": true,
+          "stars": "***"
+        },
+        "suicide_bar": {
+          "beta": 0.19891,
+          "se": 0.080392,
+          "p": 0.0135699,
+          "significant": true,
+          "stars": "*"
+        },
+        "proxy_bar": {
+          "beta": -0.00079121,
+          "se": 0.00026181,
+          "p": 0.0025956,
+          "significant": true,
+          "stars": "**"
+        },
+        "gdp_bar": {
+          "beta": 9.2389e-05,
+          "se": 3.6141e-05,
+          "p": 0.0107712,
+          "significant": true,
+          "stars": "*"
+        }
+      },
+      "IFE": {
+        "proxy": {
+          "beta": -0.00045834,
+          "se": 0.00012421,
+          "p": 0.0002402,
+          "significant": true,
+          "stars": "***"
+        },
+        "gdp": {
+          "beta": -0.00010045,
+          "se": 2.3439e-05,
+          "p": 2.06e-05,
+          "significant": true,
+          "stars": "***"
+        },
+        "F1": {
+          "beta": -1.7228,
+          "se": 0.41328,
+          "p": 3.42e-05,
+          "significant": true,
+          "stars": "***"
+        },
+        "F2": {
+          "beta": -0.021423,
+          "se": 0.32547,
+          "p": 0.9475386,
+          "significant": false,
+          "stars": ""
+        },
+        "F3": {
+          "beta": 0.0087035,
+          "se": 0.35148,
+          "p": 0.9802509,
+          "significant": false,
+          "stars": ""
+        }
+      }
+    }
+  },
+  "robustness_summary": {
+    "dep": {
+      "proxy": {
+        "sign_consistent": true,
+        "direction": "+",
+        "beta_range": [
+          3.1178e-05,
+          0.00010329
+        ],
+        "all_significant": true
+      },
+      "gdp": {
+        "sign_consistent": true,
+        "direction": "-",
+        "beta_range": [
+          -6.8986e-06,
+          -4.6409e-06
+        ],
+        "all_significant": true
+      }
+    },
+    "suicide": {
+      "proxy": {
+        "sign_consistent": true,
+        "direction": "-",
+        "beta_range": [
+          -0.00067844,
+          -0.00044443
+        ],
+        "all_significant": true
+      },
+      "gdp": {
+        "sign_consistent": true,
+        "direction": "-",
+        "beta_range": [
+          -0.00011051,
+          -9.9738e-05
+        ],
+        "all_significant": true
+      }
+    }
+  }
+}

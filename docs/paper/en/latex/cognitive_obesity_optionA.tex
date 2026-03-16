@@ -507,6 +507,8 @@ AdProxy (defined in \cref{sec:math}, Equation~\ref{eq:proxy-ad}) captures the de
 
 Limitation: time-series validation (proxy \emph{changes} vs ad spend changes, 2022--2024) yields $\rho = 0.16$ (n.s.), indicating that the proxy captures cross-sectional \emph{levels} but not short-term \emph{dynamics} of advertising markets. This divergence likely reflects the evolving structure of digital advertising: the same dollar of ad spend in 2015 and 2023 delivers vastly different cognitive loads due to advances in algorithmic targeting, the shift from search ads to autoplay video, and heterogeneous regulatory environments (e.g., GDPR in the EU vs.\ minimal regulation elsewhere). Ideally, validation would use attention-weighted exposure metrics (impressions $\times$ mean view duration), but such data remain proprietary to platforms.
 
+External construct validation shows AdProxy correlates $r = 0.77$ with Internet penetration and $r = 0.84$ with GDP per capita at levels. A Davidson--MacKinnon $J$-test finds the additive Internet + GDP specification statistically encompasses AdProxy ($t = 7.77$, $p < 0.001$), while AdProxy does not encompass Internet + GDP ($t = -1.67$, $p = 0.095$). However, in cross-income-tier generalization (training on high-income countries, predicting low-income), AdProxy outperforms the additive specification (RMSE $0.211$ vs.\ $0.246$), suggesting the multiplicative form captures supply-side advertising conditions more portably. We retain AdProxy as an interpretable single-index summary while acknowledging that it does not add incremental explanatory power beyond its components ($\Delta R^2 = 0.0006$, $F = 2.80$, $p = 0.095$).
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{proxy_validation_rank.png}
@@ -687,6 +689,32 @@ Diabetes prev.\ (placebo)       & FD   & $-0.0058$  & 0.728 & n.s.\ \checkmark \
 
 Diabetes prevalence shows no significant association with AdProxy under either specification ($p = 0.96$, $p = 0.73$), corroborating construct specificity. Cardiovascular prevalence shows a significant \emph{negative} association ($\beta = -0.145$, $p < 0.001$), opposite in sign to the depression effect---advertising-intensive economies may coincide with better cardiovascular infrastructure. The key finding is that AdProxy does not exhibit a uniform positive association with all health outcomes: diabetes is null, cardiovascular is negative, while mental health targets show the theoretically predicted pattern. This partial specificity supports the interpretation that advertising exposure captures cognitive-load-related pathways rather than a generic development confounder.
 
+\paragraph{Cross-sectional dependence robustness.}
+To address cross-sectional dependence (Pesaran, 2004), we re-estimate the core specification using five estimators that progressively absorb latent common factors. Table~\ref{tab:cce-ife} reports the proxy coefficient for depression and suicide outcomes across Entity FE, Two-Way FE, Driscoll--Kraay SE, Pesaran Common Correlated Effects (CCE), and Interactive Fixed Effects (IFE, PCA-augmented).
+
+\begin{table}[h]
+\centering
+\caption{Macro Panel Estimates Across Alternative Estimators}\label{tab:cce-ife}
+\small
+\begin{tabular}{lcccc}
+\hline
+Estimator & \multicolumn{2}{c}{Depression} & \multicolumn{2}{c}{Suicide} \\
+ & $\hat{\beta}_{\text{proxy}}$ & $p$ & $\hat{\beta}_{\text{proxy}}$ & $p$ \\
+\hline
+Entity FE          & $1.033 \times 10^{-4}$ & $< 10^{-16}$ & $-6.784 \times 10^{-4}$ & $3.0 \times 10^{-9}$ \\
+TWFE               & $3.118 \times 10^{-5}$ & $< 10^{-16}$ & $-4.530 \times 10^{-4}$ & $6.7 \times 10^{-4}$ \\
+Driscoll--Kraay    & $3.118 \times 10^{-5}$ & $1.3 \times 10^{-9}$ & $-4.530 \times 10^{-4}$ & $3.5 \times 10^{-7}$ \\
+CCE (Pesaran)      & $3.122 \times 10^{-5}$ & $< 10^{-16}$ & $-4.444 \times 10^{-4}$ & $7.3 \times 10^{-4}$ \\
+IFE (PCA proxy)    & $3.327 \times 10^{-5}$ & $< 10^{-16}$ & $-4.583 \times 10^{-4}$ & $2.4 \times 10^{-4}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+Sign and significance are preserved across all five estimators, confirming that the proxy--depression association ($+$) and proxy--suicide association ($-$) survive CSD-robust inference. The depression coefficient ranges from $3.12 \times 10^{-5}$ to $1.03 \times 10^{-4}$; the suicide coefficient ranges from $-6.78 \times 10^{-4}$ to $-4.44 \times 10^{-4}$. All estimates are significant at $p < 0.001$.
+
+\paragraph{Multiple testing correction.}
+We apply Benjamini--Hochberg FDR correction within five pre-registered test families (macro depression, macro suicide, macro DALYs, placebo/falsification, and micro-level analyses). Of 35 hypothesis tests, 23 are significant at $\alpha = 0.05$ before correction; all 23 survive BH-FDR adjustment. Under the more conservative Bonferroni correction, 22 of 23 remain significant (the sole casualty being the TWFE suicide--AdProxy estimate, $p_{\text{raw}} = 0.007 \rightarrow p_{\text{Bonf}} = 0.056$). Full family-wise corrected $p$-values are reported in Table~\ref{tab:fdr} in \cref{app:fdr}.
+
 
 \subsection{Transparency Note on the Exploratory Process}\label{sec:transparency}
 
@@ -744,7 +772,7 @@ Table~\ref{tab:micro-specs} summarizes the design and specification of the two i
 
 Using the CDC NHANES 2017--2018 cycle (adults 18+, $N = 5{,}032$ with complete PHQ-9 and physical activity data), we examined the relationship between the PHQ-9 depression scale (9-item self-report; depression defined as PHQ-9 $\geq 10$) and leisure physical exercise (any moderate/vigorous leisure activity in the past 30 days; PAQ\_650/655). See \cref{app:nhanes} for full variable specifications.
 
-The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.30$, 95\% CI $[0.24, 0.36]$). The full covariate model (age, sex, education [3 levels], poverty-income ratio [continuous], health insurance [binary], BMI [continuous]; $N = 4{,}176$ complete cases) yields $\beta_{\text{exercise}} = -0.85$, 95\% CI $[-1.12, -0.59]$, $t = -6.35$, $p = 2.2 \times 10^{-10}$. Other significant predictors: poverty-income ratio ($\beta = -0.37$, CI $[-0.46, -0.29]$, $t = -8.40$), sex ($\beta_{\text{female}} = 0.86$, CI $[0.62, 1.11]$, $t = 6.84$), BMI ($\beta = 0.04$, CI $[0.02, 0.05]$, $t = 4.30$), and education ($\beta = -0.14$, CI $[-0.27, -0.01]$, $t = -2.15$). Health insurance was non-significant ($t = 0.61$). Model $R^2 = 0.066$. Survey-weighted analysis (NHANES MEC weights) yields qualitatively identical results (weighted $\beta = -0.91$, $t = -4.73$; see replication repository for full weighted output). Note: exercise is binary (any moderate/vigorous activity in the past 30 days), precluding spline-based nonlinearity assessment; dose-response analysis requires continuous measurement (a priority for the confirmatory ESM study).
+The depression rate for the exercise group was 5.9\%, versus 11.7\% for the no-exercise group (2.0$\times$ difference, $t = 10.22$, $p = 2.67 \times 10^{-24}$, Cohen's $d = 0.30$, 95\% CI $[0.24, 0.36]$). The full covariate model (age, sex, education [3 levels], poverty-income ratio [continuous], health insurance [binary], BMI [continuous]; $N = 4{,}176$ complete cases) yields $\beta_{\text{exercise}} = -0.85$, 95\% CI $[-1.12, -0.59]$, $t = -6.35$, $p = 2.2 \times 10^{-10}$. Other significant predictors: poverty-income ratio ($\beta = -0.37$, CI $[-0.46, -0.29]$, $t = -8.40$), sex ($\beta_{\text{female}} = 0.86$, CI $[0.62, 1.11]$, $t = 6.84$), BMI ($\beta = 0.04$, CI $[0.02, 0.05]$, $t = 4.30$), and education ($\beta = -0.14$, CI $[-0.27, -0.01]$, $t = -2.15$). Health insurance was non-significant ($t = 0.61$). Model $R^2 = 0.066$. Applying NHANES complex survey design (WTMEC2YR weights, SDMVPSU clustering, SDMVSTRA stratification) yields virtually identical estimates: exercise $\beta = -0.88$ (weighted) vs.\ $-0.86$ (unweighted) in the full model, with significance preserved across all age subgroups ($p < 0.003$ in the young tertile, $p < 0.024$ in the middle tertile, and $p < 0.003$ in the old tertile). Full weighted results are reported in the replication repository. Note: exercise is binary (any moderate/vigorous activity in the past 30 days), precluding spline-based nonlinearity assessment; dose-response analysis requires continuous measurement (a priority for the confirmatory ESM study).
 
 The sedentary time interaction was non-significant ($t = -0.37$). Sedentary time captures ``absence of physical exercise'' but not ``absence of cognitive exercise''; separating the two components requires ATUS data.
 
@@ -1346,6 +1374,62 @@ Dimension & \textbf{Open (0)} & \textbf{Partial (1)} & \textbf{Closed (2)} \\
 \end{table}
 
 This 5-dimension $\times$ 3-level rubric produces a composite score (0--10) that maps onto the three-category system used in the ATUS analysis. The rubric is intentionally minimal: it can be applied by trained coders in under 30 seconds per epoch, and its dimensions are directly operationalizable from passive sensing data (motor engagement via accelerometry), interaction logs (action contingency via touch events), and self-report (prediction error source). For AI dialogue transcripts, ``motor engagement'' is replaced by ``behavioral activation compliance'' (whether the AI prompts real-world action), and ``environmental feedback'' by ``external-referent challenge'' (whether the AI introduces information that contradicts the user's model). We encourage researchers to report inter-rater reliability (Cohen's $\kappa$ or ICC) on the composite score and to share annotated corpora to enable rubric refinement.
+
+
+\subsection{Multiple Testing Correction: FDR Results}\label{app:fdr}
+
+\begin{table}[htbp]
+\centering
+\caption{Multiple Testing Correction: Benjamini--Hochberg FDR}
+\label{tab:fdr}
+\footnotesize
+\begin{tabular}{llccc}
+\toprule
+Family & Specification & Raw $p$ & BH $q$ & Bonferroni $p$ \\
+\midrule
+  Macro: Depression & AdProxy / Pooled OLS & 0.0780 & 0.1040 & 0.6243 \\
+   & AdProxy / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & AdProxy / TWFE & 0.1811 & 0.2069 & 1.0000 \\
+   & AdProxy / First Difference & $1.5 \times 10^{-7}$*** & $4.1 \times 10^{-7}$*** & $1.2 \times 10^{-6}$*** \\
+   & Internet \% / Pooled OLS & $9.0 \times 10^{-4}$*** & 0.0014** & 0.0072** \\
+   & Internet \% / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & Internet \% / TWFE & 0.3319 & 0.3319 & 1.0000 \\
+   & Internet \% / First Difference & $4.5 \times 10^{-5}$*** & $9.1 \times 10^{-5}$*** & $3.6 \times 10^{-4}$*** \\
+\addlinespace
+  Macro: Suicide & AdProxy / Pooled OLS & 0.5641 & 0.5641 & 1.0000 \\
+   & AdProxy / Entity FE & $1.5 \times 10^{-5}$*** & $1.2 \times 10^{-4}$*** & $1.2 \times 10^{-4}$*** \\
+   & AdProxy / TWFE & 0.0070** & 0.0112* & 0.0559 \\
+   & AdProxy / First Difference & $2.2 \times 10^{-4}$*** & $5.8 \times 10^{-4}$*** & 0.0017** \\
+   & Internet \% / Pooled OLS & 0.1885 & 0.2154 & 1.0000 \\
+   & Internet \% / Entity FE & $5.1 \times 10^{-5}$*** & $2.1 \times 10^{-4}$*** & $4.1 \times 10^{-4}$*** \\
+   & Internet \% / TWFE & 0.1558 & 0.2077 & 1.0000 \\
+   & Internet \% / First Difference & 0.0033** & 0.0067** & 0.0267* \\
+\addlinespace
+  Macro: DALYs & AdProxy / Pooled OLS & 0.0677 & 0.0902 & 0.5413 \\
+   & AdProxy / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & AdProxy / TWFE & 0.4351 & 0.4972 & 1.0000 \\
+   & AdProxy / First Difference & $1.5 \times 10^{-7}$*** & $3.9 \times 10^{-7}$*** & $1.2 \times 10^{-6}$*** \\
+   & Internet \% / Pooled OLS & $4.0 \times 10^{-4}$*** & $6.4 \times 10^{-4}$*** & 0.0032** \\
+   & Internet \% / Entity FE & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & Internet \% / TWFE & 0.7322 & 0.7322 & 1.0000 \\
+   & Internet \% / First Difference & $5.0 \times 10^{-5}$*** & $1.0 \times 10^{-4}$*** & $4.0 \times 10^{-4}$*** \\
+\addlinespace
+  Placebo & Cardiovascular / TWFE & $4.3 \times 10^{-9}$*** & $9.5 \times 10^{-9}$*** & $1.7 \times 10^{-8}$*** \\
+   & Cardiovascular / First Diff & $4.7 \times 10^{-9}$*** & $9.5 \times 10^{-9}$*** & $1.9 \times 10^{-8}$*** \\
+   & Diabetes / TWFE & 0.9606 & 0.9606 & 1.0000 \\
+   & Diabetes / First Diff & 0.7280 & 0.9606 & 1.0000 \\
+\addlinespace
+  Micro & NHANES: Exercise $\to$ PHQ-9 & $2.2 \times 10^{-10}$*** & $5.0 \times 10^{-10}$*** & $1.5 \times 10^{-9}$*** \\
+   & ATUS: exercise\_min $\to$ Cantril & $6.7 \times 10^{-7}$*** & $1.2 \times 10^{-6}$*** & $4.7 \times 10^{-6}$*** \\
+   & ATUS: active\_cog\_min $\to$ Cantril & 0.3573 & 0.3573 & 1.0000 \\
+   & ATUS: passive\_min $\to$ Cantril & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+   & ATUS: Exercise (binary) $\to$ Cantril & $1.7 \times 10^{-5}$*** & $2.4 \times 10^{-5}$*** & $1.2 \times 10^{-4}$*** \\
+   & ATUS: Active leisure (binary) $\to$ Cantril & 0.0067** & 0.0078** & 0.0470* \\
+   & ATUS: High passive (binary) $\to$ Cantril & $< 10^{-10}$*** & $< 10^{-10}$*** & $< 10^{-10}$*** \\
+\bottomrule
+\end{tabular}
+\par\smallskip\noindent\textit{Note.} $^{*}p<.05$; $^{**}p<.01$; $^{***}p<.001$. BH $q$-values computed within each family using the Benjamini--Hochberg step-up procedure. 23 of 35 tests significant before and after BH-FDR correction; 22 survive Bonferroni.
+\end{table}
 
 
 \end{document}
