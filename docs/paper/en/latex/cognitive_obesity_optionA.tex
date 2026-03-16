@@ -63,12 +63,17 @@ The core claim is that the primary predictor of psychopathology is not the absol
 
 Systematic analysis of 177-country $\times$ 1990--2023 panel data (Study~1) demonstrates:
 (1)~The positive effect of internet penetration observed under country FE alone reverses sign under Two-Way Fixed Effects (TWFE), revealing dependence on common time trends.
-(2)~The strongest predictor of depression prevalence is GDP ($t=18.27$), likely reflecting a combination of diagnostic capacity expansion (greater clinician density, broader screening) and genuine prevalence changes associated with development-linked stressors, verified through comparison with hard outcomes (suicide rates).
-(3)~Hansen Panel Threshold Regression identifies a threshold of $\gamma^*=25.7\%$ internet penetration ($F=213$, bootstrap 95\% CI $= [25.7, 32.8]$) for suicide rates: below this level, internet access is protective; above, protective effects saturate and reverse. No discontinuous threshold is detected for depression ($p=0.654$); a continuous inverted-U dose-response (quadratic $F=127.0$) provides the best fit.
-(4)~The advertising exposure proxy (AdProxy $= \text{Internet}\% \times \text{GDP/capita} / 1000$, 2017 PPP) captures the benefit-to-harm reversal for depression more clearly, with TWFE sign reversal at AdProxy~$\approx 1{,}000$ (e.g., a country with 80\% internet and GDP/capita~$= \$12{,}500$, or 50\% internet and $\$20{,}000$). First-difference analysis confirms significant prediction even after controlling for GDP changes ($t=3.16$, internet $>30\%$ subsample).
+(2)~The strongest predictor of depression prevalence is GDP ($t=18.27$), likely reflecting diagnostic capacity expansion combined with genuine prevalence changes, verified through comparison with hard outcomes (suicide rates).
+(3)~Hansen Panel Threshold Regression identifies a suicide-rate threshold at $\gamma^*=25.7\%$ internet penetration ($F=213$, bootstrap 95\% CI $= [25.7, 32.8]$); depression shows no discontinuous threshold ($p=0.654$) but a continuous inverted-U dose-response (quadratic $F=127.0$).
+(4)~The advertising exposure proxy (AdProxy $= \text{Internet}\% \times \text{GDP/capita} / 1000$) captures the benefit-to-harm reversal more clearly; first-difference analysis confirms significant prediction after controlling for GDP changes ($t=3.16$).
 
-Individual-level verification (NHANES $N=5{,}032$; ATUS $N=21{,}736$) confirms that physical exercise and active cognitive leisure independently predict wellbeing as additive channels (interaction $p=0.95$), with absence of both yielding the worst health outcomes (Fair/Poor health rate 3.1$\times$).
-Existing findings from behavioral economics, environmental psychology, and neuroscience are reinterpreted through the balance model, presenting individual-level convergent evidence.
+Robustness is assessed through five alternative estimators---entity FE, TWFE, Driscoll-Kraay SE, Pesaran CCE, and interactive fixed effects (PCA-augmented)---all yielding sign-consistent coefficients.
+Convergent validity of AdProxy is confirmed against an independent ITU mobile-cellular indicator (Spearman $\rho=0.85$); horse-race regressions show AdProxy uniquely predicts suicide ($p<0.001$) while mobile does not.
+Benjamini-Hochberg FDR correction across 35 hypothesis tests retains 23 at $q<0.05$.
+
+Individual-level verification (NHANES $N=5{,}032$ with complex survey weights; ATUS $N=21{,}736$) confirms that physical exercise and active cognitive leisure independently predict wellbeing as additive channels (interaction $p=0.95$; Cohen's $d=0.30$ for exercise).
+Structural balance estimation directly tests the additive model: Internet ($\hat{\alpha}_1>0$, $t=5.05$) and education ($\hat{\alpha}_2$, $t=6.75$) enter as separable predictors under TWFE, with the additive specification preferred over a ratio model ($\Delta\text{AIC}=72$).
+Existing findings from behavioral economics, environmental psychology, and neuroscience are reinterpreted through the balance model as convergent evidence.
 
 Critical limitation: all macro-level findings are subject to ecological fallacy---country-level associations cannot be directly attributed to individual-level mechanisms.
 This study is exploratory and requires individual-level confirmatory verification via Experience Sampling Method (ESM). Falsification conditions are explicitly stated.
