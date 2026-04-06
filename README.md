@@ -11,7 +11,7 @@
 | LaTeX source (EN) | [docs/paper/en/latex/](docs/paper/en/latex/) |
 | LaTeX source (JA) | [docs/paper/ja_pre/latex/](docs/paper/ja_pre/latex/) |
 
-**Status:** Preprint — PsyArXiv submission in progress.
+**Status:** Preprint — Available on [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6527598).
 
 ## Overview
 
@@ -52,11 +52,17 @@ cognitive-obesity-replication/
 │   │   ├── robust_tests.py    ← Section 2.2.8: Robustness checks
 │   │   ├── alternative_estimators.py ← DK-SE, country trends, FD-IV
 │   │   ├── proxy_validation.py      ← Ad proxy construct validation
+│   │   ├── adproxy_validation.py    ← ITU convergent validity for AdProxy
+│   │   ├── fdr_correction.py        ← FDR (Benjamini-Hochberg) correction
+│   │   ├── itu_convergent_validity.py ← ITU mobile broadband validation
+│   │   ├── first_difference_proxy_vs_gdp.py ← FD proxy vs GDP comparison
+│   │   ├── trend_collinearity_diagnostic.py ← Country trend diagnostics
 │   │   └── r_cce_ife_estimators.R   ← CCE (Pesaran), IFE (Bai) [R]
 │   │
 │   ├── block_c/               ← Individual-level validation
 │   │   ├── 01_nhanes_phq9_exercise.py       ← Section 2.3.2 (baseline)
 │   │   ├── 01_nhanes_weighted.py            ← Appendix A.1 (survey weights)
+│   │   ├── nhanes_sleep_moderation.py       ← Sleep deprivation moderation
 │   │   ├── 02_atus_wellbeing_analysis.py    ← Section 2.3.3 (baseline)
 │   │   ├── 02b_atus_ratio_test.py           ← Additive vs. ratio model test
 │   │   ├── 02_atus_with_covariates.py       ← Appendix A.2 (covariates + weights)
@@ -165,7 +171,7 @@ Run `python3 analysis/pilot/sns_engagement/00_synthetic_data.py` to generate tes
 ```
 Miyauchi, K. (2026). Cognitive Obesity: Cognitive-Experiential Imbalance as a
 Unifying Framework for Depression, Violence, and Information Overload.
-PsyArXiv. https://doi.org/[DOI pending]
+SSRN. https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6527598
 ```
 
 See also: [CITATION.cff](CITATION.cff)
